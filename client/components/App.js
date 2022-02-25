@@ -211,7 +211,14 @@ class App extends Common {
         <Header Store={Store} setStore={this.setStore} connect={this.connect} />
         <main>
           {Store.showModal ? (
-            <Modal.Dialog>
+            <Modal.Dialog
+              style={{
+                color: "black",
+                backgroundColor: "yellow",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <Modal.Header>
                 <Modal.Title>{Store.modalTitle}</Modal.Title>
               </Modal.Header>

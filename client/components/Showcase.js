@@ -9,7 +9,7 @@ export default class Showcase extends Base {
   constructor(props) {
     super(props);
 
-    this.bindMany(["onCheck"]);
+    this.bindMany(["onCheck", "onId"]);
   }
 
   onCheck(event, trait, value, id) {
@@ -46,10 +46,19 @@ export default class Showcase extends Base {
         }
       }
     }
-
     this.setStore({
       filter,
       tokenIds: tokens,
+    });
+    console.log(this.Store.tokenIds, this.Store.filter)
+
+  }
+
+  onId(id) {
+    const filter = {};
+    this.setStore({
+      filter,
+      tokenIds: id,
     });
   }
 
@@ -61,6 +70,7 @@ export default class Showcase extends Base {
           setStore={this.setStore}
           isOpen={true}
           onCheck={this.onCheck}
+          onId= {this.onId}
         />
         <Content
           Store={this.Store}

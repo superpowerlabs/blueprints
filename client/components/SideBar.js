@@ -20,6 +20,9 @@ import rarityDistribution from "../config/rarityDistribution.json";
 class SideBar extends Base {
   constructor(props) {
     super(props);
+    this.state = {value: ''};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   allTraits() {
@@ -39,6 +42,15 @@ class SideBar extends Base {
     }
     return rows;
   }
+  handleChange(event) {
+    this.setState({value: event.target.value});
+    this.props.onId(event.target.value)
+  }
+  handleSubmit() {
+    console.log(this.state.value)
+    this.props.onId(this.state.value)
+
+  }
 
   render() {
     let i = 0;
@@ -55,6 +67,13 @@ class SideBar extends Base {
           </Button>
         </div>
 
+        <form onSubmit={this.handleSubmit}>
+        <label>
+           Search by Token ID :
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
         <Nav className="flex-column pt-2">{this.allTraits()}</Nav>
       </div>
     );
