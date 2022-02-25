@@ -72,7 +72,7 @@ export default class Content extends Base {
     const rows = [];
     for (let m of items) {
       let img = m.image.split("/");
-      img = "/images/" + img[img.length - 1].replace(/png$/, "jpg");
+      img = "https://s3.mob.land/blueprints-thumbs/" + img[img.length - 1].replace(/png$/, "jpg");
       rows.push(
         <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
           <LazyLoadImage src={img} />
