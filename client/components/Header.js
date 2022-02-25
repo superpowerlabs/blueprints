@@ -74,7 +74,7 @@ export default class Header extends Base {
         />
 
         <Navbar.Collapse id="navbarScroll">
-          <Navbar.Brand href={"https://mob.land"}>
+          <Navbar.Brand as={Link} to={"/"}>
             <img
               // className={"positionAbsolute"}
               src={"/images/logo.png"}

@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-undef
 const { Form } = ReactBootstrap;
+import * as Scroll from 'react-scroll'
 import Masonry from "react-masonry-component";
 import allMetadata from "../config/allMetadata.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -21,6 +22,7 @@ export default class Content extends Base {
   }
 
   componentDidMount() {
+      Scroll.animateScroll.scrollToTop()
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
   }
