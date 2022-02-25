@@ -43,7 +43,6 @@ class SideBar extends Base {
     return rows;
   }
   handleChange(event) {
-    this.props.getTokens(event.target.value);
     this.setState({ value: event.target.value });
     this.props.onId(event.target.value);
   }
