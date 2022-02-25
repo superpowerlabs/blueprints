@@ -210,44 +210,55 @@ class App extends Common {
       <BrowserRouter>
         <Header Store={Store} setStore={this.setStore} connect={this.connect} />
         <main>
-          <Switch>
-            <Route exact path="/">
-              <Showcase Store={Store} setStore={this.setStore} />
-            </Route>
-            <Route exact path="*">
-              <Error404 Store={Store} setStore={this.setStore} />
-            </Route>
-          </Switch>
-          {/*<Footer />*/}
-        </main>
-        {Store.showModal ? (
-          <Modal.Dialog>
-            <Modal.Header>
-              <Modal.Title>{Store.modalTitle}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{Store.modalBody}</Modal.Body>
-            <Modal.Footer>
-              <Button
-                onClick={() => {
-                  this.setStore({ showModal: false });
-                }}
-              >
-                {Store.modalClose || "Close"}
-              </Button>
-              {this.state.secondButton ? (
+          {Store.showModal ? (
+            <Modal.Dialog>
+              <Modal.Header>
+                <Modal.Title>{Store.modalTitle}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {Store.modalBody ? (
+                  <video
+                    style={{ maxheight: "100px" }}
+                    src={Store.modalBody}
+                    controls
+                    loop
+                    autoPlay
+                  />
+                ) : null}
+              </Modal.Body>
+              <Modal.Footer>
                 <Button
                   onClick={() => {
-                    Store.modalAction();
                     this.setStore({ showModal: false });
                   }}
-                  bsStyle="primary"
                 >
-                  {Store.secondButton}
+                  {Store.modalClose || "Close"}
                 </Button>
-              ) : null}
-            </Modal.Footer>
-          </Modal.Dialog>
-        ) : null}
+                {this.state.secondButton ? (
+                  <Button
+                    onClick={() => {
+                      Store.modalAction();
+                      this.setStore({ showModal: false });
+                    }}
+                    bsStyle="primary"
+                  >
+                    {Store.secondButton}
+                  </Button>
+                ) : null}
+              </Modal.Footer>
+            </Modal.Dialog>
+          ) : (
+            <Switch>
+              <Route exact path="/">
+                <Showcase Store={Store} setStore={this.setStore} />
+              </Route>
+              <Route exact path="*">
+                <Error404 Store={Store} setStore={this.setStore} />
+              </Route>
+            </Switch>
+          )}
+          {/*<Footer />*/}
+        </main>
       </BrowserRouter>
     );
   }

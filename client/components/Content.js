@@ -70,12 +70,20 @@ export default class Content extends Base {
   getTokens() {
     let { items } = this.state;
     const rows = [];
+    const imageClick = (m) => {
+      console.log("Click");
+      this.setStore({ showModal: true });
+      this.setStore({ modalBody: m["extend_info"]["videoUrl"] });
+      this.setStore({ modalTitle: m["extend_info"]["videoUrl"] });
+      console.log(this.Store.showModal);
+      console.log(this.Store.modalBody);
+    };
     for (let m of items) {
       let img = m.image.split("/");
       img = "/images/" + img[img.length - 1].replace(/png$/, "jpg");
       rows.push(
         <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
-          <LazyLoadImage src={img} />
+          <LazyLoadImage src={img} onClick={() => imageClick(m)} />
           <div className={"centered tokenId"}># {m.tokenId}</div>
         </div>
       );
@@ -120,21 +128,21 @@ export default class Content extends Base {
             );
           })}
         </div>
-        <div style={{marginTop: 8}}>
-        <InfiniteScroll
-          dataLength={this.state.items.length}
-          next={this.fetchMoreData}
-          hasMore={this.state.hasMore}
-          loader={<h4>Loading...</h4>}
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
-        >
-          {" "}
-          <Masonry>{this.getTokens()}</Masonry>
-        </InfiniteScroll>
+        <div style={{ marginTop: 8 }}>
+          <InfiniteScroll
+            dataLength={this.state.items.length}
+            next={this.fetchMoreData}
+            hasMore={this.state.hasMore}
+            loader={<h4>Loading...</h4>}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+          >
+            {" "}
+            <Masonry>{this.getTokens()}</Masonry>
+          </InfiniteScroll>
         </div>
       </div>
     );

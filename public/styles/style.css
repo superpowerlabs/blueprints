@@ -1965,7 +1965,9 @@ li a.dropdown-toggle::after {
     font-size: 0.9rem;
 }
 
-.toplist, .category, .category > div {
+.toplist,
+.category,
+.category > div {
     display: inline;
 }
 

@@ -13,13 +13,14 @@ export default class Showcase extends Base {
   }
 
   onCheck(event, trait, value, id) {
+    console.log(event, trait, value, id, "on check");
     const filter = this.Store.filter || {};
     let key = [trait, value].join("|");
-    let prevValue
+    let prevValue;
     for (let k in filter) {
       let tv = k.split("|");
       if (tv[0] === trait) {
-        prevValue = tv[1]
+        prevValue = tv[1];
         delete filter[k];
         break;
       }
@@ -54,15 +55,18 @@ export default class Showcase extends Base {
 
   render() {
     return (
-      <div style={{ width: "100%"}}>
+      <div style={{ width: "100%" }}>
         <SideBar
           Store={this.Store}
           setStore={this.setStore}
           isOpen={true}
           onCheck={this.onCheck}
         />
-        <Content Store={this.Store} setStore={this.setStore}
-                 onCheck={this.onCheck}/>
+        <Content
+          Store={this.Store}
+          setStore={this.setStore}
+          onCheck={this.onCheck}
+        />
       </div>
     );
   }
