@@ -104,7 +104,7 @@ export default class Content extends Base {
         <div className={"toplist"}>
           {Object.keys(filter).map((f) => {
             f = f.split("|");
-            let text = [f[0], this.cleanTrait(f[1])].join(" | ");
+            let text = [f[0], this.cleanTrait(f[1])].join(": ");
             return (
               <div key={"cat" + i++} className={"category"}>
                 <Form.Group className="" controlId={"check" + i}>
