@@ -51,7 +51,6 @@ let preferredOrder = [
 ];
 
 let dist = {};
-
 for (let key of preferredOrder) {
   dist[key] = traits[key];
 }

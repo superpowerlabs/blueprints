@@ -50,8 +50,7 @@ export default class Showcase extends Base {
       filter,
       tokenIds: tokens,
     });
-    console.log(this.Store.tokenIds, this.Store.filter)
-
+    console.log(this.Store.tokenIds, this.Store.filter);
   }
 
   onId(id) {
@@ -70,7 +69,7 @@ export default class Showcase extends Base {
           setStore={this.setStore}
           isOpen={true}
           onCheck={this.onCheck}
-          onId= {this.onId}
+          onId={this.onId}
         />
         <Content
           Store={this.Store}

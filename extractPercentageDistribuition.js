@@ -6,9 +6,18 @@ const fspath = require("fspath");
 // process.exit(0)
 
 const metadata = require("./client/config/allMetadata.json");
-
+let total = 0;
 let traits = {};
+
+const addSomeDecimals = (s, c = 2) => {
+  s = s.toString().split(".");
+  s[1] = (s[1] || "").substring(0, c);
+  s[1] = s[1] + "0".repeat(c - s[1].length);
+  return s.join(".");
+};
+
 for (let m of metadata) {
+  total++;
   for (let a of m.attributes) {
     if (!traits[a.trait_type]) {
       traits[a.trait_type] = {};
@@ -56,16 +65,14 @@ for (let key of preferredOrder) {
   dist[key] = traits[key];
 }
 
-let total = 8000;
-for(attributes in dist)
-{
-    const keys = Object.keys(dist[attributes])
-    keys.forEach((key, index) => {
-        dist[attributes][key] = (dist[attributes][key] / total) * 100
-        console.log(` ${dist[attributes][key]}`);
-    });
+for (attributes in dist) {
+  const keys = Object.keys(dist[attributes]);
+  keys.forEach((key, index) => {
+    dist[attributes][key] = addSomeDecimals(
+      (dist[attributes][key] / total) * 100
+    );
+  });
 }
-
 
 let output = new fspath("./client/config/percentageDistribution.json");
 output.write(JSON.stringify(dist, null, 2));
@@ -83,8 +90,6 @@ for (let m of metadata) {
     index[key].push(m.tokenId);
   }
 }
-
-
 
 output = new fspath("./client/config/percentagedMetadata.json");
 output.write(JSON.stringify(index, null, 2));
