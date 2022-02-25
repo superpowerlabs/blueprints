@@ -78,10 +78,12 @@ export default class Header extends Base {
             <img
               // className={"positionAbsolute"}
               src={"/images/logo.png"}
-              style={{
-                // width: 300,
-                // left: this.isMobile() ? 80 : this.Store.width / 2 - 80,
-              }}
+              style={
+                {
+                  // width: 300,
+                  // left: this.isMobile() ? 80 : this.Store.width / 2 - 80,
+                }
+              }
             />
           </Navbar.Brand>
           {/*<Nav className="mr-auto my-2 my-lg-0" navbarScroll>*/}
