@@ -1980,5 +1980,6 @@ li a.dropdown-toggle::after {
 }
 
 .tokenId {
-    color: yellow;
+    color: darkgrey;
+    width: 230px;
 }
