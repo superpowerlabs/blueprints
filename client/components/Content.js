@@ -71,12 +71,9 @@ export default class Content extends Base {
     let { items } = this.state;
     const rows = [];
     const imageClick = (m) => {
-      console.log("Click");
       this.setStore({ showModal: true });
       this.setStore({ modalBody: m["extend_info"]["videoUrl"] });
       this.setStore({ modalTitle: m["extend_info"]["videoUrl"] });
-      console.log(this.Store.showModal);
-      console.log(this.Store.modalBody);
     };
     for (let m of items) {
       let img = m.image.split("/");

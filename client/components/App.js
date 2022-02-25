@@ -218,7 +218,7 @@ class App extends Common {
               <Modal.Body>
                 {Store.modalBody ? (
                   <video
-                    style={{ maxheight: "100px" }}
+                    style={{ maxHeight: "100%", maxWidth: "100%" }}
                     src={Store.modalBody}
                     controls
                     loop
