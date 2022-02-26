@@ -53,6 +53,7 @@ class App extends Common {
       "showModal",
       "setWallet",
       "connect",
+      "getPercent",
     ]);
   }
 
@@ -203,6 +204,21 @@ class App extends Common {
     }
   }
 
+  getPercent(m) {
+    let ret = [];
+    console.log(m);
+    let number = Object.entries(m);
+    for (let [x, y] of number) {
+      console.log(x, y);
+      ret.push(
+        <div>
+          {x} {y}%{" "}
+        </div>
+      );
+    }
+    return ret;
+  }
+
   render() {
     const Store = this.state.Store;
     return (
@@ -233,6 +249,7 @@ class App extends Common {
                 ) : null}
               </Modal.Body>
               <Modal.Footer>
+                {this.getPercent(Store.modalPercentage)}
                 <Button
                   onClick={() => {
                     this.setStore({ showModal: false });

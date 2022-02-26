@@ -5,6 +5,7 @@ import Masonry from "react-masonry-component";
 import allMetadata from "../config/allMetadata.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
+import percent from "../config/percentageDistribution.json";
 
 import Base from "./Base";
 
@@ -18,7 +19,12 @@ export default class Content extends Base {
       previous: (this.Store.tokenIds || []).length,
     };
 
-    this.bindMany(["getTokens", "fetchMoreData", "monitorData"]);
+    this.bindMany([
+      "getTokens",
+      "fetchMoreData",
+      "monitorData",
+      "getPercentage",
+    ]);
   }
 
   componentDidMount() {
@@ -69,10 +75,36 @@ export default class Content extends Base {
     });
   }
 
+  getPercentage(m) {
+    let attributes = m.attributes;
+    console.log(m);
+    let trait = [];
+    let value = [];
+    let number = {};
+    for (let x in attributes) {
+      value.push(attributes[x]["value"]);
+      trait.push(attributes[x]["trait_type"]);
+    }
+    for (let y in percent) {
+      if (trait.includes(y)) {
+        const keys = Object.keys(percent[y]);
+        keys.every((key, index) => {
+          if (value.includes(key)) {
+            number[key] = percent[y][key];
+          }
+        });
+      }
+    }
+    this.setStore({
+      modalPercentage: number,
+    });
+  }
+
   getTokens() {
     let { items } = this.state;
     const rows = [];
     const imageClick = (m) => {
+      this.getPercentage(m);
       this.setStore({ showModal: true });
       this.setStore({ modalTitle: m["tokenId"] });
       this.setStore({ modalBody: m["extend_info"]["videoUrl"] });
