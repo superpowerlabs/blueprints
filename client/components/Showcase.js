@@ -17,7 +17,6 @@ export default class Showcase extends Base {
 
 
   onCheck(event, trait, value, id) {
-    console.log(event, trait, value, id, "on check");
     const filter = this.Store.filter || {};
     let key = [trait, value].join("|");
     let prevValue;
@@ -59,7 +58,6 @@ export default class Showcase extends Base {
 
   onId(id) {
     let idnum = toNumber(id)
-    console.log(id)
     const filter = {};
     this.setStore({
       filter,

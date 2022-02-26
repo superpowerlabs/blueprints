@@ -133,19 +133,7 @@ export default class Content extends Base {
   render() {
     const filter = this.Store.filter || {};
     let i = 0;
-    const isSearch = this.Store.isSearch
-    const searchTokenId = this.Store.searchTokenId
 
-    // if(isSearch)
-    // {
-    //   return (
-    //     <div className={"tokenList"}>
-    //     <div className={"toplist"}>
-    //     <LazyLoadImage src={img} onClick={() => imageClick(m)} />
-    //   </div>
-    //     </div >
-    // )
-    // }
     return (
       <div className={"tokenList"}>
         <div className={"toplist"}>
