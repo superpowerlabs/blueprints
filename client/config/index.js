@@ -1,3 +1,4 @@
+/* eslint-disable */
 const contracts = Object.assign(
   require("./deployed.json"),
   require("./deployedProduction.json")

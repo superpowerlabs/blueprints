@@ -10,7 +10,6 @@ import config from "../config";
 import ls from "local-storage";
 import Common from "./Common";
 import Header from "./Header";
-import Footer from "./Footer";
 import Showcase from "./Showcase";
 import Error404 from "./Error404";
 

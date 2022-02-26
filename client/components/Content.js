@@ -56,7 +56,6 @@ export default class Content extends Base {
         }
         newItems++;
         items.push(m);
-
       }
       if (newItems > 20) {
         hasMore = true;
@@ -78,15 +77,14 @@ export default class Content extends Base {
       this.setStore({ modalTitle: m["tokenId"] });
       this.setStore({ modalBody: m["extend_info"]["videoUrl"] });
     };
-    let foundSearch = null
-    if(this.Store.isSearch)
-    {
+    let foundSearch = null;
+    if (this.Store.isSearch) {
       for (let m of allMetadata) {
-        if(m.tokenId === this.Store.searchTokenId)
-        {
+        if (m.tokenId === this.Store.searchTokenId) {
           let img = m.image.split("/");
-          img ="https://s3.mob.land/blueprints-thumbs/" +
-          img[img.length - 1].replace(/png$/, "jpg");
+          img =
+            "https://s3.mob.land/blueprints-thumbs/" +
+            img[img.length - 1].replace(/png$/, "jpg");
           rows.push(
             <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
               <LazyLoadImage src={img} onClick={() => imageClick(m)} />
@@ -96,24 +94,23 @@ export default class Content extends Base {
           foundSearch = true;
         }
       }
-      if(!foundSearch )
-      {rows.push(<div>Token not found :(</div>)
+      if (!foundSearch) {
+        rows.push(<div>Token not found :(</div>);
+      }
+    } else {
+      for (let m of items) {
+        let img = m.image.split("/");
+        img =
+          "https://s3.mob.land/blueprints-thumbs/" +
+          img[img.length - 1].replace(/png$/, "jpg");
+        rows.push(
+          <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
+            <LazyLoadImage src={img} onClick={() => imageClick(m)} />
+            <div className={"centered tokenId"}># {m.tokenId}</div>
+          </div>
+        );
       }
     }
-    else{
-    for (let m of items) {
-      let img = m.image.split("/");
-      img =
-        "https://s3.mob.land/blueprints-thumbs/" +
-        img[img.length - 1].replace(/png$/, "jpg");
-      rows.push(
-        <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
-          <LazyLoadImage src={img} onClick={() => imageClick(m)} />
-          <div className={"centered tokenId"}># {m.tokenId}</div>
-        </div>
-      );
-    }
-  }
     return rows;
   }
 
@@ -182,7 +179,5 @@ export default class Content extends Base {
         </div>
       </div>
     );
-    
   }
-  
 }

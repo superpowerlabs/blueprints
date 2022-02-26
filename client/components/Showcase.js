@@ -4,9 +4,7 @@ import indexedMetadata from "../config/indexedMetadata.json";
 import SideBar from "./SideBar";
 import Content from "./Content";
 import Base from "./Base";
-import allMetadata from "../config/allMetadata.json";
 import { toNumber } from "lodash";
-
 
 export default class Showcase extends Base {
   constructor(props) {
@@ -14,7 +12,6 @@ export default class Showcase extends Base {
 
     this.bindMany(["onCheck", "onId"]);
   }
-
 
   onCheck(event, trait, value, id) {
     const filter = this.Store.filter || {};
@@ -57,13 +54,12 @@ export default class Showcase extends Base {
   }
 
   onId(id) {
-    let idnum = toNumber(id)
+    let idnum = toNumber(id);
     const filter = {};
     this.setStore({
       filter,
-      searchTokenId: idnum ,
+      searchTokenId: idnum,
       isSearch: true,
-
     });
   }
 
