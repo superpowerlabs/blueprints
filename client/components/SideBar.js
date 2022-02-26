@@ -22,7 +22,6 @@ class SideBar extends Base {
     super(props);
     this.state = { value: "" };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   allTraits() {
@@ -46,10 +45,7 @@ class SideBar extends Base {
     this.setState({ value: event.target.value });
     this.props.onId(event.target.value);
   }
-  handleSubmit() {
-    console.log(this.state.value);
-    this.props.onId(this.state.value);
-  }
+
 
   render() {
     let i = 0;
@@ -65,8 +61,6 @@ class SideBar extends Base {
             <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
           </Button>
         </div>
-
-        <form onSubmit={this.handleSubmit}>
           <label>
             Search by Token ID :
             <input
@@ -75,8 +69,7 @@ class SideBar extends Base {
               onChange={this.handleChange}
             />
           </label>
-          <input type="submit" value="Submit" />
-        </form>
+       
         <Nav className="flex-column pt-2">{this.allTraits()}</Nav>
       </div>
     );
