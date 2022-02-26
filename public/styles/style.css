@@ -545,7 +545,7 @@ span.button {
 }
 
 .navbar {
-    background-color: black !important;
+    background-color: #00001160 !important;
     border-bottom: none !important;
     background-size: 100%;
     padding: 0.2rem 1.4rem !important;
@@ -1959,13 +1959,16 @@ li a.dropdown-toggle::after {
 .tokenCard img {
     width: 230px;
     height: 230px;
+    border-radius: 8px;
 }
 
 .label {
     font-size: 0.9rem;
 }
 
-.toplist, .category, .category > div {
+.toplist,
+.category,
+.category > div {
     display: inline;
 }
 
@@ -1980,5 +1983,6 @@ li a.dropdown-toggle::after {
 }
 
 .tokenId {
-    color: yellow;
+    color: darkgrey;
+    width: 230px;
 }

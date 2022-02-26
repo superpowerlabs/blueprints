@@ -32,7 +32,7 @@ class SubMenu extends Base {
           type="radio"
           label={text}
           name={trait}
-          checked={(this.Store.filter||{})[[trait, value].join('|')]}
+          checked={(this.Store.filter || {})[[trait, value].join("|")]}
           onChange={(event) => this.props.onCheck(event, trait, value, id)}
         />
       </Form.Group>
