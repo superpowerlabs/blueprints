@@ -76,20 +76,3 @@ for (attributes in dist) {
 
 let output = new fspath("./client/config/percentageDistribution.json");
 output.write(JSON.stringify(dist, null, 2));
-
-// index data
-
-let index = {};
-for (let m of metadata) {
-  for (let a of m.attributes) {
-    let key = [a.trait_type, a.value].join("|");
-    if (!index[key]) {
-      index[key] = [];
-    }
-
-    index[key].push(m.tokenId);
-  }
-}
-
-output = new fspath("./client/config/percentagedMetadata.json");
-output.write(JSON.stringify(index, null, 2));
