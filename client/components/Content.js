@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-undef
 const { Form } = ReactBootstrap;
+import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
 import allMetadata from "../config/allMetadata.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -21,6 +22,7 @@ export default class Content extends Base {
   }
 
   componentDidMount() {
+    Scroll.animateScroll.scrollToTop();
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
   }
@@ -83,7 +85,8 @@ export default class Content extends Base {
         if(m.tokenId === this.Store.searchTokenId)
         {
           let img = m.image.split("/");
-          img = "/images/" + img[img.length - 1].replace(/png$/, "jpg");
+          img ="https://s3.mob.land/blueprints-thumbs/" +
+          img[img.length - 1].replace(/png$/, "jpg");
           rows.push(
             <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
               <LazyLoadImage src={img} onClick={() => imageClick(m)} />
@@ -100,7 +103,9 @@ export default class Content extends Base {
     else{
     for (let m of items) {
       let img = m.image.split("/");
-      img = "/images/" + img[img.length - 1].replace(/png$/, "jpg");
+      img =
+        "https://s3.mob.land/blueprints-thumbs/" +
+        img[img.length - 1].replace(/png$/, "jpg");
       rows.push(
         <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
           <LazyLoadImage src={img} onClick={() => imageClick(m)} />
@@ -169,8 +174,17 @@ export default class Content extends Base {
             hasMore={this.state.hasMore}
             loader={<h4>Loading...</h4>}
             endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>Yay! You have seen it all</b>
+              <p
+                style={{
+                  padding: 40,
+                  textAlign: "center",
+                  color: "#bac",
+                  fontSize: "80%",
+                }}
+              >
+                {this.state.items.length
+                  ? "Yay! You have seen it all"
+                  : "No items with this filter"}
               </p>
             }
           >
