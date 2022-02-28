@@ -58,11 +58,9 @@ class SideBar extends Base {
         {/*    onChange={this.handleChange}*/}
         {/*  />*/}
         {/*</label>*/}
-        <div className={'searchBox'}>
+        <div className={"searchBox"}>
           <InputGroup className="mb-3" size={"sm"}>
-            <InputGroup.Text id="basic-addon3">
-              Search by ID
-            </InputGroup.Text>
+            <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
             <FormControl
               aria-describedby="basic-addon3"
               value={this.state.value}

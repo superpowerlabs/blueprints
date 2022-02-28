@@ -6,7 +6,7 @@ import allMetadata from "../config/allMetadata.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import percent from "../config/percentageDistribution.json";
-import {preferredOrder} from '../config'
+import { preferredOrder } from "../config";
 
 import Base from "./Base";
 
@@ -91,9 +91,9 @@ export default class Content extends Base {
         }
       }
     }
-    const result = {}
+    const result = {};
     for (let key of preferredOrder) {
-      result[key] = percentages[key]
+      result[key] = percentages[key];
     }
     return result;
   }
@@ -146,14 +146,21 @@ export default class Content extends Base {
 
   getJpg(m) {
     let img = m.image.split("/");
-    return "https://s3.mob.land/blueprints-thumbs/" + img[img.length - 1].replace(/png$/, "jpg");
+    return (
+      "https://s3.mob.land/blueprints-thumbs/" +
+      img[img.length - 1].replace(/png$/, "jpg")
+    );
   }
 
   getTokens() {
     let { items } = this.state;
     const rows = [];
     let foundSearch = null;
-    if (this.Store.isSearch && this.Store.searchTokenId && !isNaN(parseInt(this.Store.searchTokenId))) {
+    if (
+      this.Store.isSearch &&
+      this.Store.searchTokenId &&
+      !isNaN(parseInt(this.Store.searchTokenId))
+    ) {
       for (let m of allMetadata) {
         if (m.tokenId === this.Store.searchTokenId) {
           let img = this.getJpg(m);
