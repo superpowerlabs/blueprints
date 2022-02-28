@@ -1986,3 +1986,8 @@ li a.dropdown-toggle::after {
     color: darkgrey;
     width: 230px;
 }
+
+.modalBody {
+    display: flex;
+    flex-direction: row;
+}

@@ -77,24 +77,26 @@ export default class Content extends Base {
 
   getPercentage(m) {
     let attributes = m.attributes;
-    console.log(m);
+
     let trait = [];
     let value = [];
     let number = {};
     for (let x in attributes) {
       value.push(attributes[x]["value"]);
       trait.push(attributes[x]["trait_type"]);
-    }
-    for (let y in percent) {
-      if (trait.includes(y)) {
-        const keys = Object.keys(percent[y]);
-        keys.every((key, index) => {
-          if (value.includes(key)) {
-            number[key] = percent[y][key];
+      for (let y in percent) {
+        if (attributes[x]["trait_type"] === y) {
+          for (let num in percent[y]) {
+            if (num === attributes[x]["value"]) {
+              console.log(y, percent[y][num]);
+              number[y] = [num, percent[y][num]];
+            }
           }
-        });
+        }
       }
     }
+
+    console.log(number, "final");
     this.setStore({
       modalPercentage: number,
     });

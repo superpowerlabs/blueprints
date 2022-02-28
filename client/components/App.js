@@ -206,13 +206,11 @@ class App extends Common {
 
   getPercent(m) {
     let ret = [];
-    console.log(m);
     let number = Object.entries(m);
     for (let [x, y] of number) {
-      console.log(x, y);
       ret.push(
         <div>
-          {x} {y}%{" "}
+          {y[0]}: {x} {y[1]}%{" "}
         </div>
       );
     }
@@ -237,19 +235,23 @@ class App extends Common {
               <Modal.Header>
                 <Modal.Title>{Store.modalTitle}</Modal.Title>
               </Modal.Header>
-              <Modal.Body>
-                {Store.modalBody ? (
-                  <video
-                    style={{ maxHeight: "100%", maxWidth: "100%" }}
-                    src={Store.modalBody}
-                    controls
-                    loop
-                    autoPlay
-                  />
-                ) : null}
-              </Modal.Body>
+              <div className={"modalBody"}>
+                <Modal.Body>
+                  {Store.modalBody ? (
+                    <video
+                      style={{ maxHeight: "100%", maxWidth: "100%" }}
+                      src={Store.modalBody}
+                      controls
+                      loop
+                      autoPlay
+                    />
+                  ) : null}
+                </Modal.Body>
+                <Modal.Body>
+                  {this.getPercent(Store.modalPercentage)}
+                </Modal.Body>
+              </div>
               <Modal.Footer>
-                {this.getPercent(Store.modalPercentage)}
                 <Button
                   onClick={() => {
                     this.setStore({ showModal: false });
