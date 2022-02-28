@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import SubMenu from "./SubMenu";
 // eslint-disable-next-line no-undef
-const { Button, Nav } = ReactBootstrap;
+const { InputGroup, FormControl, Button, Nav } = ReactBootstrap;
 import classNames from "classnames";
 import Base from "./Base";
 
@@ -50,14 +50,26 @@ class SideBar extends Base {
             <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
           </Button>
         </div>
-        <label>
-          Search by Token ID :
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-        </label>
+        {/*<label>*/}
+        {/*  Search by Token ID :*/}
+        {/*  <input*/}
+        {/*    type="text"*/}
+        {/*    value={this.state.value}*/}
+        {/*    onChange={this.handleChange}*/}
+        {/*  />*/}
+        {/*</label>*/}
+        <div className={'searchBox'}>
+          <InputGroup className="mb-3" size={"sm"}>
+            <InputGroup.Text id="basic-addon3">
+              Search by ID
+            </InputGroup.Text>
+            <FormControl
+              aria-describedby="basic-addon3"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </InputGroup>
+        </div>
 
         <Nav className="flex-column pt-2">{this.allTraits()}</Nav>
       </div>

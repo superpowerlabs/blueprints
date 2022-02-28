@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-undef
-const { Form } = ReactBootstrap;
+const { Form, Row, Col } = ReactBootstrap;
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
 import allMetadata from "../config/allMetadata.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import percent from "../config/percentageDistribution.json";
+import {preferredOrder} from '../config'
 
 import Base from "./Base";
 
@@ -23,7 +24,8 @@ export default class Content extends Base {
       "getTokens",
       "fetchMoreData",
       "monitorData",
-      "getPercentage",
+      "getPercentages",
+      "imageClick",
     ]);
   }
 
@@ -75,53 +77,93 @@ export default class Content extends Base {
     });
   }
 
-  getPercentage(m) {
-    let attributes = m.attributes;
-
-    let trait = [];
-    let value = [];
-    let number = {};
+  getPercentages(m) {
+    const attributes = m.attributes;
+    const percentages = {};
     for (let x in attributes) {
-      value.push(attributes[x]["value"]);
-      trait.push(attributes[x]["trait_type"]);
       for (let y in percent) {
         if (attributes[x]["trait_type"] === y) {
           for (let num in percent[y]) {
             if (num === attributes[x]["value"]) {
-              console.log(y, percent[y][num]);
-              number[y] = [num, percent[y][num]];
+              percentages[y] = [num, percent[y][num]];
             }
           }
         }
       }
     }
+    const result = {}
+    for (let key of preferredOrder) {
+      result[key] = percentages[key]
+    }
+    return result;
+  }
 
-    console.log(number, "final");
+  imageClick(m) {
+    const percentages = this.getPercentages(m);
+    const pc = [];
+    const pc2 = [];
+    let i = 0;
+    for (let trait in percentages) {
+      let arr = i % 2 ? pc2 : pc;
+      arr.push(
+        <div key={"pc" + i++}>
+          <span className={"pcTrait"}>{trait}</span>:{" "}
+          <span className={"pcValue"}>
+            {this.cleanTrait(percentages[trait][0])}
+          </span>{" "}
+          <span className={"pcPc"}>({percentages[trait][1]}%)</span>
+        </div>
+      );
+    }
+    const body = (
+      <Row>
+        <Col lg={6}>
+          <video
+            style={{ width: "100%" }}
+            src={m.animation_url}
+            controls
+            loop
+            autoPlay
+            poster={this.getJpg(m)}
+          />
+        </Col>
+        <Col className={"pcCol"} lg={3}>
+          {pc}
+        </Col>
+        <Col className={"pcCol"} lg={3}>
+          {pc2}
+        </Col>
+      </Row>
+    );
+
     this.setStore({
-      modalPercentage: number,
+      modalSize: "xl",
+      showModal: true,
+      modalTitle: m.name,
+      modalBody: body,
     });
+  }
+
+  getJpg(m) {
+    let img = m.image.split("/");
+    return "https://s3.mob.land/blueprints-thumbs/" + img[img.length - 1].replace(/png$/, "jpg");
   }
 
   getTokens() {
     let { items } = this.state;
     const rows = [];
-    const imageClick = (m) => {
-      this.getPercentage(m);
-      this.setStore({ showModal: true });
-      this.setStore({ modalTitle: m["tokenId"] });
-      this.setStore({ modalBody: m["extend_info"]["videoUrl"] });
-    };
     let foundSearch = null;
-    if (this.Store.isSearch) {
+    if (this.Store.isSearch && this.Store.searchTokenId && !isNaN(parseInt(this.Store.searchTokenId))) {
       for (let m of allMetadata) {
         if (m.tokenId === this.Store.searchTokenId) {
-          let img = m.image.split("/");
-          img =
-            "https://s3.mob.land/blueprints-thumbs/" +
-            img[img.length - 1].replace(/png$/, "jpg");
+          let img = this.getJpg(m);
           rows.push(
             <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
-              <LazyLoadImage src={img} onClick={() => imageClick(m)} />
+              <LazyLoadImage
+                className={"command"}
+                src={img}
+                onClick={() => this.imageClick(m)}
+              />
               <div className={"centered tokenId"}># {m.tokenId}</div>
             </div>
           );
@@ -133,13 +175,14 @@ export default class Content extends Base {
       }
     } else {
       for (let m of items) {
-        let img = m.image.split("/");
-        img =
-          "https://s3.mob.land/blueprints-thumbs/" +
-          img[img.length - 1].replace(/png$/, "jpg");
+        let img = this.getJpg(m);
         rows.push(
           <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
-            <LazyLoadImage src={img} onClick={() => imageClick(m)} />
+            <LazyLoadImage
+              className={"command"}
+              src={img}
+              onClick={() => this.imageClick(m)}
+            />
             <div className={"centered tokenId"}># {m.tokenId}</div>
           </div>
         );
