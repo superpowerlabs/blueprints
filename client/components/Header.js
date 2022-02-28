@@ -1,6 +1,6 @@
 // import { isMobile } from "react-device-detect";
 
-const { Navbar, Nav, Button } =
+const { Navbar, Button } =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
 
@@ -8,7 +8,6 @@ const { Navbar, Nav, Button } =
 const { Link } = ReactRouterDOM;
 
 import Base from "./Base";
-import { addToken } from "../utils/Wallet";
 
 export default class Header extends Base {
   constructor(props) {

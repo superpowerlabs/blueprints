@@ -1,10 +1,6 @@
 // eslint-disable-next-line no-undef
 const { Accordion, Nav, Form } = ReactBootstrap;
 // eslint-disable-next-line no-undef
-const { Link } = ReactRouterDOM;
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import classNames from "classnames";
 import Base from "./Base";
 
 class SubMenu extends Base {

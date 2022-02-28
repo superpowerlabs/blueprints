@@ -6,9 +6,18 @@ const fspath = require("fspath");
 // process.exit(0)
 
 const metadata = require("./client/config/allMetadata.json");
-
+let total = 0;
 let traits = {};
+
+const addSomeDecimals = (s, c = 2) => {
+  s = s.toString().split(".");
+  s[1] = (s[1] || "").substring(0, c);
+  s[1] = s[1] + "0".repeat(c - s[1].length);
+  return s.join(".");
+};
+
 for (let m of metadata) {
+  total++;
   for (let a of m.attributes) {
     if (!traits[a.trait_type]) {
       traits[a.trait_type] = {};
@@ -51,25 +60,19 @@ let preferredOrder = [
 ];
 
 let dist = {};
+
 for (let key of preferredOrder) {
   dist[key] = traits[key];
 }
 
-let output = new fspath("./client/config/rarityDistribution.json");
-output.write(JSON.stringify(dist, null, 2));
-
-// index data
-
-let index = {};
-for (let m of metadata) {
-  for (let a of m.attributes) {
-    let key = [a.trait_type, a.value].join("|");
-    if (!index[key]) {
-      index[key] = [];
-    }
-    index[key].push(m.tokenId);
-  }
+for (attributes in dist) {
+  const keys = Object.keys(dist[attributes]);
+  keys.forEach((key, index) => {
+    dist[attributes][key] = addSomeDecimals(
+      (dist[attributes][key] / total) * 100
+    );
+  });
 }
 
-output = new fspath("./client/config/indexedMetadata.json");
-output.write(JSON.stringify(index, null, 2));
+let output = new fspath("./client/config/percentageDistribution.json");
+output.write(JSON.stringify(dist, null, 2));

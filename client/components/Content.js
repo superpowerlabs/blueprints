@@ -5,6 +5,7 @@ import Masonry from "react-masonry-component";
 import allMetadata from "../config/allMetadata.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
+import percent from "../config/percentageDistribution.json";
 
 import Base from "./Base";
 
@@ -18,7 +19,12 @@ export default class Content extends Base {
       previous: (this.Store.tokenIds || []).length,
     };
 
-    this.bindMany(["getTokens", "fetchMoreData", "monitorData"]);
+    this.bindMany([
+      "getTokens",
+      "fetchMoreData",
+      "monitorData",
+      "getPercentage",
+    ]);
   }
 
   componentDidMount() {
@@ -69,20 +75,75 @@ export default class Content extends Base {
     });
   }
 
+  getPercentage(m) {
+    let attributes = m.attributes;
+
+    let trait = [];
+    let value = [];
+    let number = {};
+    for (let x in attributes) {
+      value.push(attributes[x]["value"]);
+      trait.push(attributes[x]["trait_type"]);
+      for (let y in percent) {
+        if (attributes[x]["trait_type"] === y) {
+          for (let num in percent[y]) {
+            if (num === attributes[x]["value"]) {
+              console.log(y, percent[y][num]);
+              number[y] = [num, percent[y][num]];
+            }
+          }
+        }
+      }
+    }
+
+    console.log(number, "final");
+    this.setStore({
+      modalPercentage: number,
+    });
+  }
+
   getTokens() {
     let { items } = this.state;
     const rows = [];
-    for (let m of items) {
-      let img = m.image.split("/");
-      img =
-        "https://s3.mob.land/blueprints-thumbs/" +
-        img[img.length - 1].replace(/png$/, "jpg");
-      rows.push(
-        <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
-          <LazyLoadImage src={img} />
-          <div className={"centered tokenId"}># {m.tokenId}</div>
-        </div>
-      );
+    const imageClick = (m) => {
+      this.getPercentage(m);
+      this.setStore({ showModal: true });
+      this.setStore({ modalTitle: m["tokenId"] });
+      this.setStore({ modalBody: m["extend_info"]["videoUrl"] });
+    };
+    let foundSearch = null;
+    if (this.Store.isSearch) {
+      for (let m of allMetadata) {
+        if (m.tokenId === this.Store.searchTokenId) {
+          let img = m.image.split("/");
+          img =
+            "https://s3.mob.land/blueprints-thumbs/" +
+            img[img.length - 1].replace(/png$/, "jpg");
+          rows.push(
+            <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
+              <LazyLoadImage src={img} onClick={() => imageClick(m)} />
+              <div className={"centered tokenId"}># {m.tokenId}</div>
+            </div>
+          );
+          foundSearch = true;
+        }
+      }
+      if (!foundSearch) {
+        rows.push(<div>Token not found :(</div>);
+      }
+    } else {
+      for (let m of items) {
+        let img = m.image.split("/");
+        img =
+          "https://s3.mob.land/blueprints-thumbs/" +
+          img[img.length - 1].replace(/png$/, "jpg");
+        rows.push(
+          <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
+            <LazyLoadImage src={img} onClick={() => imageClick(m)} />
+            <div className={"centered tokenId"}># {m.tokenId}</div>
+          </div>
+        );
+      }
     }
     return rows;
   }
@@ -103,6 +164,7 @@ export default class Content extends Base {
   render() {
     const filter = this.Store.filter || {};
     let i = 0;
+
     return (
       <div className={"tokenList"}>
         <div className={"toplist"}>
