@@ -50,14 +50,6 @@ class SideBar extends Base {
             <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
           </Button>
         </div>
-        {/*<label>*/}
-        {/*  Search by Token ID :*/}
-        {/*  <input*/}
-        {/*    type="text"*/}
-        {/*    value={this.state.value}*/}
-        {/*    onChange={this.handleChange}*/}
-        {/*  />*/}
-        {/*</label>*/}
         <div className={"searchBox"}>
           <InputGroup className="mb-3" size={"sm"}>
             <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
