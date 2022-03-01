@@ -46,11 +46,9 @@ class App extends Common {
     };
 
     this.bindMany([
-      "handleClose",
-      "handleShow",
       "setStore",
       "updateDimensions",
-      "showModal",
+      "closeModal",
       "setWallet",
       "connect",
       "getPercent",
@@ -69,14 +67,6 @@ class App extends Common {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions.bind(this));
-  }
-
-  handleClose() {
-    this.setState({ show: false });
-  }
-
-  handleShow() {
-    this.setState({ show: true });
   }
 
   async componentDidMount() {
@@ -124,14 +114,6 @@ class App extends Common {
     }
   }
 
-  // chainId: '0x3',
-  // chainName: 'Ropsten',
-  // nativeCurrency: {
-  //   symbol: 'RETH',
-  //   decimals: 18,
-  // },
-  // rpcUrls: ['https://ropsten.infura.io/v3/your_key'],
-
   async setWallet(eth, connectedWith) {
     try {
       const provider = new ethers.providers.Web3Provider(eth);
@@ -166,14 +148,14 @@ class App extends Common {
     }
   }
 
-  showModal(modalTitle, modalBody, modalClose, secondButton, modalAction) {
+  closeModal() {
     this.setStore({
-      modalTitle,
-      modalBody,
-      modalClose,
-      secondButton,
-      modalAction,
-      showModal: true,
+      modalTitle: undefined,
+      modalBody: undefined,
+      modalClose: undefined,
+      secondButton: undefined,
+      modalAction: undefined,
+      showModal: false,
     });
   }
 
@@ -223,66 +205,43 @@ class App extends Common {
       <BrowserRouter>
         <Header Store={Store} setStore={this.setStore} connect={this.connect} />
         <main>
-          {Store.showModal ? (
-            <Modal.Dialog
-              style={{
-                color: "black",
-                backgroundColor: "yellow",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Modal.Header>
-                <Modal.Title>{Store.modalTitle}</Modal.Title>
-              </Modal.Header>
-              <div className={"modalBody"}>
-                <Modal.Body>
-                  {Store.modalBody ? (
-                    <video
-                      style={{ maxHeight: "100%", maxWidth: "100%" }}
-                      src={Store.modalBody}
-                      controls
-                      loop
-                      autoPlay
-                    />
-                  ) : null}
-                </Modal.Body>
-                <Modal.Body>
-                  {this.getPercent(Store.modalPercentage)}
-                </Modal.Body>
-              </div>
-              <Modal.Footer>
+          <Switch>
+            <Route exact path="/">
+              <Showcase Store={Store} setStore={this.setStore} />
+            </Route>
+            <Route exact path="*">
+              <Error404 Store={Store} setStore={this.setStore} />
+            </Route>
+          </Switch>
+          {/*<Footer />*/}
+          <Modal
+            size={Store.modalSize || "sm"}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={Store.showModal}
+            onHide={this.closeModal}
+          >
+            <Modal.Header>
+              <Modal.Title>{Store.modalTitle}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{Store.modalBody}</Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.closeModal}>
+                {Store.modalClose || "Close"}
+              </Button>
+              {this.state.secondButton ? (
                 <Button
                   onClick={() => {
-                    this.setStore({ showModal: false });
+                    Store.modalAction();
+                    this.closeModal();
                   }}
+                  bsStyle="primary"
                 >
-                  {Store.modalClose || "Close"}
+                  {Store.secondButton}
                 </Button>
-                {this.state.secondButton ? (
-                  <Button
-                    onClick={() => {
-                      Store.modalAction();
-                      this.setStore({ showModal: false });
-                    }}
-                    bsStyle="primary"
-                  >
-                    {Store.secondButton}
-                  </Button>
-                ) : null}
-              </Modal.Footer>
-            </Modal.Dialog>
-          ) : (
-            <Switch>
-              <Route exact path="/">
-                <Showcase Store={Store} setStore={this.setStore} />
-              </Route>
-              <Route exact path="*">
-                <Error404 Store={Store} setStore={this.setStore} />
-              </Route>
-            </Switch>
-          )}
-          {/*<Footer />*/}
+              ) : null}
+            </Modal.Footer>
+          </Modal>
         </main>
       </BrowserRouter>
     );

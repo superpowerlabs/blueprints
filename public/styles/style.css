@@ -1991,3 +1991,52 @@ li a.dropdown-toggle::after {
     display: flex;
     flex-direction: row;
 }
+
+.modal-content {
+    background-color: #000000c0 !important;
+    border-radius: 12px;
+    border: 1px solid #226;
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal-title {
+    margin-bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.modal-footer {
+    border: none;
+    margin-top: 0;
+}
+
+.pcCol > div {
+    padding: 5px 0;
+}
+
+.pcTrait {
+    color: yellow;
+}
+.pcPc {
+    color: aqua;
+}
+
+.searchBox {
+    padding: 0 21px;
+    width: 200px;
+}
+
+.input-group-text {
+    background-color: #2e1645;
+    color: #61dafb;
+    border: 1px solid #446 !important;
+}
+
+.form-control {
+    background-color: black;
+    color: white;
+    border: 1px solid #446 !important;
+}

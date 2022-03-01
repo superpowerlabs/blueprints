@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fspath = require("fspath");
-
+const { preferredOrder } = require("./client/config");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
@@ -20,35 +20,6 @@ for (let m of metadata) {
     }
   }
 }
-
-let preferredOrder = [
-  "Rarity",
-  "Tier",
-  "Gender",
-  "Personality",
-  "Trait",
-  "Gang",
-  "Skin Tone",
-  "Combat Style",
-  "Macro Ability",
-  "Chest",
-  "Hair",
-  "Head",
-  "Legs",
-  "Badge",
-  "Cybernetic Implant",
-  "Health",
-  "Attack",
-  "Defense",
-  "Heal",
-  "Soul",
-  "Class",
-  "Weapon Type",
-  "Active Ability 1",
-  "Active Ability 2",
-  "Passive Ability",
-  "Leader Ability",
-];
 
 let dist = {};
 for (let key of preferredOrder) {
