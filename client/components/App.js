@@ -229,7 +229,7 @@ class App extends Common {
               <Button onClick={this.closeModal}>
                 {Store.modalClose || "Close"}
               </Button>
-              {this.state.secondButton ? (
+              {Store.secondButton ? (
                 <Button
                   onClick={() => {
                     Store.modalAction();
