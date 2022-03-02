@@ -136,13 +136,6 @@ export default class Content extends Base {
       </Row>
     );
 
-    // this.setStore({
-
-    //   modalSize: "xl",
-    //   showModal: true,
-    //   modalTitle: m.name,
-    //   modalBody: body,
-    // });
     this.Store.globals.showPopUp({
       title: m.name,
       body: body,

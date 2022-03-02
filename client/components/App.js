@@ -2,7 +2,6 @@
 const { BrowserRouter, Route, Switch } = ReactRouterDOM;
 
 // eslint-disable-next-line no-undef
-const { Modal, Button } = ReactBootstrap;
 
 const ethers = require("ethers");
 import clientApi from "../utils/ClientApi";
@@ -49,7 +48,6 @@ class App extends Common {
     this.bindMany([
       "setStore",
       "updateDimensions",
-      "closeModal",
       "setWallet",
       "connect",
       "getPercent",
@@ -160,7 +158,6 @@ class App extends Common {
   }
 
   showPopUp(params) {
-    console.log(params);
     try {
       this.setStore({
         modals: Object.assign(params, {
@@ -173,12 +170,11 @@ class App extends Common {
         }),
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
   handleClose(event) {
-    console.log("hi");
     const { onBeforeClose, onClose } = this.state.Store.modals || {};
     if (onBeforeClose && event !== null) {
       if (!onBeforeClose()) {
@@ -252,6 +248,7 @@ class App extends Common {
             </Route>
           </Switch>
           {/*<Footer />*/}
+          {/* Since we have only one time of popup the parameter what is unnecessary. But we will keep it for the future */}
           {!!show && what === "popup" ? <PopUp modals={modals} /> : ""}
         </main>
       </BrowserRouter>
