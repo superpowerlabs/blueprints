@@ -146,7 +146,7 @@ export default class Content extends Base {
     this.Store.globals.showPopUp({
       title: m.name,
       body: body,
-    })
+    });
   }
 
   getJpg(m) {

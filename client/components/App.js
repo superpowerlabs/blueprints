@@ -55,11 +55,8 @@ class App extends Common {
       "getPercent",
     ]);
 
-    this.globals = [
-      'showPopUp',
-      'handleClose',
-    ]
-    this.bindMany(this.globals)  
+    this.globals = ["showPopUp", "handleClose"];
+    this.bindMany(this.globals);
   }
 
   getWidth() {
@@ -78,17 +75,16 @@ class App extends Common {
 
   async componentDidMount() {
     window.addEventListener("resize", this.updateDimensions.bind(this));
-    const globals = this.state.Store.globals || {}
+    const globals = this.state.Store.globals || {};
     for (let f of this.globals) {
-      globals[f] = this[f]
+      globals[f] = this[f];
     }
     this.setStore({
-      globals
-    })
+      globals,
+    });
     if (this.state.Store.connectedWith) {
       this.connect();
     }
-
   }
 
   async connect() {
@@ -164,42 +160,40 @@ class App extends Common {
   }
 
   showPopUp(params) {
-    console.log(params)
-    try{
-    this.setStore({
-      modals: Object.assign(params, {
-        show: true,
-        what: 'popup',
-        handleClose: this.handleClose,
-        closeLabel:'Close',
-        noSave: true,
-        size: 'xl',
-      })
-    })
-  }
-  catch(e)
-  {console.log(e)}
-    console.log(this.state.Store.modals, "alo")
+    console.log(params);
+    try {
+      this.setStore({
+        modals: Object.assign(params, {
+          show: true,
+          what: "popup",
+          handleClose: this.handleClose,
+          closeLabel: "Close",
+          noSave: true,
+          size: "xl",
+        }),
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   handleClose(event) {
-    console.log("hi")
-    const {onBeforeClose, onClose} = this.state.Store.modals || {}
+    console.log("hi");
+    const { onBeforeClose, onClose } = this.state.Store.modals || {};
     if (onBeforeClose && event !== null) {
       if (!onBeforeClose()) {
         // onBeforeClose returns true if the user want to exit
-        return
+        return;
       }
     }
-    if (typeof onClose === 'function') {
-      onClose(this.changes)
+    if (typeof onClose === "function") {
+      onClose(this.changes);
     }
     this.setStore({
-      modals: {}
-    })
-    delete this.changes
+      modals: {},
+    });
+    delete this.changes;
   }
-
 
   setStore(newProps, storeItLocally) {
     let store = this.state.Store;
@@ -244,7 +238,7 @@ class App extends Common {
   render() {
     const Store = this.state.Store;
     const modals = Store.modals;
-    const {show, what} = (modals || {})
+    const { show, what } = modals || {};
     return (
       <BrowserRouter>
         <Header Store={Store} setStore={this.setStore} connect={this.connect} />
@@ -258,7 +252,7 @@ class App extends Common {
             </Route>
           </Switch>
           {/*<Footer />*/}
-          {!!show && what === 'popup' ? <PopUp modals={modals}/> : ''}
+          {!!show && what === "popup" ? <PopUp modals={modals} /> : ""}
         </main>
       </BrowserRouter>
     );
