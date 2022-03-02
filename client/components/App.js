@@ -12,6 +12,7 @@ import Common from "./Common";
 import Header from "./Header";
 import Showcase from "./Showcase";
 import Error404 from "./Error404";
+import PopUp from "./Popup";
 
 class App extends Common {
   constructor(props) {
@@ -53,6 +54,12 @@ class App extends Common {
       "connect",
       "getPercent",
     ]);
+
+    this.globals = [
+      'showPopUp',
+      'handleClose',
+    ]
+    this.bindMany(this.globals)  
   }
 
   getWidth() {
@@ -71,9 +78,17 @@ class App extends Common {
 
   async componentDidMount() {
     window.addEventListener("resize", this.updateDimensions.bind(this));
+    const globals = this.state.Store.globals || {}
+    for (let f of this.globals) {
+      globals[f] = this[f]
+    }
+    this.setStore({
+      globals
+    })
     if (this.state.Store.connectedWith) {
       this.connect();
     }
+
   }
 
   async connect() {
@@ -148,16 +163,43 @@ class App extends Common {
     }
   }
 
-  closeModal() {
+  showPopUp(params) {
+    console.log(params)
+    try{
     this.setStore({
-      modalTitle: undefined,
-      modalBody: undefined,
-      modalClose: undefined,
-      secondButton: undefined,
-      modalAction: undefined,
-      showModal: false,
-    });
+      modals: Object.assign(params, {
+        show: true,
+        what: 'popup',
+        handleClose: this.handleClose,
+        closeLabel:'Close',
+        noSave: true,
+        size: 'xl',
+      })
+    })
   }
+  catch(e)
+  {console.log(e)}
+    console.log(this.state.Store.modals, "alo")
+  }
+
+  handleClose(event) {
+    console.log("hi")
+    const {onBeforeClose, onClose} = this.state.Store.modals || {}
+    if (onBeforeClose && event !== null) {
+      if (!onBeforeClose()) {
+        // onBeforeClose returns true if the user want to exit
+        return
+      }
+    }
+    if (typeof onClose === 'function') {
+      onClose(this.changes)
+    }
+    this.setStore({
+      modals: {}
+    })
+    delete this.changes
+  }
+
 
   setStore(newProps, storeItLocally) {
     let store = this.state.Store;
@@ -201,6 +243,8 @@ class App extends Common {
 
   render() {
     const Store = this.state.Store;
+    const modals = Store.modals;
+    const {show, what} = (modals || {})
     return (
       <BrowserRouter>
         <Header Store={Store} setStore={this.setStore} connect={this.connect} />
@@ -214,34 +258,7 @@ class App extends Common {
             </Route>
           </Switch>
           {/*<Footer />*/}
-          <Modal
-            size={Store.modalSize || "sm"}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={Store.showModal}
-            onHide={this.closeModal}
-          >
-            <Modal.Header>
-              <Modal.Title>{Store.modalTitle}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{Store.modalBody}</Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.closeModal}>
-                {Store.modalClose || "Close"}
-              </Button>
-              {this.state.secondButton ? (
-                <Button
-                  onClick={() => {
-                    Store.modalAction();
-                    this.closeModal();
-                  }}
-                  bsStyle="primary"
-                >
-                  {Store.secondButton}
-                </Button>
-              ) : null}
-            </Modal.Footer>
-          </Modal>
+          {!!show && what === 'popup' ? <PopUp modals={modals}/> : ''}
         </main>
       </BrowserRouter>
     );
