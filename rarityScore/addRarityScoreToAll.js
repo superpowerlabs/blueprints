@@ -9,17 +9,13 @@ const rarityScore = require("../rarityScore.json");
 
 let traits = [];
 for (let m of metadata) {
-    for(let score of rarityScore){
-        if(score[0]=== m.tokenId)
-        {
-         m.rarity_score = score[1]
-        traits.push(m);
-        }
-
+  for (let score of rarityScore) {
+    if (score[0] === m.tokenId) {
+      m.rarity_score = score[1];
+      traits.push(m);
     }
-
+  }
 }
-
 
 let output = new fspath("./allDataandRarityScore.json");
 output.write(JSON.stringify(traits, null, 2));
