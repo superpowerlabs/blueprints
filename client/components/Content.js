@@ -2,7 +2,7 @@
 const { Form, Row, Col } = ReactBootstrap;
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
-import allMetadata from "../config/allMetadata.json";
+import allMetadata from "../config/allDataandRarityScore.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import percent from "../config/percentageDistribution.json";
