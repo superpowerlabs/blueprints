@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const fspath = require("fspath");
-const { preferredOrder } = require("../client/config");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
