@@ -65,17 +65,17 @@ class SideBar extends Base {
             />
           </InputGroup>
 
-          <div  className='rows'>
-          Sort by:
-          <BootstrapSwitchButton
-            checked={this.Store.isSorted}
-            onlabel="Rarity Score"
-            offlabel="Token ID "
-            onChange={this.handleToggle}
-            width={100}
-            onstyle="info" 
-            offstyle="outline-info"
-          />
+          <div className="rows">
+            Sort by:
+            <BootstrapSwitchButton
+              checked={this.Store.isSorted}
+              onlabel="Rarity Score"
+              offlabel="Token ID "
+              onChange={this.handleToggle}
+              width={100}
+              onstyle="info"
+              offstyle="outline-info"
+            />
           </div>
         </div>
 
