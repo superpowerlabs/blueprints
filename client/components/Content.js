@@ -8,6 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import percent from "../config/percentageDistribution.json";
 import { preferredOrder } from "../config";
 import sortedAllMetadata from "../config/sortedAllDataandRarityScore.json";
+import Decimals from "../utils/Decimals";
 
 import Base from "./Base";
 
@@ -134,8 +135,9 @@ export default class Content extends Base {
     const pc = [];
     const pc2 = [];
     let i = 0;
+    let arr;
     for (let trait in percentages) {
-      let arr = i % 2 ? pc2 : pc;
+      arr = i % 2 ? pc2 : pc;
       arr.push(
         <div key={"pc" + i++}>
           <span className={"pcTrait"}>{trait}</span>:{" "}
@@ -146,6 +148,13 @@ export default class Content extends Base {
         </div>
       );
     }
+    arr.push(
+      <div key={"pc"}>
+        <span className={"pcTrait"}>Rarity_score</span>
+        <span className={"pcValue"}>:</span>{" "}
+        <span className={"pcPc"}>({Decimals(m.rarity_score)})</span>
+      </div>
+    );
     const body = (
       <Row>
         <Col lg={6}>
