@@ -244,6 +244,13 @@ export default class Content extends Base {
 
   render() {
     const filter = this.Store.filter || {};
+    let total = allMetadata.length;
+    if(this.Store.tokenIds)
+    {
+       total = this.Store.tokenIds.length;
+    }
+    if(this.Store.isSearch)
+    {total = 1}
     let i = 0;
 
     return (
@@ -265,7 +272,9 @@ export default class Content extends Base {
                 </Form.Group>
               </div>
             );
-          })}
+          })
+          }
+          Total :  { total}
         </div>
         <div style={{ marginTop: 8 }}>
           <InfiniteScroll
