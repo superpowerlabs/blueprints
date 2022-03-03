@@ -72,9 +72,11 @@ class SideBar extends Base {
               onlabel="Rarity Score"
               offlabel="Token ID "
               onChange={this.handleToggle}
-              width={100}
-              onstyle="info"
-              offstyle="outline-info"
+              width={500}
+              height={40}
+              onstyle="dark"
+              offstyle="dark"
+              style="border"
             />
           </div>
         </div>
