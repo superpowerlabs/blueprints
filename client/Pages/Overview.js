@@ -4,8 +4,7 @@ import React from "react";
 function Overview() {
   return (
     <div className={"tokenList"}>
-      <div className={"toplist"}>
-      </div>
+      <div className={"toplist"}></div>
     </div>
   );
 }
