@@ -2013,6 +2013,12 @@ li a.dropdown-toggle::after {
     margin-top: 0;
 }
 
+.modalFooter {
+    display: flex;
+    flex-direction: row;
+    margin-right: 50%;
+}
+
 .pcCol > div {
     padding: 5px 0;
 }
