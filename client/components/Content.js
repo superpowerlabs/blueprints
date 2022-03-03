@@ -58,7 +58,7 @@ export default class Content extends Base {
     let len = items.length;
     let newItems = 0;
     if (this.Store.isSorted) {
-     // console.log("hi");
+      // console.log("hi");
       for (let m of sortedAllMetadata) {
         if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
           if (index <= len) {
