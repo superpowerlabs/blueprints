@@ -2040,3 +2040,7 @@ li a.dropdown-toggle::after {
     color: white;
     border: 1px solid #446 !important;
 }
+.rows {
+    display: flex;
+    flex-direction: row;
+}
