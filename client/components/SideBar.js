@@ -5,6 +5,7 @@ import SubMenu from "./SubMenu";
 const { InputGroup, FormControl, Button, Nav } = ReactBootstrap;
 import classNames from "classnames";
 import Base from "./Base";
+import BootstrapSwitchButton from "bootstrap-switch-button-react"
 
 import rarityDistribution from "../config/rarityDistribution.json";
 
@@ -60,6 +61,14 @@ class SideBar extends Base {
             />
           </InputGroup>
         </div>
+        <BootstrapSwitchButton
+    checked={false}
+    onlabel='Admin User'
+    offlabel='Regular User'
+    onChange={(checked) => {
+        this.setState({ isUserAdmin: checked })
+    }}
+/>
 
         <Nav className="flex-column pt-2">{this.allTraits()}</Nav>
       </div>
