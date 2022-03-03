@@ -14,6 +14,7 @@ class SideBar extends Base {
     super(props);
     this.state = { value: "" };
     this.handleChange = this.handleChange.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   allTraits() {
@@ -36,6 +37,9 @@ class SideBar extends Base {
   handleChange(event) {
     this.setState({ value: event.target.value });
     this.props.onId(event.target.value);
+  }
+  handleToggle(event) {
+    this.props.onSort();
   }
 
   render() {
@@ -62,12 +66,10 @@ class SideBar extends Base {
           </InputGroup>
         </div>
         <BootstrapSwitchButton
-          checked={false}
+          checked={this.Store.isSorted}
           onlabel="Rarity Score"
           offlabel="Token ID "
-          onChange={(checked) => {
-            this.setStore({ isSorted: checked });
-          }}
+          onChange={this.handleToggle}
         />
 
         <Nav className="flex-column pt-2">{this.allTraits()}</Nav>

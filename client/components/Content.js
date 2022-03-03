@@ -38,6 +38,18 @@ export default class Content extends Base {
 
   monitorData() {
     const tokenIds = this.Store.tokenIds || [];
+
+    if(this.Store.justToggled)
+    {
+      this.setState({
+        items: [],
+        previous: tokenIds.length,
+      });
+      this.setStore({
+        justToggled: false
+      });
+      this.fetchMoreData();
+    }
     if (tokenIds.length !== this.state.previous) {
       this.setState({
         items: [],
@@ -49,6 +61,7 @@ export default class Content extends Base {
   }
 
   fetchMoreData() {
+    let sorted = this.Store.isSorted;
     let { items } = this.state;
     const filter = this.Store.filter || {};
     const noFilter = Object.keys(filter).length === 0;
@@ -57,8 +70,7 @@ export default class Content extends Base {
     let index = 1;
     let len = items.length;
     let newItems = 0;
-    if (this.Store.isSorted) {
-      // console.log("hi");
+    if (sorted) {
       for (let m of sortedAllMetadata) {
         if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
           if (index <= len) {
@@ -75,7 +87,6 @@ export default class Content extends Base {
         }
       }
     } else {
-      //console.log(this.Store.isSorted);
 
       for (let m of allMetadata) {
         if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
