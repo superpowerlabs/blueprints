@@ -7,6 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import percent from "../config/percentageDistribution.json";
 import { preferredOrder } from "../config";
+import sortedAllMetadata from "../config/sortedAllDataandRarityScore.json";
 
 import Base from "./Base";
 
@@ -56,19 +57,40 @@ export default class Content extends Base {
     let index = 1;
     let len = items.length;
     let newItems = 0;
-    for (let m of allMetadata) {
-      if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
-        if (index <= len) {
-          index++;
-          continue;
+    if (this.Store.isSorted) {
+     // console.log("hi");
+      for (let m of sortedAllMetadata) {
+        if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
+          if (index <= len) {
+            index++;
+            continue;
+          }
+          newItems++;
+          items.push(m);
         }
-        newItems++;
-        items.push(m);
+        if (newItems > 20) {
+          hasMore = true;
+          items.pop();
+          break;
+        }
       }
-      if (newItems > 20) {
-        hasMore = true;
-        items.pop();
-        break;
+    } else {
+      //console.log(this.Store.isSorted);
+
+      for (let m of allMetadata) {
+        if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
+          if (index <= len) {
+            index++;
+            continue;
+          }
+          newItems++;
+          items.push(m);
+        }
+        if (newItems > 20) {
+          hasMore = true;
+          items.pop();
+          break;
+        }
       }
     }
     this.setState({

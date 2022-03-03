@@ -63,10 +63,10 @@ class SideBar extends Base {
         </div>
         <BootstrapSwitchButton
           checked={false}
-          onlabel="Admin User"
-          offlabel="Regular User"
+          onlabel="Rarity Score"
+          offlabel="Token ID "
           onChange={(checked) => {
-            this.setState({ isUserAdmin: checked });
+            this.setStore({ isSorted: checked });
           }}
         />
 
