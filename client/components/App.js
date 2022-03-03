@@ -229,7 +229,7 @@ class App extends Common {
             </Modal.Header>
             <Modal.Body>{Store.modalBody}</Modal.Body>
             <Modal.Footer>
-               Rarity_score: {Store.modalFooter}
+              Rarity_score: {Store.modalFooter}
               <Button onClick={this.closeModal}>
                 {Store.modalClose || "Close"}
               </Button>

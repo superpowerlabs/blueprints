@@ -179,7 +179,7 @@ export default class Content extends Base {
       showModal: true,
       modalTitle: m.name,
       modalBody: body,
-      modalFooter: Footer
+      modalFooter: Footer,
     });
   }
 
