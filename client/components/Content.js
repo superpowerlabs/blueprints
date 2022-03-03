@@ -39,14 +39,13 @@ export default class Content extends Base {
   monitorData() {
     const tokenIds = this.Store.tokenIds || [];
 
-    if(this.Store.justToggled)
-    {
+    if (this.Store.justToggled) {
       this.setState({
         items: [],
         previous: tokenIds.length,
       });
       this.setStore({
-        justToggled: false
+        justToggled: false,
       });
       this.fetchMoreData();
     }
@@ -87,7 +86,6 @@ export default class Content extends Base {
         }
       }
     } else {
-
       for (let m of allMetadata) {
         if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
           if (index <= len) {

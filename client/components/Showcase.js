@@ -67,7 +67,7 @@ export default class Showcase extends Base {
     this.setStore({
       filter: this.Store.filter,
       isSorted: !this.Store.isSorted,
-      justToggled: true
+      justToggled: true,
     });
   }
 
