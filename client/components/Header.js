@@ -1,5 +1,4 @@
 // import { isMobile } from "react-device-detect";
-
 const { Navbar, Button } =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
@@ -71,7 +70,6 @@ export default class Header extends Base {
           aria-controls="basic-navbar-nav"
           onClick={this.setExpanded}
         />
-
         <Navbar.Collapse id="navbarScroll">
           <Navbar.Brand as={Link} to={"/"}>
             <img
@@ -101,7 +99,8 @@ export default class Header extends Base {
         {/*    }}*/}
         {/*  />*/}
         {/*) : null}*/}
-
+        <Link to="/">Overview</Link>
+        <Link to="/Blueprints">Blueprints</Link>
         {!this.isMobile() ? (
           connectedWallet ? (
             <div className={"aqua floatRightAbsolute"}>
