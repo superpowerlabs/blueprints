@@ -8,7 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import percent from "../config/percentageDistribution.json";
 import { preferredOrder } from "../config";
 import sortedAllMetadata from "../config/sortedAllDataandRarityScore.json";
-import Decimals from "../utils/Decimals"
+import Decimals from "../utils/Decimals";
 
 import Base from "./Base";
 

@@ -9,7 +9,6 @@ const metadata = require("./client/config/allMetadata.json");
 let total = 0;
 let traits = {};
 
-
 for (let m of metadata) {
   total++;
   for (let a of m.attributes) {
