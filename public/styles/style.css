@@ -1992,6 +1992,7 @@ li a.dropdown-toggle::after {
     flex-direction: row;
 }
 
+
 .modal-content {
     background-color: #000000c0 !important;
     border-radius: 12px;

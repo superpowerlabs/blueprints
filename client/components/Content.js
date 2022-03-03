@@ -166,12 +166,20 @@ export default class Content extends Base {
         </Col>
       </Row>
     );
+    const Footer = (
+      <Row>
+        <Col className={"footer"} lg={6}>
+          {m.rarity_score}
+        </Col>
+      </Row>
+    );
 
     this.setStore({
       modalSize: "xl",
       showModal: true,
       modalTitle: m.name,
       modalBody: body,
+      modalFooter: Footer
     });
   }
 
