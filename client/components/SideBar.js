@@ -64,12 +64,19 @@ class SideBar extends Base {
               onChange={this.handleChange}
             />
           </InputGroup>
+
+          <div  className='rows'>
+          Sort by:
           <BootstrapSwitchButton
             checked={this.Store.isSorted}
             onlabel="Rarity Score"
             offlabel="Token ID "
             onChange={this.handleToggle}
+            width={100}
+            onstyle="info" 
+            offstyle="outline-info"
           />
+          </div>
         </div>
 
         <Nav className="flex-column pt-2">{this.allTraits()}</Nav>
