@@ -193,22 +193,21 @@ class App extends Common {
 
   async getCoupons(contracts, connectedWallet) {
     console.log(contracts, " hello", connectedWallet);
-    let ownedCoupons = [];
     const couponsContract = contracts[SYN_COUPONS_NAME];
-    if (connectedWallet) {
-      console.log("caca1");
-      if ((await couponsContract.balanceOf(connectedWallet)) > 0) {
-        console.log("caca2");
 
-        for (let coupon of allMetadata) {
-          if (await couponsContract.ownerOf(allMetadata[coupon].tokenId)) {
-            let temp = this.Store.ownedCoupons;
-            temp.push(allMetadata[coupon].tokenId);
-            this.setStore({
-              ownedCoupons: temp,
-            });
-          }
+   let ownedCoupons = [];
+    if (connectedWallet) {
+      if ((await couponsContract.balanceOf(connectedWallet)) > 0) {
+        
+        const balance = (await couponsContract.balanceOf(connectedWallet)).toNumber()
+        
+        console.log(await couponsContract.tokenOfOwnerByIndex(connectedWallet, 5), "tokenbyindex")
+        for (let i=0;i< balance;i++) {
+        ownedCoupons.push((await couponsContract.tokenOfOwnerByIndex(connectedWallet, i)).toNumber())
         }
+
+        console.log(ownedCoupons)
+        
       }
     }
   }
