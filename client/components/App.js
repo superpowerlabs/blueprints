@@ -15,6 +15,7 @@ import Common from "./Common";
 import Header from "./Header";
 import Showcase from "./Showcase";
 import Error404 from "./Error404";
+import Overview from "../Pages/Overview";
 
 class App extends Common {
   constructor(props) {
@@ -78,6 +79,9 @@ class App extends Common {
     if (this.state.Store.connectedWith) {
       this.connect();
     }
+    this.setStore({
+      isSorted: false,
+    });
   }
 
   async connect() {
@@ -270,10 +274,13 @@ class App extends Common {
         <Header Store={Store} setStore={this.setStore} connect={this.connect} />
         <main>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/Blueprints">
               <Showcase Store={Store} setStore={this.setStore} />
             </Route>
-            <Route exact path="*">
+            <Route path="/">
+              <Overview />
+            </Route>
+            <Route path="*">
               <Error404 Store={Store} setStore={this.setStore} />
             </Route>
           </Switch>

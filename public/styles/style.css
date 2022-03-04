@@ -2013,6 +2013,12 @@ li a.dropdown-toggle::after {
     margin-top: 0;
 }
 
+.modalFooter {
+    display: flex;
+    flex-direction: row;
+    margin-right: 50%;
+}
+
 .pcCol > div {
     padding: 5px 0;
 }
@@ -2039,4 +2045,8 @@ li a.dropdown-toggle::after {
     background-color: black;
     color: white;
     border: 1px solid #446 !important;
+}
+.rows {
+    display: flex;
+    flex-direction: row;
 }
