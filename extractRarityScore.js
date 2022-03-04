@@ -7,7 +7,12 @@ const fspath = require("fspath");
 const metadata = require("./client/config/allMetadata.json");
 const percentageDistribution = require("./client/config/percentageDistribution.json");
 const stats = ["Health", "Attack", "Defense", "Heal", "Soul"];
-const abilities = ["Active Ability 1" , "Active Ability 2", "Passive Ability", "Leader Ability"]
+const abilities = [
+  "Active Ability 1",
+  "Active Ability 2",
+  "Passive Ability",
+  "Leader Ability",
+];
 
 let traits = [];
 for (let m of metadata) {
@@ -35,24 +40,20 @@ for (let i = 0; i < traits.length; i++) {
             if (stats.includes(traits[i][1][j].trait_type)) {
               totalStats =
                 totalStats + 1 / (percentageDistribution[p][val] / 100);
-                totalStats = totalStats * .1
+              totalStats = totalStats * 0.1;
             } else if (traits[i][1][j].trait_type === "Rarity") {
               totalRarity =
                 totalRarity + 1 / (percentageDistribution[p][val] / 100);
               totalRarity = totalRarity * 10;
-
-            }else if (traits[i][1][j].trait_type === "Tier") {
+            } else if (traits[i][1][j].trait_type === "Tier") {
               totalTier =
                 totalTier + 1 / (percentageDistribution[p][val] / 100);
               totalTier = totalTier * 2;
-
             } else if (abilities.includes(traits[i][1][j].trait_type)) {
               totalAbilities =
-              totalAbilities + 1 / (percentageDistribution[p][val] / 100);
+                totalAbilities + 1 / (percentageDistribution[p][val] / 100);
               totalAbilities = totalAbilities * 1.1;
-
-            } 
-            else {
+            } else {
               totalAttributes =
                 totalAttributes + 1 / (percentageDistribution[p][val] / 100);
               totalAttributes = totalAttributes * 1;
