@@ -2069,3 +2069,32 @@ li a.dropdown-toggle::after {
     background-color: #1e0645;
     color: yellow;
 }
+
+.doc {
+    background: #ff00cc20;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.headerButton {
+    background-color: #220099;
+    padding: 2px 8px;
+    margin: 0 12px;
+    border: 1px solid #220099aa;
+    border-radius: 4px;
+    color: #ccaaff;
+}
+
+.headerButton:hover {
+    color: yellow;
+}
+
+.headerButton.lastButton {
+    margin-right: 60px;
+}
+
+.headerButton.selected,
+.headerButton.selected:hover {
+    background-color: #22009960;
+    color: white;
+}
