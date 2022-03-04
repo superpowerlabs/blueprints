@@ -246,23 +246,6 @@ export default class Content extends Base {
     } else {
       for (let m of items) {
         let img = this.getJpg(m);
-        // if(this.Store.isMyId)
-        // {
-        //   if(this.Store.ownedIds.includes(m.tokenId))
-        //   {
-        //     rows.push(
-        //       <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
-        //         <LazyLoadImage
-        //           className={"command"}
-        //           src={img}
-        //           onClick={() => this.imageClick(m)}
-        //         />
-        //         <div className={"centered tokenId"}># {m.tokenId}</div>
-        //       </div>
-        //     );
-
-        //   }}
-        //   else{
         rows.push(
           <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
             <LazyLoadImage
@@ -273,7 +256,6 @@ export default class Content extends Base {
             <div className={"centered tokenId"}># {m.tokenId}</div>
           </div>
         );
-        //  }
       }
     }
     return rows;
