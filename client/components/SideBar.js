@@ -13,8 +13,7 @@ class SideBar extends Base {
   constructor(props) {
     super(props);
     this.state = { value: "" };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
+    this.bindMany(["handleChange", "handleToggle", "handleMyIds"]);
   }
 
   allTraits() {
@@ -41,6 +40,14 @@ class SideBar extends Base {
   handleToggle(event) {
     this.props.onSort();
   }
+  handleMyIds(event){
+    const filter = {};
+    this.setStore({
+      filter,
+      isMyId: !this.Store.isMyId,
+      justIsMyId: true,
+    });
+  }
 
   render() {
     return (
@@ -66,13 +73,27 @@ class SideBar extends Base {
           </InputGroup>
 
           <div className="rows">
-            Sort by:
+          See Blueprints : 
+            <BootstrapSwitchButton
+              checked={this.Store.isMyId}
+              onlabel="Owned"
+              offlabel="All"
+              onChange={this.handleMyIds}
+              width={400}
+              height={40}
+              onstyle="dark"
+              offstyle="dark"
+              style="border"
+            />
+            </div>
+            <div className="rows" >
+            Sort by :
             <BootstrapSwitchButton
               checked={this.Store.isSorted}
               onlabel="Rarity Score"
               offlabel="Token ID "
               onChange={this.handleToggle}
-              width={500}
+              width={400}
               height={40}
               onstyle="dark"
               offstyle="dark"

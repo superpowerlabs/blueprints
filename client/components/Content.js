@@ -40,14 +40,21 @@ export default class Content extends Base {
   monitorData() {
     const tokenIds = this.Store.tokenIds || [];
 
-    if (this.Store.justToggled) {
+    if (this.Store.justToggled || this.Store.justIsMyId) {
       this.setState({
         items: [],
         previous: tokenIds.length,
       });
-      this.setStore({
-        justToggled: false,
-      });
+      if(this.Store.justToggled){
+        this.setStore({
+          justToggled: false,
+        });
+      }
+      if(this.Store.justIsMyId){
+        this.setStore({
+          justIsMyId: false,
+        });
+      }
       this.fetchMoreData();
     }
     if (tokenIds.length !== this.state.previous) {
@@ -77,8 +84,21 @@ export default class Content extends Base {
             index++;
             continue;
           }
+
+          if(this.Store.isMyId)
+          {
+            const ownedIds = this.Store.ownedIds
+            if(ownedIds.includes(m.tokenId) && !items.includes(m))
+            {
+              newItems++;
+              items.push(m);
+            }
+          }
+          else{
           newItems++;
           items.push(m);
+        }
+
         }
         if (newItems > 20) {
           hasMore = true;
@@ -93,9 +113,21 @@ export default class Content extends Base {
             index++;
             continue;
           }
+
+          if(this.Store.isMyId)
+          {
+            const ownedIds = this.Store.ownedIds
+            if(ownedIds.includes(m.tokenId) && !items.includes(m))
+            {
+              newItems++;
+              items.push(m);
+            }
+          }
+          else{
           newItems++;
           items.push(m);
         }
+        }    
         if (newItems > 20) {
           hasMore = true;
           items.pop();
@@ -106,7 +138,7 @@ export default class Content extends Base {
     this.setState({
       items,
       hasMore,
-    });
+    })
   }
 
   getPercentages(m) {
@@ -223,16 +255,34 @@ export default class Content extends Base {
     } else {
       for (let m of items) {
         let img = this.getJpg(m);
-        rows.push(
-          <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
-            <LazyLoadImage
-              className={"command"}
-              src={img}
-              onClick={() => this.imageClick(m)}
-            />
-            <div className={"centered tokenId"}># {m.tokenId}</div>
-          </div>
-        );
+        // if(this.Store.isMyId)
+        // {
+        //   if(this.Store.ownedIds.includes(m.tokenId))
+        //   {
+        //     rows.push(
+        //       <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
+        //         <LazyLoadImage
+        //           className={"command"}
+        //           src={img}
+        //           onClick={() => this.imageClick(m)}
+        //         />
+        //         <div className={"centered tokenId"}># {m.tokenId}</div>
+        //       </div>
+        //     );
+
+        //   }}
+        //   else{
+            rows.push(
+              <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
+                <LazyLoadImage
+                  className={"command"}
+                  src={img}
+                  onClick={() => this.imageClick(m)}
+                />
+                <div className={"centered tokenId"}># {m.tokenId}</div>
+              </div>
+            );
+        //  }
       }
     }
     return rows;
@@ -282,7 +332,9 @@ export default class Content extends Base {
               </div>
             );
           })}
-          Total : {total}
+          {!this.Store.isMyId ? 
+          <div> Total: {total}</div> 
+          : null }
         </div>
         <div style={{ marginTop: 8 }}>
           <InfiniteScroll
