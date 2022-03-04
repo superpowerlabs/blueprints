@@ -67,6 +67,6 @@ Many characteristics are present on the Mobland Genesis Blueprint Crew individua
 
 **Traits** – Defines the profession that the character prefers that gives them bonuses in various Job assignments
 
-**Personality** – Quirks that make the character unique and that affect various gameplay situations`
+**Personality** – Quirks that make the character unique and that affect various gameplay situations`;
 
 export default text;
