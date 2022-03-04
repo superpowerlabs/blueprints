@@ -7,6 +7,9 @@ const { Modal, Button } = ReactBootstrap;
 const ethers = require("ethers");
 import clientApi from "../utils/ClientApi";
 import config from "../config";
+
+import { SYN_COUPONS_NAME } from "../config/constants";
+import allMetadata from "../config/allMetadata.json";
 import ls from "local-storage";
 import Common from "./Common";
 import Header from "./Header";
@@ -52,6 +55,7 @@ class App extends Common {
       "setWallet",
       "connect",
       "getPercent",
+      "getCoupons",
     ]);
   }
 
@@ -114,7 +118,34 @@ class App extends Common {
     }
   }
 
+  async getContracts(config, chainId, web3Provider) {
+    let contracts = {};
+    let networkNotSupported = false;
+    let connectedNetwork = null;
+    if (config.supportedId[chainId]) {
+      let addresses = config.contracts[chainId];
+      connectedNetwork = config.supportedId[chainId];
+      for (let contractName in addresses) {
+        contracts[contractName] = new ethers.Contract(
+          addresses[contractName],
+          config.abi[contractName],
+          web3Provider
+        );
+      }
+    } else {
+      networkNotSupported = true;
+    }
+
+    return {
+      contracts,
+      connectedNetwork,
+      networkNotSupported,
+    };
+  }
+
   async setWallet(eth, connectedWith) {
+    let contracts = {};
+
     try {
       const provider = new ethers.providers.Web3Provider(eth);
       const signer = provider.getSigner();
@@ -124,6 +155,15 @@ class App extends Common {
       let connectedNetwork = null;
       if (config.supportedId && config.supportedId[chainId]) {
         connectedNetwork = config.supportedId[chainId];
+        let addresses = config.contracts[chainId];
+
+        for (let contractName in addresses) {
+          contracts[contractName] = new ethers.Contract(
+            addresses[contractName],
+            config.abi[contractName],
+            provider
+          );
+        }
       } else {
         networkNotSupported = true;
       }
@@ -134,6 +174,7 @@ class App extends Common {
         chainId,
         connectedNetwork,
         networkNotSupported,
+        contracts,
       });
       this.setStore(
         {
@@ -141,10 +182,34 @@ class App extends Common {
         },
         true
       );
+
       clientApi.setConnectedWallet(connectedWallet, chainId);
+      this.getCoupons(contracts, connectedWallet);
     } catch (e) {
       console.error(e);
       // window.location.reload()
+    }
+  }
+
+  async getCoupons(contracts, connectedWallet) {
+    console.log(contracts, " hello", connectedWallet);
+    let ownedCoupons = [];
+    const couponsContract = contracts[SYN_COUPONS_NAME];
+    if (connectedWallet) {
+      console.log("caca1");
+      if ((await couponsContract.balanceOf(connectedWallet)) > 0) {
+        console.log("caca2");
+
+        for (let coupon of allMetadata) {
+          if (await couponsContract.ownerOf(allMetadata[coupon].tokenId)) {
+            let temp = this.Store.ownedCoupons;
+            temp.push(allMetadata[coupon].tokenId);
+            this.setStore({
+              ownedCoupons: temp,
+            });
+          }
+        }
+      }
     }
   }
 
