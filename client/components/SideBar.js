@@ -1,20 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import SubMenu from "./SubMenu";
-// eslint-disable-next-line no-undef
-const { InputGroup, FormControl, Button, Nav } = ReactBootstrap;
+const { InputGroup, FormControl, Button, Nav, ButtonGroup, ToggleButton } =
+  // eslint-disable-next-line no-undef
+  ReactBootstrap;
 import classNames from "classnames";
 import Base from "./Base";
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 import rarityDistribution from "../config/rarityDistribution.json";
 
 class SideBar extends Base {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
+    this.state = { value: "", sortBy: "id" };
+    this.bindMany(["handleChange"]);
   }
 
   allTraits() {
@@ -38,23 +37,16 @@ class SideBar extends Base {
     this.setState({ value: event.target.value });
     this.props.onId(event.target.value);
   }
-  handleToggle(event) {
-    this.props.onSort();
+
+  sortBy(by) {
+    if (by !== this.sortBy) {
+      this.props.onSort();
+    }
   }
 
   render() {
     return (
-      <div className={classNames("sidebar", { "is-open": this.props.isOpen })}>
-        <div className="sidebar-header">
-          <Button
-            variant="link"
-            onClick={this.props.toggle}
-            style={{ color: "#fff" }}
-            className="mt-4"
-          >
-            <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
-          </Button>
-        </div>
+      <div>
         <div className={"searchBox"}>
           <InputGroup className="mb-3" size={"sm"}>
             <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
@@ -65,23 +57,58 @@ class SideBar extends Base {
             />
           </InputGroup>
 
-          <div className="rows">
-            Sort by:
-            <BootstrapSwitchButton
-              checked={this.Store.isSorted}
-              onlabel="Rarity Score"
-              offlabel="Token ID "
-              onChange={this.handleToggle}
-              width={500}
-              height={40}
-              onstyle="dark"
-              offstyle="dark"
-              style="border"
-            />
-          </div>
-        </div>
+          <ButtonGroup aria-label="Basic example">
+            <ToggleButton
+              id={"radio-1"}
+              type="radio"
+              variant="warning"
+              name="radio"
+              value={"id"}
+              checked={this.state.sortBy === "id"}
+              className={"btn nowrap"}
+              size={"sm"}
+              onChange={(e) => {
+                this.sortBy("id");
+                this.setState({ sortBy: e.currentTarget.value });
+              }}
+            >
+              Sort by ID
+            </ToggleButton>
 
-        <Nav className="flex-column pt-2">{this.allTraits()}</Nav>
+            <ToggleButton
+              id={"radio-2"}
+              type="radio"
+              variant="warning"
+              name="radio"
+              value={"score"}
+              checked={this.state.sortBy === "score"}
+              className={"btn nowrap"}
+              size={"sm"}
+              onChange={(e) => {
+                this.sortBy("score");
+                this.setState({ sortBy: e.currentTarget.value });
+              }}
+            >
+              Sort by Rarity
+            </ToggleButton>
+          </ButtonGroup>
+        </div>
+        <div
+          className={classNames("sidebar", { "is-open": this.props.isOpen })}
+        >
+          <div className="sidebar-header">
+            <Button
+              variant="link"
+              onClick={this.props.toggle}
+              style={{ color: "#fff" }}
+              className="mt-4"
+            >
+              <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
+            </Button>
+          </div>
+
+          <Nav className="sidebarBody flex-column pt-2">{this.allTraits()}</Nav>
+        </div>
       </div>
     );
   }

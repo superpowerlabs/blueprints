@@ -32,9 +32,9 @@ export default class Content extends Base {
   }
 
   componentDidMount() {
-    Scroll.animateScroll.scrollToTop();
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
+    Scroll.animateScroll.scrollToTop();
   }
 
   monitorData() {
@@ -280,7 +280,9 @@ export default class Content extends Base {
               </div>
             );
           })}
-          Total : {total}
+          <span className={"total"}>
+            {total} result{total !== 1 ? "s" : ""}
+          </span>
         </div>
         <div style={{ marginTop: 8 }}>
           <InfiniteScroll
