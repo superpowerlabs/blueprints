@@ -99,8 +99,8 @@ export default class Header extends Base {
         {/*    }}*/}
         {/*  />*/}
         {/*) : null}*/}
-        <Link to="/">Overview</Link>
-        <Link to="/Blueprints">Blueprints</Link>
+        <Link style={{marginRight: "50px"}} to="/">Overview</Link>
+        <Link style={{marginRight: "50px"}} to="/Blueprints">Blueprints</Link>
         {!this.isMobile() ? (
           connectedWallet ? (
             <div className={"aqua floatRightAbsolute"}>
