@@ -2,7 +2,6 @@
 const { BrowserRouter, Route, Switch } = ReactRouterDOM;
 
 // eslint-disable-next-line no-undef
-const { Modal, Button } = ReactBootstrap;
 
 const ethers = require("ethers");
 import clientApi from "../utils/ClientApi";
@@ -12,6 +11,7 @@ import Common from "./Common";
 import Header from "./Header";
 import Showcase from "./Showcase";
 import Error404 from "./Error404";
+import PopUp from "./Popup";
 
 class App extends Common {
   constructor(props) {
@@ -48,11 +48,13 @@ class App extends Common {
     this.bindMany([
       "setStore",
       "updateDimensions",
-      "closeModal",
       "setWallet",
       "connect",
       "getPercent",
     ]);
+
+    this.globals = ["showPopUp", "handleClose"];
+    this.bindMany(this.globals);
   }
 
   getWidth() {
@@ -71,6 +73,13 @@ class App extends Common {
 
   async componentDidMount() {
     window.addEventListener("resize", this.updateDimensions.bind(this));
+    const globals = this.state.Store.globals || {};
+    for (let f of this.globals) {
+      globals[f] = this[f];
+    }
+    this.setStore({
+      globals,
+    });
     if (this.state.Store.connectedWith) {
       this.connect();
     }
@@ -148,15 +157,38 @@ class App extends Common {
     }
   }
 
-  closeModal() {
+  showPopUp(params) {
+    try {
+      this.setStore({
+        modals: Object.assign(params, {
+          show: true,
+          what: "popup",
+          handleClose: this.handleClose,
+          closeLabel: "Close",
+          noSave: true,
+          size: "xl",
+        }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  handleClose(event) {
+    const { onBeforeClose, onClose } = this.state.Store.modals || {};
+    if (onBeforeClose && event !== null) {
+      if (!onBeforeClose()) {
+        // onBeforeClose returns true if the user want to exit
+        return;
+      }
+    }
+    if (typeof onClose === "function") {
+      onClose(this.changes);
+    }
     this.setStore({
-      modalTitle: undefined,
-      modalBody: undefined,
-      modalClose: undefined,
-      secondButton: undefined,
-      modalAction: undefined,
-      showModal: false,
+      modals: {},
     });
+    delete this.changes;
   }
 
   setStore(newProps, storeItLocally) {
@@ -201,6 +233,8 @@ class App extends Common {
 
   render() {
     const Store = this.state.Store;
+    const modals = Store.modals;
+    const { show, what } = modals || {};
     return (
       <BrowserRouter>
         <Header Store={Store} setStore={this.setStore} connect={this.connect} />
@@ -214,34 +248,8 @@ class App extends Common {
             </Route>
           </Switch>
           {/*<Footer />*/}
-          <Modal
-            size={Store.modalSize || "sm"}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={Store.showModal}
-            onHide={this.closeModal}
-          >
-            <Modal.Header>
-              <Modal.Title>{Store.modalTitle}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{Store.modalBody}</Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.closeModal}>
-                {Store.modalClose || "Close"}
-              </Button>
-              {Store.secondButton ? (
-                <Button
-                  onClick={() => {
-                    Store.modalAction();
-                    this.closeModal();
-                  }}
-                  bsStyle="primary"
-                >
-                  {Store.secondButton}
-                </Button>
-              ) : null}
-            </Modal.Footer>
-          </Modal>
+          {/* Since we have only one time of popup the parameter what is unnecessary. But we will keep it for the future */}
+          {!!show && what === "popup" ? <PopUp modals={modals} /> : ""}
         </main>
       </BrowserRouter>
     );
