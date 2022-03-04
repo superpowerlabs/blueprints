@@ -305,7 +305,11 @@ export default class Content extends Base {
               </div>
             );
           })}
-          {!this.Store.isMyId ? <div> Total: {total}</div> : null}
+          {!this.Store.isMyId ? (
+            <span className={"total"}>
+              {total} result{total !== 1 ? "s" : ""}
+            </span>
+          ) : null}
         </div>
         <div style={{ marginTop: 8 }}>
           <InfiniteScroll
