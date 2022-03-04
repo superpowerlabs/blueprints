@@ -2039,8 +2039,8 @@ li a.dropdown-toggle::after {
 }
 
 .searchBox {
-    padding: 70px 21px 21px;
-    width: 200px;
+    padding: 70px 121px 21px 21px;
+    width: 360px;
     position: fixed;
     left: 0;
     top: 0;
