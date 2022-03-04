@@ -2070,7 +2070,6 @@ li a.dropdown-toggle::after {
     color: yellow;
 }
 
-
 .doc {
     background: #ff00cc20;
     border-radius: 12px;
@@ -2094,9 +2093,8 @@ li a.dropdown-toggle::after {
     margin-right: 60px;
 }
 
-.headerButton.selected , .headerButton.selected:hover{
+.headerButton.selected,
+.headerButton.selected:hover {
     background-color: #22009960;
     color: white;
 }
-
-

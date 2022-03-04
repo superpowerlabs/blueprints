@@ -1,4 +1,4 @@
-import * as Scroll from 'react-scroll'
+import * as Scroll from "react-scroll";
 import React from "react";
 import text from "../config/text";
 import Markdown from "react-markdown-it";
@@ -8,9 +8,8 @@ import Base from "../components/Base";
 const { Container, Row, Col } = ReactBootstrap;
 
 export default class Overview extends Base {
-
   componentDidMount() {
-    Scroll.animateScroll.scrollToTop()
+    Scroll.animateScroll.scrollToTop();
   }
 
   render() {
@@ -29,7 +28,7 @@ export default class Overview extends Base {
                 textAlign: "left",
               }}
             >
-              <Markdown source={text}/>
+              <Markdown source={text} />
             </div>
           </Col>
         </Row>
