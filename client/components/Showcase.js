@@ -10,7 +10,7 @@ export default class Showcase extends Base {
   constructor(props) {
     super(props);
 
-    this.bindMany(["onCheck", "onId"]);
+    this.bindMany(["onCheck", "onId", "onSort"]);
   }
 
   onCheck(event, trait, value, id) {
@@ -63,6 +63,14 @@ export default class Showcase extends Base {
     });
   }
 
+  onSort() {
+    this.setStore({
+      filter: this.Store.filter,
+      isSorted: !this.Store.isSorted,
+      justToggled: true,
+    });
+  }
+
   render() {
     return (
       <div style={{ width: "100%" }}>
@@ -72,6 +80,7 @@ export default class Showcase extends Base {
           isOpen={true}
           onCheck={this.onCheck}
           onId={this.onId}
+          onSort={this.onSort}
         />
         <Content
           Store={this.Store}

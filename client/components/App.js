@@ -83,6 +83,9 @@ class App extends Common {
     if (this.state.Store.connectedWith) {
       this.connect();
     }
+    this.setStore({
+      isSorted: false,
+    });
   }
 
   async connect() {

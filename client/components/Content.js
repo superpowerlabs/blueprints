@@ -2,11 +2,13 @@
 const { Form, Row, Col } = ReactBootstrap;
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
-import allMetadata from "../config/allMetadata.json";
+import allMetadata from "../config/allDataandRarityScore.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import percent from "../config/percentageDistribution.json";
 import { preferredOrder } from "../config";
+import sortedAllMetadata from "../config/sortedAllDataandRarityScore.json";
+import Decimals from "../utils/Decimals";
 
 import Base from "./Base";
 
@@ -37,6 +39,17 @@ export default class Content extends Base {
 
   monitorData() {
     const tokenIds = this.Store.tokenIds || [];
+
+    if (this.Store.justToggled) {
+      this.setState({
+        items: [],
+        previous: tokenIds.length,
+      });
+      this.setStore({
+        justToggled: false,
+      });
+      this.fetchMoreData();
+    }
     if (tokenIds.length !== this.state.previous) {
       this.setState({
         items: [],
@@ -48,6 +61,7 @@ export default class Content extends Base {
   }
 
   fetchMoreData() {
+    let sorted = this.Store.isSorted;
     let { items } = this.state;
     const filter = this.Store.filter || {};
     const noFilter = Object.keys(filter).length === 0;
@@ -56,19 +70,37 @@ export default class Content extends Base {
     let index = 1;
     let len = items.length;
     let newItems = 0;
-    for (let m of allMetadata) {
-      if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
-        if (index <= len) {
-          index++;
-          continue;
+    if (sorted) {
+      for (let m of sortedAllMetadata) {
+        if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
+          if (index <= len) {
+            index++;
+            continue;
+          }
+          newItems++;
+          items.push(m);
         }
-        newItems++;
-        items.push(m);
+        if (newItems > 20) {
+          hasMore = true;
+          items.pop();
+          break;
+        }
       }
-      if (newItems > 20) {
-        hasMore = true;
-        items.pop();
-        break;
+    } else {
+      for (let m of allMetadata) {
+        if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
+          if (index <= len) {
+            index++;
+            continue;
+          }
+          newItems++;
+          items.push(m);
+        }
+        if (newItems > 20) {
+          hasMore = true;
+          items.pop();
+          break;
+        }
       }
     }
     this.setState({
@@ -103,8 +135,9 @@ export default class Content extends Base {
     const pc = [];
     const pc2 = [];
     let i = 0;
+    let arr;
     for (let trait in percentages) {
-      let arr = i % 2 ? pc2 : pc;
+      arr = i % 2 ? pc2 : pc;
       arr.push(
         <div key={"pc" + i++}>
           <span className={"pcTrait"}>{trait}</span>:{" "}
@@ -115,6 +148,13 @@ export default class Content extends Base {
         </div>
       );
     }
+    arr.push(
+      <div key={"pc"}>
+        <span className={"pcTrait"}>Rarity_score</span>
+        <span className={"pcValue"}>:</span>{" "}
+        <span className={"pcPc"}>({Decimals(m.rarity_score)})</span>
+      </div>
+    );
     const body = (
       <Row>
         <Col lg={6}>
@@ -211,6 +251,13 @@ export default class Content extends Base {
 
   render() {
     const filter = this.Store.filter || {};
+    let total = allMetadata.length;
+    if (this.Store.tokenIds) {
+      total = this.Store.tokenIds.length;
+    }
+    if (this.Store.isSearch) {
+      total = 1;
+    }
     let i = 0;
 
     return (
@@ -233,6 +280,7 @@ export default class Content extends Base {
               </div>
             );
           })}
+          Total : {total}
         </div>
         <div style={{ marginTop: 8 }}>
           <InfiniteScroll

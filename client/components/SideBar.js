@@ -5,6 +5,7 @@ import SubMenu from "./SubMenu";
 const { InputGroup, FormControl, Button, Nav } = ReactBootstrap;
 import classNames from "classnames";
 import Base from "./Base";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 import rarityDistribution from "../config/rarityDistribution.json";
 
@@ -13,6 +14,7 @@ class SideBar extends Base {
     super(props);
     this.state = { value: "" };
     this.handleChange = this.handleChange.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   allTraits() {
@@ -35,6 +37,9 @@ class SideBar extends Base {
   handleChange(event) {
     this.setState({ value: event.target.value });
     this.props.onId(event.target.value);
+  }
+  handleToggle(event) {
+    this.props.onSort();
   }
 
   render() {
@@ -59,6 +64,21 @@ class SideBar extends Base {
               onChange={this.handleChange}
             />
           </InputGroup>
+
+          <div className="rows">
+            Sort by:
+            <BootstrapSwitchButton
+              checked={this.Store.isSorted}
+              onlabel="Rarity Score"
+              offlabel="Token ID "
+              onChange={this.handleToggle}
+              width={500}
+              height={40}
+              onstyle="dark"
+              offstyle="dark"
+              style="border"
+            />
+          </div>
         </div>
 
         <Nav className="flex-column pt-2">{this.allTraits()}</Nav>
