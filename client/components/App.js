@@ -208,12 +208,18 @@ class App extends Common {
   async getCoupons(contracts, connectedWallet) {
     const couponsContract = contracts[SYN_COUPONS_NAME];
 
-   let ownedCoupons = [];
+    let ownedCoupons = [];
     if (connectedWallet) {
       if ((await couponsContract.balanceOf(connectedWallet)) > 0) {
-        const balance = (await couponsContract.balanceOf(connectedWallet)).toNumber()  
-        for (let i=0;i< balance;i++) {
-        ownedCoupons.push((await couponsContract.tokenOfOwnerByIndex(connectedWallet, i)).toNumber())
+        const balance = (
+          await couponsContract.balanceOf(connectedWallet)
+        ).toNumber();
+        for (let i = 0; i < balance; i++) {
+          ownedCoupons.push(
+            (
+              await couponsContract.tokenOfOwnerByIndex(connectedWallet, i)
+            ).toNumber()
+          );
         }
         this.setStore({
           ownedIds: ownedCoupons,

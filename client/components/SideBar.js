@@ -40,7 +40,7 @@ class SideBar extends Base {
   handleToggle(event) {
     this.props.onSort();
   }
-  handleMyIds(event){
+  handleMyIds(event) {
     const filter = {};
     this.setStore({
       filter,
@@ -73,7 +73,7 @@ class SideBar extends Base {
           </InputGroup>
 
           <div className="rows">
-          See Blueprints : 
+            See Blueprints :
             <BootstrapSwitchButton
               checked={this.Store.isMyId}
               onlabel="Owned"
@@ -85,8 +85,8 @@ class SideBar extends Base {
               offstyle="dark"
               style="border"
             />
-            </div>
-            <div className="rows" >
+          </div>
+          <div className="rows">
             Sort by :
             <BootstrapSwitchButton
               checked={this.Store.isSorted}

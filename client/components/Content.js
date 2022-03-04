@@ -45,12 +45,12 @@ export default class Content extends Base {
         items: [],
         previous: tokenIds.length,
       });
-      if(this.Store.justToggled){
+      if (this.Store.justToggled) {
         this.setStore({
           justToggled: false,
         });
       }
-      if(this.Store.justIsMyId){
+      if (this.Store.justIsMyId) {
         this.setStore({
           justIsMyId: false,
         });
@@ -85,20 +85,16 @@ export default class Content extends Base {
             continue;
           }
 
-          if(this.Store.isMyId)
-          {
-            const ownedIds = this.Store.ownedIds
-            if(ownedIds.includes(m.tokenId) && !items.includes(m))
-            {
+          if (this.Store.isMyId) {
+            const ownedIds = this.Store.ownedIds;
+            if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
               newItems++;
               items.push(m);
             }
+          } else {
+            newItems++;
+            items.push(m);
           }
-          else{
-          newItems++;
-          items.push(m);
-        }
-
         }
         if (newItems > 20) {
           hasMore = true;
@@ -114,20 +110,17 @@ export default class Content extends Base {
             continue;
           }
 
-          if(this.Store.isMyId)
-          {
-            const ownedIds = this.Store.ownedIds
-            if(ownedIds.includes(m.tokenId) && !items.includes(m))
-            {
+          if (this.Store.isMyId) {
+            const ownedIds = this.Store.ownedIds;
+            if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
               newItems++;
               items.push(m);
             }
+          } else {
+            newItems++;
+            items.push(m);
           }
-          else{
-          newItems++;
-          items.push(m);
         }
-        }    
         if (newItems > 20) {
           hasMore = true;
           items.pop();
@@ -138,7 +131,7 @@ export default class Content extends Base {
     this.setState({
       items,
       hasMore,
-    })
+    });
   }
 
   getPercentages(m) {
@@ -270,16 +263,16 @@ export default class Content extends Base {
 
         //   }}
         //   else{
-            rows.push(
-              <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
-                <LazyLoadImage
-                  className={"command"}
-                  src={img}
-                  onClick={() => this.imageClick(m)}
-                />
-                <div className={"centered tokenId"}># {m.tokenId}</div>
-              </div>
-            );
+        rows.push(
+          <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
+            <LazyLoadImage
+              className={"command"}
+              src={img}
+              onClick={() => this.imageClick(m)}
+            />
+            <div className={"centered tokenId"}># {m.tokenId}</div>
+          </div>
+        );
         //  }
       }
     }
@@ -330,9 +323,7 @@ export default class Content extends Base {
               </div>
             );
           })}
-          {!this.Store.isMyId ? 
-          <div> Total: {total}</div> 
-          : null }
+          {!this.Store.isMyId ? <div> Total: {total}</div> : null}
         </div>
         <div style={{ marginTop: 8 }}>
           <InfiniteScroll
