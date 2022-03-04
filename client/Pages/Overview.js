@@ -3,7 +3,9 @@ import text from "../../text";
 import Markdown from "react-markdown-it";
 function Overview() {
   return (
-    <div className={"Overview"} style={{ marginTop: "50px" }}>
+    <div className={"Overview"} style={{ 
+      marginTop: "50px",
+      textAlign: "center" }}>
       <Markdown source={text} />
     </div>
   );
