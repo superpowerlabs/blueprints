@@ -1,6 +1,4 @@
-const text = `### Autopsy Report:
-
-**Mobland Blueprint NFTs**
+const text = `
 
 #### Overview
 
