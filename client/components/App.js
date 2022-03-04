@@ -12,6 +12,7 @@ import Header from "./Header";
 import Showcase from "./Showcase";
 import Error404 from "./Error404";
 import PopUp from "./Popup";
+import Overview from "../Pages/Overview";
 
 class App extends Common {
   constructor(props) {
@@ -245,6 +246,9 @@ class App extends Common {
           <Switch>
             <Route exact path="/">
               <Showcase Store={Store} setStore={this.setStore} />
+            </Route>
+            <Route path="/overview">
+              <Overview />
             </Route>
             <Route exact path="*">
               <Error404 Store={Store} setStore={this.setStore} />
