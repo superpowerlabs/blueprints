@@ -57,6 +57,8 @@ export default class Header extends Base {
       address = this.ellipseAddress(connectedWallet);
     }
 
+    const pathname = window.location.pathname.split("/")[1];
+
     return (
       <Navbar
         expanded={expanded}
@@ -99,11 +101,20 @@ export default class Header extends Base {
         {/*    }}*/}
         {/*  />*/}
         {/*) : null}*/}
-        <Link style={{ marginRight: "50px" }} to="/">
-          Overview
+        <Link
+          className={"headerButton " + (pathname === "" ? "selected" : "")}
+          to="/"
+        >
+          Collection
         </Link>
-        <Link style={{ marginRight: "50px" }} to="/Blueprints">
-          Blueprints
+        <Link
+          className={
+            "headerButton lastButton " +
+            (pathname === "overview" ? "selected" : "")
+          }
+          to="/overview"
+        >
+          Overview
         </Link>
         {!this.isMobile() ? (
           connectedWallet ? (

@@ -32,9 +32,9 @@ export default class Content extends Base {
   }
 
   componentDidMount() {
-    Scroll.animateScroll.scrollToTop();
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
+    Scroll.animateScroll.scrollToTop();
   }
 
   monitorData() {

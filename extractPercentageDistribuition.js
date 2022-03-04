@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import addSomeDecimals from "./client/utils/Decimals";
 const fspath = require("fspath");
 
 // we do not want to re-execute this by mistake
@@ -22,6 +21,13 @@ for (let m of metadata) {
     }
   }
 }
+
+const addSomeDecimals = (s, c = 2) => {
+  s = s.toString().split(".");
+  s[1] = (s[1] || "").substring(0, c);
+  s[1] = s[1] + "0".repeat(c - s[1].length);
+  return s.join(".");
+};
 
 let preferredOrder = [
   "Rarity",
@@ -58,7 +64,7 @@ for (let key of preferredOrder) {
   dist[key] = traits[key];
 }
 
-for (attributes in dist) {
+for (let attributes in dist) {
   const keys = Object.keys(dist[attributes]);
   keys.forEach((key, index) => {
     dist[attributes][key] = addSomeDecimals(

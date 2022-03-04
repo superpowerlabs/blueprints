@@ -8,14 +8,13 @@ import clientApi from "../utils/ClientApi";
 import config from "../config";
 
 import { SYN_COUPONS_NAME } from "../config/constants";
-import allMetadata from "../config/allMetadata.json";
 import ls from "local-storage";
 import Common from "./Common";
 import Header from "./Header";
 import Showcase from "./Showcase";
 import Error404 from "./Error404";
-import Overview from "../Pages/Overview";
 import PopUp from "./Popup";
+import Overview from "../Pages/Overview";
 
 class App extends Common {
   constructor(props) {
@@ -311,13 +310,13 @@ class App extends Common {
         <Header Store={Store} setStore={this.setStore} connect={this.connect} />
         <main>
           <Switch>
-            <Route exact path="/Blueprints">
+            <Route exact path="/">
               <Showcase Store={Store} setStore={this.setStore} />
             </Route>
-            <Route path="/">
-              <Overview />
+            <Route path="/overview">
+              <Overview Store={Store} setStore={this.setStore} />
             </Route>
-            <Route path="*">
+            <Route exact path="*">
               <Error404 Store={Store} setStore={this.setStore} />
             </Route>
           </Switch>
