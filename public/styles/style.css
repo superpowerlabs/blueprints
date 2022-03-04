@@ -1850,7 +1850,7 @@ table td {
     background: #000000;
     color: #adb5bd;
     margin-left: -360px;
-    padding-top: 60px;
+    padding-top: 160px;
     transition: all 0.5s;
     float: left;
     height: 100%;
@@ -1972,14 +1972,22 @@ li a.dropdown-toggle::after {
     display: inline;
 }
 
+.total {
+    color: #0d66c2;
+}
+
 .toplist {
-    background: #00000020;
+    background: #000000aa;
     position: fixed;
-    padding: 12px 0;
-    top: 50px;
-    left: 380px;
-    height: 30px;
+    padding: 6px 12px 6px 24px;
+    top: 56px;
+    left: 359px;
     z-index: 2;
+    border-bottom-right-radius: 8px;
+}
+
+.nowrap {
+    white-space: nowrap;
 }
 
 .tokenId {
@@ -2031,10 +2039,16 @@ li a.dropdown-toggle::after {
 }
 
 .searchBox {
-    padding: 0 21px;
+    padding: 70px 21px 21px;
     width: 200px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    background: #000011cc;
 }
 
+.btn,
 .input-group-text {
     background-color: #2e1645;
     color: #61dafb;
@@ -2049,4 +2063,9 @@ li a.dropdown-toggle::after {
 .rows {
     display: flex;
     flex-direction: row;
+}
+
+.searchBox .btn-check:checked + .btn-warning {
+    background-color: #1e0645;
+    color: yellow;
 }
