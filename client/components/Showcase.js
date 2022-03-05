@@ -74,6 +74,7 @@ export default class Showcase extends Base {
   render() {
     const wallet = this.Store.connectedWallet || "";
     const chainId = this.Store.chainId || "";
+    const ownedIds = this.Store.ownedIds || "";
     const check = this.Store.isMyId || "";
     return (
       <div style={{ width: "100%" }}>
@@ -89,11 +90,15 @@ export default class Showcase extends Base {
           <div>
             {config.supportedId[chainId] || !check ? (
               <div>
-                <Content
-                  Store={this.Store}
-                  setStore={this.setStore}
-                  onCheck={this.onCheck}
-                />
+                {ownedIds.length === 0 && check ? (
+                  <div className="wallet-message">You do not own any NFTS</div>
+                ) : (
+                  <Content
+                    Store={this.Store}
+                    setStore={this.setStore}
+                    onCheck={this.onCheck}
+                  />
+                )}
               </div>
             ) : (
               <div className="wallet-message">Switch to BSC network</div>
