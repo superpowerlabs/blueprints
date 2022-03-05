@@ -5,6 +5,7 @@ import SideBar from "./SideBar";
 import Content from "./Content";
 import Base from "./Base";
 import { toNumber } from "lodash";
+import config from "../config";
 
 export default class Showcase extends Base {
   constructor(props) {
@@ -71,6 +72,9 @@ export default class Showcase extends Base {
   }
 
   render() {
+    const wallet = this.Store.connectedWallet || "";
+    const chainId = this.Store.chainId || "";
+    const check = this.Store.isMyId || "";
     return (
       <div style={{ width: "100%" }}>
         <SideBar
@@ -81,11 +85,23 @@ export default class Showcase extends Base {
           onId={this.onId}
           onSort={this.onSort}
         />
-        <Content
-          Store={this.Store}
-          setStore={this.setStore}
-          onCheck={this.onCheck}
-        />
+        {wallet || !check ? (
+          <div>
+            {config.supportedId[chainId] || !check ? (
+              <div>
+                <Content
+                  Store={this.Store}
+                  setStore={this.setStore}
+                  onCheck={this.onCheck}
+                />
+              </div>
+            ) : (
+              <div className="wallet-message">Switch to BSC network</div>
+            )}
+          </div>
+        ) : (
+          <div className="wallet-message">Please connect to wallet</div>
+        )}
       </div>
     );
   }

@@ -2111,3 +2111,13 @@ width: 10px !important;
     background-color: #22009960;
     color: white;
 }
+
+.wallet-message {
+    font-family: Modeco;
+    src: url(../assets/Modeco-Regular.ttf);
+    margin-top: 300px;
+    margin-left: 620px;
+    font-size: 50px;
+    font-weight: bold;
+    color: #61dafb;
+}
