@@ -73,7 +73,6 @@ class SideBar extends Base {
               onChange={this.handleChange}
             />
             <Form.Check
-              
               type={"checkbox"}
               id={"default-checkbox"}
               label={"My NFTs"}
@@ -85,7 +84,6 @@ class SideBar extends Base {
           </InputGroup>
 
           <ButtonGroup aria-label="Basic example">
- 
             <ToggleButton
               id={"radio-1"}
               type="radio"
