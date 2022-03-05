@@ -67,20 +67,25 @@ class SideBar extends Base {
           <InputGroup className="mb-3" size={"sm"}>
             <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
             <FormControl
+              className={"id-input"}
               aria-describedby="basic-addon3"
               value={this.state.value}
               onChange={this.handleChange}
             />
             <Form.Check
+              
               type={"checkbox"}
               id={"default-checkbox"}
               label={"My NFTs"}
               checked={this.Store.isMyId}
               onChange={this.handleMyIds}
+              variant="warning"
+              className={"checkbox"}
             />
           </InputGroup>
 
           <ButtonGroup aria-label="Basic example">
+ 
             <ToggleButton
               id={"radio-1"}
               type="radio"
