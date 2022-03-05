@@ -74,17 +74,17 @@ export default class Showcase extends Base {
   render() {
     const wallet = this.Store.connectedWallet || "";
     const chainId = this.Store.chainId || "";
-    const check = this.Store.isMyId|| "";
+    const check = this.Store.isMyId || "";
     return (
       <div style={{ width: "100%" }}>
         <SideBar
-                  Store={this.Store}
-                  setStore={this.setStore}
-                  isOpen={true}
-                  onCheck={this.onCheck}
-                  onId={this.onId}
-                  onSort={this.onSort}
-                />
+          Store={this.Store}
+          setStore={this.setStore}
+          isOpen={true}
+          onCheck={this.onCheck}
+          onId={this.onId}
+          onSort={this.onSort}
+        />
         {wallet || !check ? (
           <div>
             {config.supportedId[chainId] || !check ? (
@@ -99,7 +99,9 @@ export default class Showcase extends Base {
               <div className="wallet-message">Switch to BSC network</div>
             )}
           </div>
-        ) : <div className="wallet-message">Please connect to wallet</div>}
+        ) : (
+          <div className="wallet-message">Please connect to wallet</div>
+        )}
       </div>
     );
   }
