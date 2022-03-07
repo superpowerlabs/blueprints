@@ -131,31 +131,6 @@ class App extends Common {
     }
   }
 
-  async getContracts(config, chainId, web3Provider) {
-    let contracts = {};
-    let networkNotSupported = false;
-    let connectedNetwork = null;
-    if (config.supportedId[chainId]) {
-      let addresses = config.contracts[chainId];
-      connectedNetwork = config.supportedId[chainId];
-      for (let contractName in addresses) {
-        contracts[contractName] = new ethers.Contract(
-          addresses[contractName],
-          config.abi[contractName],
-          web3Provider
-        );
-      }
-    } else {
-      networkNotSupported = true;
-    }
-
-    return {
-      contracts,
-      connectedNetwork,
-      networkNotSupported,
-    };
-  }
-
   async setWallet(eth, connectedWith) {
     let contracts = {};
 

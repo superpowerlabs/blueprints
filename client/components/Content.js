@@ -276,6 +276,8 @@ export default class Content extends Base {
 
   render() {
     const filter = this.Store.filter || {};
+    let myTotal = this.Store.ownedIds || {};
+    myTotal = myTotal.length;
     let total = allMetadata.length;
     if (this.Store.tokenIds) {
       total = this.Store.tokenIds.length;
@@ -309,7 +311,11 @@ export default class Content extends Base {
             <span className={"total"}>
               {total} result{total !== 1 ? "s" : ""}
             </span>
-          ) : null}
+          ) : (
+            <span className={"total"}>
+              My result{myTotal !== 1 ? "s" : ""}: {myTotal}
+            </span>
+          )}
         </div>
         <div style={{ marginTop: 8 }}>
           <InfiniteScroll
