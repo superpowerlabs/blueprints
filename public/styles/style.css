@@ -2039,26 +2039,13 @@ li a.dropdown-toggle::after {
 }
 
 .searchBox {
-    padding: 70px 12px 21px 21px;
+    padding: 70px 121px 21px 21px;
     width: 360px;
     position: fixed;
     left: 0;
     top: 0;
     z-index: 3;
     background: #000011cc;
-}
-
-.checkbox {
-    color: #61dafb;
-    padding-left: 3.5em;
-}
-.form-check-input:checked {
-    background-color: #2e1645;
-    border-color: #fdcf00;
-}
-
-.id-input {
-    width: 10px !important;
 }
 
 .btn,
@@ -2110,14 +2097,4 @@ li a.dropdown-toggle::after {
 .headerButton.selected:hover {
     background-color: #22009960;
     color: white;
-}
-
-.wallet-message {
-    font-family: Modeco;
-    src: url(../assets/Modeco-Regular.ttf);
-    margin-top: 300px;
-    margin-left: 620px;
-    font-size: 50px;
-    font-weight: bold;
-    color: #61dafb;
 }

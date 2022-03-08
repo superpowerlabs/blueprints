@@ -1,15 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import SubMenu from "./SubMenu";
-const {
-  InputGroup,
-  FormControl,
-  Button,
-  Nav,
-  ButtonGroup,
-  ToggleButton,
-  Form,
-} =
+const { InputGroup, FormControl, Button, Nav, ButtonGroup, ToggleButton } =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
 import classNames from "classnames";
@@ -21,7 +13,7 @@ class SideBar extends Base {
   constructor(props) {
     super(props);
     this.state = { value: "", sortBy: "id" };
-    this.bindMany(["handleChange", "handleMyIds"]);
+    this.bindMany(["handleChange"]);
   }
 
   allTraits() {
@@ -51,14 +43,6 @@ class SideBar extends Base {
       this.props.onSort();
     }
   }
-  handleMyIds(event) {
-    const filter = {};
-    this.setStore({
-      filter,
-      isMyId: !this.Store.isMyId,
-      justIsMyId: true,
-    });
-  }
 
   render() {
     return (
@@ -67,19 +51,9 @@ class SideBar extends Base {
           <InputGroup className="mb-3" size={"sm"}>
             <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
             <FormControl
-              className={"id-input"}
               aria-describedby="basic-addon3"
               value={this.state.value}
               onChange={this.handleChange}
-            />
-            <Form.Check
-              type={"checkbox"}
-              id={"default-checkbox"}
-              label={"My NFTs"}
-              checked={this.Store.isMyId}
-              onChange={this.handleMyIds}
-              variant="warning"
-              className={"checkbox"}
             />
           </InputGroup>
 

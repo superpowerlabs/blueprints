@@ -62,6 +62,7 @@ export default class Showcase extends Base {
       isSearch: true,
     });
   }
+
   onSort() {
     this.setStore({
       filter: this.Store.filter,
@@ -71,12 +72,6 @@ export default class Showcase extends Base {
   }
 
   render() {
-    const {
-      connectedWallet: wallet,
-      isMyId: check,
-      connectedNetwork,
-    } = this.Store;
-    const ownedIds = this.Store.ownedIds || "";
     return (
       <div style={{ width: "100%" }}>
         <SideBar
@@ -87,27 +82,11 @@ export default class Showcase extends Base {
           onId={this.onId}
           onSort={this.onSort}
         />
-        {wallet || !check ? (
-          <div>
-            {connectedNetwork || !check ? (
-              <div>
-                {ownedIds === 0 && check ? (
-                  <div className="wallet-message">You do not own any NFTS</div>
-                ) : (
-                  <Content
-                    Store={this.Store}
-                    setStore={this.setStore}
-                    onCheck={this.onCheck}
-                  />
-                )}
-              </div>
-            ) : (
-              <div className="wallet-message">Switch to BSC network</div>
-            )}
-          </div>
-        ) : (
-          <div className="wallet-message">Please connect to wallet</div>
-        )}
+        <Content
+          Store={this.Store}
+          setStore={this.setStore}
+          onCheck={this.onCheck}
+        />
       </div>
     );
   }

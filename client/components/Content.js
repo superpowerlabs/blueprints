@@ -40,21 +40,14 @@ export default class Content extends Base {
   monitorData() {
     const tokenIds = this.Store.tokenIds || [];
 
-    if (this.Store.justToggled || this.Store.justIsMyId) {
+    if (this.Store.justToggled) {
       this.setState({
         items: [],
         previous: tokenIds.length,
       });
-      if (this.Store.justToggled) {
-        this.setStore({
-          justToggled: false,
-        });
-      }
-      if (this.Store.justIsMyId) {
-        this.setStore({
-          justIsMyId: false,
-        });
-      }
+      this.setStore({
+        justToggled: false,
+      });
       this.fetchMoreData();
     }
     if (tokenIds.length !== this.state.previous) {
@@ -84,17 +77,8 @@ export default class Content extends Base {
             index++;
             continue;
           }
-
-          if (this.Store.isMyId) {
-            const ownedIds = this.Store.ownedIds;
-            if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
-              newItems++;
-              items.push(m);
-            }
-          } else {
-            newItems++;
-            items.push(m);
-          }
+          newItems++;
+          items.push(m);
         }
         if (newItems > 20) {
           hasMore = true;
@@ -109,17 +93,8 @@ export default class Content extends Base {
             index++;
             continue;
           }
-
-          if (this.Store.isMyId) {
-            const ownedIds = this.Store.ownedIds;
-            if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
-              newItems++;
-              items.push(m);
-            }
-          } else {
-            newItems++;
-            items.push(m);
-          }
+          newItems++;
+          items.push(m);
         }
         if (newItems > 20) {
           hasMore = true;
@@ -276,8 +251,6 @@ export default class Content extends Base {
 
   render() {
     const filter = this.Store.filter || {};
-    let myTotal = this.Store.ownedIds || {};
-    myTotal = myTotal.length;
     let total = allMetadata.length;
     if (this.Store.tokenIds) {
       total = this.Store.tokenIds.length;
@@ -307,15 +280,9 @@ export default class Content extends Base {
               </div>
             );
           })}
-          {!this.Store.isMyId ? (
-            <span className={"total"}>
-              {total} result{total !== 1 ? "s" : ""}
-            </span>
-          ) : (
-            <span className={"total"}>
-              My result{myTotal !== 1 ? "s" : ""}: {myTotal}
-            </span>
-          )}
+          <span className={"total"}>
+            {total} result{total !== 1 ? "s" : ""}
+          </span>
         </div>
         <div style={{ marginTop: 8 }}>
           <InfiniteScroll
