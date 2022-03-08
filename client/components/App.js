@@ -6,6 +6,8 @@ const { BrowserRouter, Route, Switch } = ReactRouterDOM;
 const ethers = require("ethers");
 import clientApi from "../utils/ClientApi";
 import config from "../config";
+
+import { SYN_COUPONS_NAME } from "../config/constants";
 import ls from "local-storage";
 import Common from "./Common";
 import Header from "./Header";
@@ -52,6 +54,7 @@ class App extends Common {
       "setWallet",
       "connect",
       "getPercent",
+      "getCoupons",
     ]);
 
     this.globals = ["showPopUp", "handleClose"];
@@ -86,6 +89,7 @@ class App extends Common {
     }
     this.setStore({
       isSorted: false,
+      isMyId: false,
     });
   }
 
@@ -128,6 +132,8 @@ class App extends Common {
   }
 
   async setWallet(eth, connectedWith) {
+    let contracts = {};
+
     try {
       const provider = new ethers.providers.Web3Provider(eth);
       const signer = provider.getSigner();
@@ -137,6 +143,15 @@ class App extends Common {
       let connectedNetwork = null;
       if (config.supportedId && config.supportedId[chainId]) {
         connectedNetwork = config.supportedId[chainId];
+        let addresses = config.contracts[chainId];
+
+        for (let contractName in addresses) {
+          contracts[contractName] = new ethers.Contract(
+            addresses[contractName],
+            config.abi[contractName],
+            provider
+          );
+        }
       } else {
         networkNotSupported = true;
       }
@@ -147,6 +162,7 @@ class App extends Common {
         chainId,
         connectedNetwork,
         networkNotSupported,
+        contracts,
       });
       this.setStore(
         {
@@ -154,10 +170,35 @@ class App extends Common {
         },
         true
       );
+
       clientApi.setConnectedWallet(connectedWallet, chainId);
+      this.getCoupons(contracts, connectedWallet);
     } catch (e) {
       console.error(e);
       // window.location.reload()
+    }
+  }
+
+  async getCoupons(contracts, connectedWallet) {
+    const couponsContract = contracts[SYN_COUPONS_NAME];
+
+    let ownedCoupons = [];
+    if (connectedWallet) {
+      if ((await couponsContract.balanceOf(connectedWallet)) > 0) {
+        const balance = (
+          await couponsContract.balanceOf(connectedWallet)
+        ).toNumber();
+        for (let i = 0; i < balance; i++) {
+          ownedCoupons.push(
+            (
+              await couponsContract.tokenOfOwnerByIndex(connectedWallet, i)
+            ).toNumber()
+          );
+        }
+        this.setStore({
+          ownedIds: ownedCoupons,
+        });
+      }
     }
   }
 
@@ -248,7 +289,7 @@ class App extends Common {
               <Showcase Store={Store} setStore={this.setStore} />
             </Route>
             <Route path="/overview">
-              <Overview />
+              <Overview Store={Store} setStore={this.setStore} />
             </Route>
             <Route exact path="*">
               <Error404 Store={Store} setStore={this.setStore} />
