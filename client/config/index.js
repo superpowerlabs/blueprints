@@ -24,6 +24,19 @@ supportedId[1337] = "localhost";
 
 const config = {
   supportedId,
+  chainConf: {
+    56: {
+      chainId: "0x" + Number(56).toString(16),
+      chainName: "BSC",
+      nativeCurrency: {
+        name: "BNB",
+        symbol: "BNB",
+        decimals: 18,
+      },
+      rpcUrls: ["https://bsc-dataseed.binance.org"],
+      blockExplorerUrls: ["https://bscscan.com"],
+    },
+  },
   contracts,
   abi: require("./ABIs.json").contracts,
   preferredOrder: [
