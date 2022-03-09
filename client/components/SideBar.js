@@ -167,6 +167,7 @@ class SideBar extends Base {
         )}
         <div
           className={classNames("sidebar", { "is-open": this.props.isOpen })}
+          style={{ position: "relative", paddingTop: "10px" }}
         >
           <div className="sidebar-header">
             <Button
