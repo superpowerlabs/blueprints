@@ -2,11 +2,10 @@
 const { Navbar, Button } =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
-
 // eslint-disable-next-line no-undef
 const { Link } = ReactRouterDOM;
-
 import Base from "./Base";
+import { BsFillFunnelFill } from "react-icons/bs";
 
 export default class Header extends Base {
   constructor(props) {
@@ -173,7 +172,7 @@ export default class Header extends Base {
           </Link>
         </Navbar.Collapse>
         {this.isMobile() ? (
-          <Button onClick={this.openSidebar}>Sidebar</Button>
+          <BsFillFunnelFill onClick={this.openSidebar} />
         ) : null}
         {!this.isMobile() ? (
           connectedWallet ? (
