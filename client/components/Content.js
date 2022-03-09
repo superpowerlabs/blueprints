@@ -276,7 +276,6 @@ export default class Content extends Base {
 
   render() {
     const filter = this.Store.filter || {};
-    const mobile = this.isMobile();
     let myTotal = this.Store.ownedIds || {};
     myTotal = myTotal.length;
     let total = allMetadata.length;
@@ -290,7 +289,7 @@ export default class Content extends Base {
 
     return (
       <div>
-        {!mobile ? (
+        {!this.isMobile() ? (
           <div className={"tokenList"}>
             <div className={"toplist"}>
               {Object.keys(filter).map((f) => {

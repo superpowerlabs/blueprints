@@ -24,6 +24,7 @@ export default class Header extends Base {
       "setExpanded",
       "handleMyIds",
       "handleAllIds",
+      "openSidebar",
     ]);
   }
 
@@ -71,6 +72,18 @@ export default class Header extends Base {
       });
     }
     setTimeout(this.checkPathname, 500);
+  }
+
+  openSidebar() {
+    if (this.Store.sideOpen) {
+      this.setStore({
+        sideOpen: false,
+      });
+    } else {
+      this.setStore({
+        sideOpen: true,
+      });
+    }
   }
 
   render() {
@@ -159,6 +172,9 @@ export default class Header extends Base {
             Overview
           </Link>
         </Navbar.Collapse>
+        {this.isMobile() ? (
+          <Button onClick={this.openSidebar}>Sidebar</Button>
+        ) : null}
         {!this.isMobile() ? (
           connectedWallet ? (
             <div className={"aqua floatRightAbsolute"}>

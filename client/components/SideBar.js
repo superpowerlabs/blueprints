@@ -45,10 +45,9 @@ class SideBar extends Base {
   }
 
   render() {
-    const mobile = this.isMobile();
     return (
       <div>
-        {!mobile ? (
+        {!this.isMobile() ? (
           <div className={"searchBox"}>
             <InputGroup className="mb-3" size={"sm"}>
               <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
