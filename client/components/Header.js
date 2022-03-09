@@ -72,50 +72,50 @@ export default class Header extends Base {
           aria-controls="basic-navbar-nav"
           onClick={this.setExpanded}
         />
-        <Navbar.Collapse id="navbarScroll">
-          <Navbar.Brand as={Link} to={"/"}>
-            <img
-              // className={"positionAbsolute"}
-              src={"/images/logo.png"}
-              style={
-                {
-                  // width: 300,
-                  // left: this.isMobile() ? 80 : this.Store.width / 2 - 80,
-                }
+        <Navbar.Brand as={Link} to={"/"}>
+          <img
+            // className={"positionAbsolute"}
+            src={"/images/logo.png"}
+            style={
+              {
+                // width: 300,
+                // left: this.isMobile() ? 80 : this.Store.width / 2 - 80,
               }
-            />
-          </Navbar.Brand>
+            }
+          />
+        </Navbar.Brand>
+        <Navbar.Collapse id="navbarScroll">
           {/*<Nav className="mr-auto my-2 my-lg-0" navbarScroll>*/}
           {/*  <Navbar.Text className={"links"}>*/}
           {/*    <span style={{ fontSize: "1.4rem" }}>BLUEPRINTS SHOWCASE</span>*/}
           {/*  </Navbar.Text>*/}
           {/*</Nav>*/}
+          {/*{this.Store.width ? (*/}
+          {/*  <img*/}
+          {/*    className={"positionAbsolute"}*/}
+          {/*    src={"https://s3.mob.land/assets/Mobland_Title_Stylized300.png"}*/}
+          {/*    style={{*/}
+          {/*      width: 160,*/}
+          {/*      left: this.isMobile() ? 80 : this.Store.width / 2 - 80,*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*) : null}*/}
+          <Link
+            className={"headerButton " + (pathname === "" ? "selected" : "")}
+            to="/"
+          >
+            Collection
+          </Link>
+          <Link
+            className={
+              "headerButton lastButton " +
+              (pathname === "overview" ? "selected" : "")
+            }
+            to="/overview"
+          >
+            Overview
+          </Link>
         </Navbar.Collapse>
-        {/*{this.Store.width ? (*/}
-        {/*  <img*/}
-        {/*    className={"positionAbsolute"}*/}
-        {/*    src={"https://s3.mob.land/assets/Mobland_Title_Stylized300.png"}*/}
-        {/*    style={{*/}
-        {/*      width: 160,*/}
-        {/*      left: this.isMobile() ? 80 : this.Store.width / 2 - 80,*/}
-        {/*    }}*/}
-        {/*  />*/}
-        {/*) : null}*/}
-        <Link
-          className={"headerButton " + (pathname === "" ? "selected" : "")}
-          to="/"
-        >
-          Collection
-        </Link>
-        <Link
-          className={
-            "headerButton lastButton " +
-            (pathname === "overview" ? "selected" : "")
-          }
-          to="/overview"
-        >
-          Overview
-        </Link>
         {!this.isMobile() ? (
           connectedWallet ? (
             <div className={"aqua floatRightAbsolute"}>
@@ -134,7 +134,20 @@ export default class Header extends Base {
               Connect your wallet
             </Button>
           )
-        ) : null}
+        ) : connectedWallet ? (
+          <div className={"aqua floatRightAbsolute"}>
+            <i className="fas fa-user-astronaut" style={{ marginRight: 10 }} />
+            {address}
+          </div>
+        ) : (
+          <Button
+            className={"floatRightAbsolute"}
+            size={"sm"}
+            onClick={this.props.connect}
+          >
+            Connect your wallet
+          </Button>
+        )}
       </Navbar>
     );
   }

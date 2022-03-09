@@ -61,64 +61,124 @@ class SideBar extends Base {
   }
 
   render() {
+    const mobile = this.isMobile();
     return (
       <div>
-        <div className={"searchBox"}>
-          <InputGroup className="mb-3" size={"sm"}>
-            <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
-            <FormControl
-              className={"id-input"}
-              aria-describedby="basic-addon3"
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-            <Form.Check
-              type={"checkbox"}
-              id={"default-checkbox"}
-              label={"My NFTs"}
-              checked={this.Store.isMyId}
-              onChange={this.handleMyIds}
-              variant="warning"
-              className={"checkbox"}
-            />
-          </InputGroup>
+        {!mobile ? (
+          <div className={"searchBox"}>
+            <InputGroup className="mb-3" size={"sm"}>
+              <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
+              <FormControl
+                className={"id-input"}
+                aria-describedby="basic-addon3"
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+              <Form.Check
+                type={"checkbox"}
+                id={"default-checkbox"}
+                label={"My NFTs"}
+                checked={this.Store.isMyId}
+                onChange={this.handleMyIds}
+                variant="warning"
+                className={"checkbox"}
+              />
+            </InputGroup>
 
-          <ButtonGroup aria-label="Basic example">
-            <ToggleButton
-              id={"radio-1"}
-              type="radio"
-              variant="warning"
-              name="radio"
-              value={"id"}
-              checked={this.state.sortBy === "id"}
-              className={"btn nowrap"}
-              size={"sm"}
-              onChange={(e) => {
-                this.sortBy("id");
-                this.setState({ sortBy: e.currentTarget.value });
-              }}
-            >
-              Sort by ID
-            </ToggleButton>
+            <ButtonGroup aria-label="Basic example">
+              <ToggleButton
+                id={"radio-1"}
+                type="radio"
+                variant="warning"
+                name="radio"
+                value={"id"}
+                checked={this.state.sortBy === "id"}
+                className={"btn nowrap"}
+                size={"sm"}
+                onChange={(e) => {
+                  this.sortBy("id");
+                  this.setState({ sortBy: e.currentTarget.value });
+                }}
+              >
+                Sort by ID
+              </ToggleButton>
 
-            <ToggleButton
-              id={"radio-2"}
-              type="radio"
-              variant="warning"
-              name="radio"
-              value={"score"}
-              checked={this.state.sortBy === "score"}
-              className={"btn nowrap"}
-              size={"sm"}
-              onChange={(e) => {
-                this.sortBy("score");
-                this.setState({ sortBy: e.currentTarget.value });
-              }}
-            >
-              Sort by Rarity
-            </ToggleButton>
-          </ButtonGroup>
-        </div>
+              <ToggleButton
+                id={"radio-2"}
+                type="radio"
+                variant="warning"
+                name="radio"
+                value={"score"}
+                checked={this.state.sortBy === "score"}
+                className={"btn nowrap"}
+                size={"sm"}
+                onChange={(e) => {
+                  this.sortBy("score");
+                  this.setState({ sortBy: e.currentTarget.value });
+                }}
+              >
+                Sort by Rarity
+              </ToggleButton>
+            </ButtonGroup>
+          </div>
+        ) : (
+          <div className={"searchBox"} style={{position: "static", padding: "10px 12px 21px 21px" }}>
+            <InputGroup className="mb-3" size={"sm"}>
+              <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
+              <FormControl
+                className={"id-input"}
+                aria-describedby="basic-addon3"
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+              <Form.Check
+                type={"checkbox"}
+                id={"default-checkbox"}
+                label={"My NFTs"}
+                checked={this.Store.isMyId}
+                onChange={this.handleMyIds}
+                variant="warning"
+                className={"checkbox"}
+              />
+            </InputGroup>
+
+            <ButtonGroup aria-label="Basic example">
+              <ToggleButton
+                id={"radio-1"}
+                type="radio"
+                variant="warning"
+                name="radio"
+                value={"id"}
+                checked={this.state.sortBy === "id"}
+                className={"btn nowrap"}
+                size={"sm"}
+                onChange={(e) => {
+                  this.sortBy("id");
+                  this.setState({ sortBy: e.currentTarget.value });
+                }}
+              >
+                Sort by ID
+              </ToggleButton>
+
+              <ToggleButton
+                id={"radio-2"}
+                type="radio"
+                variant="warning"
+                name="radio"
+                value={"score"}
+                checked={this.state.sortBy === "score"}
+                className={"btn nowrap"}
+                size={"sm"}
+                onChange={(e) => {
+                  this.sortBy("score");
+                  this.setState({ sortBy: e.currentTarget.value });
+                }}
+              >
+                Sort by Rarity
+              </ToggleButton>
+            </ButtonGroup>
+          </div>
+        )}
         <div
           className={classNames("sidebar", { "is-open": this.props.isOpen })}
         >

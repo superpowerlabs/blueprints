@@ -77,16 +77,28 @@ export default class Showcase extends Base {
       connectedNetwork,
     } = this.Store;
     const ownedIds = this.Store.ownedIds || "";
+    const mobile = this.isMobile();
     return (
       <div style={{ width: "100%" }}>
-        <SideBar
-          Store={this.Store}
-          setStore={this.setStore}
-          isOpen={true}
-          onCheck={this.onCheck}
-          onId={this.onId}
-          onSort={this.onSort}
-        />
+        {!mobile ? (
+          <SideBar
+            Store={this.Store}
+            setStore={this.setStore}
+            isOpen={true}
+            onCheck={this.onCheck}
+            onId={this.onId}
+            onSort={this.onSort}
+          />
+        ) : (
+          <SideBar
+            Store={this.Store}
+            setStore={this.setStore}
+            isOpen={false}
+            onCheck={this.onCheck}
+            onId={this.onId}
+            onSort={this.onSort}
+          />
+        )}
         {wallet || !check ? (
           <div>
             {connectedNetwork || !check ? (
