@@ -353,7 +353,10 @@ export default class Content extends Base {
             className={"tokenList"}
             style={{ marginLeft: "60px", marginTop: "10px" }}
           >
-            <div className={"toplist"} style={{ position: "static", left: "50px" }}>
+            <div
+              className={"toplist"}
+              style={{ position: "static", left: "50px" }}
+            >
               {Object.keys(filter).map((f) => {
                 f = f.split("|");
                 let text = [f[0], this.cleanTrait(f[1])].join(": ");

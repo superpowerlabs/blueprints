@@ -122,7 +122,10 @@ class SideBar extends Base {
             </ButtonGroup>
           </div>
         ) : (
-          <div className={"searchBox"} style={{position: "static", padding: "10px 12px 21px 21px" }}>
+          <div
+            className={"searchBox"}
+            style={{ position: "static", padding: "10px 12px 21px 21px" }}
+          >
             <InputGroup className="mb-3" size={"sm"}>
               <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
               <FormControl
