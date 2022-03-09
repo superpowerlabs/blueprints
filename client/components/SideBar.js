@@ -1,15 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import SubMenu from "./SubMenu";
-const {
-  InputGroup,
-  FormControl,
-  Button,
-  Nav,
-  ButtonGroup,
-  ToggleButton,
-
-} =
+const { InputGroup, FormControl, Button, Nav, ButtonGroup, ToggleButton } =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
 import classNames from "classnames";
@@ -52,7 +44,6 @@ class SideBar extends Base {
     }
   }
 
-
   render() {
     return (
       <div>
@@ -66,15 +57,15 @@ class SideBar extends Base {
               onChange={this.handleChange}
             />
             {
-            // <Form.Check
-            //   type={"checkbox"}
-            //   id={"default-checkbox"}
-            //   label={"My NFTs"}
-            //   checked={this.Store.isMyId}
-            //   onChange={this.handleMyIds}
-            //   variant="warning"
-            //   className={"checkbox"}
-            // />
+              // <Form.Check
+              //   type={"checkbox"}
+              //   id={"default-checkbox"}
+              //   label={"My NFTs"}
+              //   checked={this.Store.isMyId}
+              //   onChange={this.handleMyIds}
+              //   variant="warning"
+              //   className={"checkbox"}
+              // />
             }
           </InputGroup>
 

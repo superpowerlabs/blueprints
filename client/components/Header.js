@@ -18,7 +18,13 @@ export default class Header extends Base {
       pathname: window.location.pathname,
     };
 
-    this.bindMany(["expandAddress", "checkPathname", "setExpanded","handleMyIds", "handleAllIds"]);
+    this.bindMany([
+      "expandAddress",
+      "checkPathname",
+      "setExpanded",
+      "handleMyIds",
+      "handleAllIds",
+    ]);
   }
 
   setExpanded() {
