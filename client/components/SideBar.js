@@ -8,7 +8,7 @@ const {
   Nav,
   ButtonGroup,
   ToggleButton,
-  Form,
+
 } =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
@@ -21,7 +21,7 @@ class SideBar extends Base {
   constructor(props) {
     super(props);
     this.state = { value: "", sortBy: "id" };
-    this.bindMany(["handleChange", "handleMyIds"]);
+    this.bindMany(["handleChange"]);
   }
 
   allTraits() {
@@ -51,14 +51,7 @@ class SideBar extends Base {
       this.props.onSort();
     }
   }
-  handleMyIds(event) {
-    const filter = {};
-    this.setStore({
-      filter,
-      isMyId: !this.Store.isMyId,
-      justIsMyId: true,
-    });
-  }
+
 
   render() {
     return (
@@ -72,15 +65,17 @@ class SideBar extends Base {
               value={this.state.value}
               onChange={this.handleChange}
             />
-            <Form.Check
-              type={"checkbox"}
-              id={"default-checkbox"}
-              label={"My NFTs"}
-              checked={this.Store.isMyId}
-              onChange={this.handleMyIds}
-              variant="warning"
-              className={"checkbox"}
-            />
+            {
+            // <Form.Check
+            //   type={"checkbox"}
+            //   id={"default-checkbox"}
+            //   label={"My NFTs"}
+            //   checked={this.Store.isMyId}
+            //   onChange={this.handleMyIds}
+            //   variant="warning"
+            //   className={"checkbox"}
+            // />
+            }
           </InputGroup>
 
           <ButtonGroup aria-label="Basic example">

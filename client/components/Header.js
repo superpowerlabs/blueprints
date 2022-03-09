@@ -18,7 +18,7 @@ export default class Header extends Base {
       pathname: window.location.pathname,
     };
 
-    this.bindMany(["expandAddress", "checkPathname", "setExpanded"]);
+    this.bindMany(["expandAddress", "checkPathname", "setExpanded","handleMyIds", "handleAllIds"]);
   }
 
   setExpanded() {
@@ -35,6 +35,25 @@ export default class Header extends Base {
   expandAddress() {
     this.setState({
       addressExpanded: !this.state.addressExpanded,
+    });
+  }
+
+  handleMyIds() {
+    const filter = {};
+    this.setStore({
+      filter,
+      isMyId: true,
+      justIsMyId: true,
+    });
+  }
+
+  handleAllIds() {
+    const filter = {};
+
+    this.setStore({
+      filter,
+      isMyId: false,
+      justIsMyId: true,
     });
   }
 
@@ -104,8 +123,16 @@ export default class Header extends Base {
         <Link
           className={"headerButton " + (pathname === "" ? "selected" : "")}
           to="/"
+          onClick={this.handleAllIds}
         >
           Collection
+        </Link>
+        <Link
+          className={"headerButton " + (pathname === "" ? "selected" : "")}
+          to="/"
+          onClick={this.handleMyIds}
+        >
+          My Collection
         </Link>
         <Link
           className={

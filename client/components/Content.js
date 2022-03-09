@@ -86,7 +86,7 @@ export default class Content extends Base {
           }
 
           if (this.Store.isMyId) {
-            const ownedIds = this.Store.ownedIds;
+            const ownedIds = this.Store.ownedIds || [];
             if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
               newItems++;
               items.push(m);
@@ -111,7 +111,7 @@ export default class Content extends Base {
           }
 
           if (this.Store.isMyId) {
-            const ownedIds = this.Store.ownedIds;
+            const ownedIds = this.Store.ownedIds || [];
             if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
               newItems++;
               items.push(m);
