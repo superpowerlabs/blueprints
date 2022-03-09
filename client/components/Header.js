@@ -18,7 +18,13 @@ export default class Header extends Base {
       pathname: window.location.pathname,
     };
 
-    this.bindMany(["expandAddress", "checkPathname", "setExpanded"]);
+    this.bindMany([
+      "expandAddress",
+      "checkPathname",
+      "setExpanded",
+      "handleMyIds",
+      "handleAllIds",
+    ]);
   }
 
   setExpanded() {
@@ -35,6 +41,25 @@ export default class Header extends Base {
   expandAddress() {
     this.setState({
       addressExpanded: !this.state.addressExpanded,
+    });
+  }
+
+  handleMyIds() {
+    const filter = {};
+    this.setStore({
+      filter,
+      isMyId: true,
+      justIsMyId: true,
+    });
+  }
+
+  handleAllIds() {
+    const filter = {};
+
+    this.setStore({
+      filter,
+      isMyId: false,
+      justIsMyId: true,
     });
   }
 
@@ -100,11 +125,29 @@ export default class Header extends Base {
           {/*    }}*/}
           {/*  />*/}
           {/*) : null}*/}
+          {/*{this.Store.width ? (*/}
+          {/*  <img*/}
+          {/*    className={"positionAbsolute"}*/}
+          {/*    src={"https://s3.mob.land/assets/Mobland_Title_Stylized300.png"}*/}
+          {/*    style={{*/}
+          {/*      width: 160,*/}
+          {/*      left: this.isMobile() ? 80 : this.Store.width / 2 - 80,*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*) : null}*/}
           <Link
             className={"headerButton " + (pathname === "" ? "selected" : "")}
             to="/"
+            onClick={this.handleAllIds}
           >
             Collection
+          </Link>
+          <Link
+            className={"headerButton " + (pathname === "" ? "selected" : "")}
+            to="/"
+            onClick={this.handleMyIds}
+          >
+            My Collection
           </Link>
           <Link
             className={

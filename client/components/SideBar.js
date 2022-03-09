@@ -1,15 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import SubMenu from "./SubMenu";
-const {
-  InputGroup,
-  FormControl,
-  Button,
-  Nav,
-  ButtonGroup,
-  ToggleButton,
-  Form,
-} =
+const { InputGroup, FormControl, Button, Nav, ButtonGroup, ToggleButton } =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
 import classNames from "classnames";
@@ -21,7 +13,7 @@ class SideBar extends Base {
   constructor(props) {
     super(props);
     this.state = { value: "", sortBy: "id" };
-    this.bindMany(["handleChange", "handleMyIds"]);
+    this.bindMany(["handleChange"]);
   }
 
   allTraits() {
@@ -51,14 +43,6 @@ class SideBar extends Base {
       this.props.onSort();
     }
   }
-  handleMyIds(event) {
-    const filter = {};
-    this.setStore({
-      filter,
-      isMyId: !this.Store.isMyId,
-      justIsMyId: true,
-    });
-  }
 
   render() {
     const mobile = this.isMobile();
@@ -74,7 +58,7 @@ class SideBar extends Base {
                 value={this.state.value}
                 onChange={this.handleChange}
               />
-              <Form.Check
+              {/* <Form.Check
                 type={"checkbox"}
                 id={"default-checkbox"}
                 label={"My NFTs"}
@@ -82,7 +66,7 @@ class SideBar extends Base {
                 onChange={this.handleMyIds}
                 variant="warning"
                 className={"checkbox"}
-              />
+              /> */}
             </InputGroup>
 
             <ButtonGroup aria-label="Basic example">
@@ -134,7 +118,7 @@ class SideBar extends Base {
                 value={this.state.value}
                 onChange={this.handleChange}
               />
-              <Form.Check
+              {/* <Form.Check
                 type={"checkbox"}
                 id={"default-checkbox"}
                 label={"My NFTs"}
@@ -142,7 +126,7 @@ class SideBar extends Base {
                 onChange={this.handleMyIds}
                 variant="warning"
                 className={"checkbox"}
-              />
+              /> */}
             </InputGroup>
 
             <ButtonGroup aria-label="Basic example">
