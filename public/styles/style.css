@@ -1854,7 +1854,7 @@ table td {
     transition: all 0.5s;
     float: left;
     height: 100%;
-    top: 0;
+    top: 80px;
     position: fixed;
     overflow-y: auto;
 }
@@ -2040,7 +2040,7 @@ li a.dropdown-toggle::after {
 
 .searchBox {
     padding: 70px 12px 21px 21px;
-    width: 260px;
+    width: 360px;
     position: fixed;
     left: 0;
     top: 0;
@@ -2050,7 +2050,7 @@ li a.dropdown-toggle::after {
 
 .checkbox {
     color: #61dafb;
-    padding: 0 2em 0 3.5em;
+    padding-left: 3.5em;
 }
 .form-check-input:checked {
     background-color: #2e1645;
@@ -2113,19 +2113,11 @@ li a.dropdown-toggle::after {
 }
 
 .wallet-message {
-    font-family: Modeco, sans-serif !important;
+    font-family: Modeco;
+    src: url(../assets/Modeco-Regular.ttf);
     margin-top: 300px;
     margin-left: 620px;
-    font-size: 2rem;
+    font-size: 50px;
     font-weight: bold;
     color: #61dafb;
-}
-
-.command {
-    cursor: pointer;
-}
-
-.form-check-label {
-    color: #4da6ff !important;
-    font-size: 0.8rem !important;
 }
