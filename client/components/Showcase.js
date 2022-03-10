@@ -122,31 +122,77 @@ export default class Showcase extends Base {
           onId={this.onId}
           onSort={this.onSort}
         />
-        {wallet || !check ? (
+        {!this.isMobile() ? (
           <div>
-            {connectedNetwork || !check ? (
+            {wallet || !check ? (
               <div>
-                {ownedIds === 0 && check ? (
-                  <div className="wallet-message">You do not own any NFTS</div>
+                {connectedNetwork || !check ? (
+                  <div>
+                    {ownedIds === 0 && check ? (
+                      <div className="wallet-message">
+                        You do not own any NFTS
+                      </div>
+                    ) : (
+                      <Content
+                        Store={this.Store}
+                        setStore={this.setStore}
+                        onCheck={this.onCheck}
+                      />
+                    )}
+                  </div>
                 ) : (
-                  <Content
-                    Store={this.Store}
-                    setStore={this.setStore}
-                    onCheck={this.onCheck}
-                  />
+                  <div
+                    className="wallet-message command"
+                    onClick={() => this.switchTo(56)}
+                  >
+                    Click to switch to Binance Smart Chain
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="wallet-message">Please connect to wallet</div>
+            )}
+          </div>
+        ) : (
+          <div>
+            {wallet || !check ? (
+              <div>
+                {connectedNetwork || !check ? (
+                  <div>
+                    {ownedIds === 0 && check ? (
+                      <div
+                        className="wallet-message"
+                        style={{ marginLeft: "10%", marginTop: "60%" }}
+                      >
+                        You do not own any NFTS
+                      </div>
+                    ) : (
+                      <Content
+                        Store={this.Store}
+                        setStore={this.setStore}
+                        onCheck={this.onCheck}
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <div
+                    className="wallet-message command"
+                    style={{ marginLeft: "10%", marginTop: "60%" }}
+                    onClick={() => this.switchTo(56)}
+                  >
+                    Click to switch to Binance Smart Chain
+                  </div>
                 )}
               </div>
             ) : (
               <div
-                className="wallet-message command"
-                onClick={() => this.switchTo(56)}
+                className="wallet-message"
+                style={{ marginLeft: "10%", marginTop: "60%" }}
               >
-                Click to switch to Binance Smart Chain
+                Please connect to wallet
               </div>
             )}
           </div>
-        ) : (
-          <div className="wallet-message">Please connect to wallet</div>
         )}
       </div>
     );
