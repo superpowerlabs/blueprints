@@ -96,9 +96,7 @@ class App extends Common {
     });
   }
 
-
   async connect() {
-  
     // console.log("connecting");
     let eth = null;
     if (isMobile) {

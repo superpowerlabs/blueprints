@@ -113,12 +113,10 @@ export default class Header extends Base {
           <img
             // className={"positionAbsolute"}
             src={"/images/logo.png"}
-            style={
-              {
-                width: this.isMobile() ? 300 : "100%",
-                //left: this.isMobile() ? 80 : null,
-              }
-            }
+            style={{
+              width: this.isMobile() ? 300 : "100%",
+              //left: this.isMobile() ? 80 : null,
+            }}
           />
         </Navbar.Brand>
         <Navbar.Collapse id="navbarScroll">
@@ -150,7 +148,7 @@ export default class Header extends Base {
           <Link
             className={"headerButton " + (pathname === "" ? "selected" : "")}
             to="/"
-            onClick={this.handleAllIds} 
+            onClick={this.handleAllIds}
           >
             Collection
           </Link>
@@ -162,7 +160,7 @@ export default class Header extends Base {
             My Collection
           </Link>
           <Link
-             className={"headerButton " + (pathname === "" ? "selected" : "")}
+            className={"headerButton " + (pathname === "" ? "selected" : "")}
             to="/overview"
           >
             Overview
