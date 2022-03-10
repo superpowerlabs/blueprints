@@ -115,8 +115,8 @@ export default class Header extends Base {
             src={"/images/logo.png"}
             style={
               {
-                // width: 300,
-                // left: this.isMobile() ? 80 : this.Store.width / 2 - 80,
+                width: this.isMobile() ? 300 : "100%",
+                //left: this.isMobile() ? 80 : null,
               }
             }
           />
@@ -150,7 +150,7 @@ export default class Header extends Base {
           <Link
             className={"headerButton " + (pathname === "" ? "selected" : "")}
             to="/"
-            onClick={this.handleAllIds}
+            onClick={this.handleAllIds} 
           >
             Collection
           </Link>
@@ -162,10 +162,7 @@ export default class Header extends Base {
             My Collection
           </Link>
           <Link
-            className={
-              "headerButton lastButton " +
-              (pathname === "overview" ? "selected" : "")
-            }
+             className={"headerButton " + (pathname === "" ? "selected" : "")}
             to="/overview"
           >
             Overview

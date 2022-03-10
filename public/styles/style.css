@@ -2110,6 +2110,7 @@ li a.dropdown-toggle::after {
 .headerButton.selected:hover {
     background-color: #22009960;
     color: white;
+    display: inline-block;
 }
 
 .wallet-message {

@@ -15,6 +15,8 @@ import Showcase from "./Showcase";
 import Error404 from "./Error404";
 import PopUp from "./Popup";
 import Overview from "../Pages/Overview";
+import { isMobile } from "react-device-detect";
+
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 class App extends Common {
@@ -94,13 +96,12 @@ class App extends Common {
     });
   }
 
-  isMobile() {
-    return window.innerWidth < 990;
-  }
+
   async connect() {
+  
     // console.log("connecting");
     let eth = null;
-    if (this.isMobile) {
+    if (isMobile) {
       eth = new WalletConnectProvider({
         infuraId: "a5d8ae5cf48e49269d71a5cf25289c0d",
         qrcodeModalOptions: {
