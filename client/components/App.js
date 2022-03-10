@@ -95,7 +95,7 @@ class App extends Common {
   }
 
   async connect() {
-     if (typeof window.ethereum !== "undefined") {
+    if (typeof window.ethereum !== "undefined") {
       let eth = window.ethereum;
       if (await eth.request({ method: "eth_requestAccounts" })) {
         eth.on("accountsChanged", () => window.location.reload());
