@@ -15,6 +15,7 @@ import Showcase from "./Showcase";
 import Error404 from "./Error404";
 import PopUp from "./Popup";
 import Overview from "../Pages/Overview";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 class App extends Common {
   constructor(props) {
@@ -93,8 +94,35 @@ class App extends Common {
     });
   }
 
+  isMobile() {
+    return window.innerWidth < 990;
+  }
   async connect() {
-    if (typeof window.ethereum !== "undefined") {
+    // console.log("connecting");
+    let eth = null;
+    if (this.isMobile) {
+      eth = new WalletConnectProvider({
+        infuraId: "a5d8ae5cf48e49269d71a5cf25289c0d",
+        qrcodeModalOptions: {
+          mobileLinks: ["metamask"],
+        },
+      });
+      await eth.enable();
+      this.setWallet(eth, "metamask");
+
+      if (await eth.request({ method: "eth_requestAccounts" })) {
+        eth.on("accountsChanged", (accounts) => {
+          window.reload();
+        });
+        eth.on("chainChanged", (chainId) => {
+          window.reload();
+        });
+        eth.on("disconnect", (code, reason) => {
+          window.reload();
+        });
+        this.setWallet(eth, "metamask");
+      }
+    } else if (typeof window.ethereum !== "undefined") {
       let eth = window.ethereum;
       if (await eth.request({ method: "eth_requestAccounts" })) {
         eth.on("accountsChanged", () => window.location.reload());
