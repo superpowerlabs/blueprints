@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 import Content from "./Content";
 import Base from "./Base";
 import { toNumber } from "lodash";
-import {chainConf} from "../config";
+import { chainConf } from "../config";
 
 export default class Showcase extends Base {
   constructor(props) {
@@ -28,9 +28,7 @@ export default class Showcase extends Base {
         try {
           await window.ethereum.request({
             method: "wallet_addEthereumChain",
-            params: [
-              chain
-            ],
+            params: [chain],
           });
         } catch (addError) {
           console.error(addError);
@@ -131,7 +129,12 @@ export default class Showcase extends Base {
                 )}
               </div>
             ) : (
-              <div className="wallet-message command" onClick={() => this.switchTo(56)}>Click to switch to Binance Smart Chain</div>
+              <div
+                className="wallet-message command"
+                onClick={() => this.switchTo(56)}
+              >
+                Click to switch to Binance Smart Chain
+              </div>
             )}
           </div>
         ) : (
