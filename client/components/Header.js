@@ -2,11 +2,10 @@
 const { Navbar, Button } =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
-
 // eslint-disable-next-line no-undef
 const { Link } = ReactRouterDOM;
-
 import Base from "./Base";
+import { BsFillFunnelFill } from "react-icons/bs";
 
 export default class Header extends Base {
   constructor(props) {
@@ -24,6 +23,7 @@ export default class Header extends Base {
       "setExpanded",
       "handleMyIds",
       "handleAllIds",
+      "openSidebar",
     ]);
   }
 
@@ -73,6 +73,18 @@ export default class Header extends Base {
     setTimeout(this.checkPathname, 500);
   }
 
+  openSidebar() {
+    if (this.Store.sideOpen) {
+      this.setStore({
+        sideOpen: false,
+      });
+    } else {
+      this.setStore({
+        sideOpen: true,
+      });
+    }
+  }
+
   render() {
     const { connectedWallet } = this.Store;
     const { expanded } = this.state;
@@ -97,58 +109,66 @@ export default class Header extends Base {
           aria-controls="basic-navbar-nav"
           onClick={this.setExpanded}
         />
+        <Navbar.Brand as={Link} to={"/"}>
+          <img
+            // className={"positionAbsolute"}
+            src={"/images/logo.png"}
+            style={{
+              width: this.isMobile() ? 300 : "100%",
+              //left: this.isMobile() ? 80 : null,
+            }}
+          />
+        </Navbar.Brand>
         <Navbar.Collapse id="navbarScroll">
-          <Navbar.Brand as={Link} to={"/"}>
-            <img
-              // className={"positionAbsolute"}
-              src={"/images/logo.png"}
-              style={
-                {
-                  // width: 300,
-                  // left: this.isMobile() ? 80 : this.Store.width / 2 - 80,
-                }
-              }
-            />
-          </Navbar.Brand>
           {/*<Nav className="mr-auto my-2 my-lg-0" navbarScroll>*/}
           {/*  <Navbar.Text className={"links"}>*/}
           {/*    <span style={{ fontSize: "1.4rem" }}>BLUEPRINTS SHOWCASE</span>*/}
           {/*  </Navbar.Text>*/}
           {/*</Nav>*/}
+          {/*{this.Store.width ? (*/}
+          {/*  <img*/}
+          {/*    className={"positionAbsolute"}*/}
+          {/*    src={"https://s3.mob.land/assets/Mobland_Title_Stylized300.png"}*/}
+          {/*    style={{*/}
+          {/*      width: 160,*/}
+          {/*      left: this.isMobile() ? 80 : this.Store.width / 2 - 80,*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*) : null}*/}
+          {/*{this.Store.width ? (*/}
+          {/*  <img*/}
+          {/*    className={"positionAbsolute"}*/}
+          {/*    src={"https://s3.mob.land/assets/Mobland_Title_Stylized300.png"}*/}
+          {/*    style={{*/}
+          {/*      width: 160,*/}
+          {/*      left: this.isMobile() ? 80 : this.Store.width / 2 - 80,*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*) : null}*/}
+          <Link
+            className={"headerButton " + (pathname === "" ? "selected" : "")}
+            to="/"
+            onClick={this.handleAllIds}
+          >
+            Collection
+          </Link>
+          <Link
+            className={"headerButton " + (pathname === "" ? "selected" : "")}
+            to="/"
+            onClick={this.handleMyIds}
+          >
+            My Collection
+          </Link>
+          <Link
+            className={"headerButton " + (pathname === "" ? "selected" : "")}
+            to="/overview"
+          >
+            Overview
+          </Link>
         </Navbar.Collapse>
-        {/*{this.Store.width ? (*/}
-        {/*  <img*/}
-        {/*    className={"positionAbsolute"}*/}
-        {/*    src={"https://s3.mob.land/assets/Mobland_Title_Stylized300.png"}*/}
-        {/*    style={{*/}
-        {/*      width: 160,*/}
-        {/*      left: this.isMobile() ? 80 : this.Store.width / 2 - 80,*/}
-        {/*    }}*/}
-        {/*  />*/}
-        {/*) : null}*/}
-        <Link
-          className={"headerButton " + (pathname === "" ? "selected" : "")}
-          to="/"
-          onClick={this.handleAllIds}
-        >
-          Collection
-        </Link>
-        <Link
-          className={"headerButton " + (pathname === "" ? "selected" : "")}
-          to="/"
-          onClick={this.handleMyIds}
-        >
-          My Collection
-        </Link>
-        <Link
-          className={
-            "headerButton lastButton " +
-            (pathname === "overview" ? "selected" : "")
-          }
-          to="/overview"
-        >
-          Overview
-        </Link>
+        {this.isMobile() ? (
+          <BsFillFunnelFill onClick={this.openSidebar} />
+        ) : null}
         {!this.isMobile() ? (
           connectedWallet ? (
             <div className={"aqua floatRightAbsolute"}>
@@ -167,7 +187,20 @@ export default class Header extends Base {
               Connect your wallet
             </Button>
           )
-        ) : null}
+        ) : connectedWallet ? (
+          <div className={"aqua floatRightAbsolute"}>
+            <i className="fas fa-user-astronaut" style={{ marginRight: 10 }} />
+            {address}
+          </div>
+        ) : (
+          <Button
+            className={"floatRightAbsolute"}
+            size={"sm"}
+            onClick={this.props.connect}
+          >
+            Connect your wallet
+          </Button>
+        )}
       </Navbar>
     );
   }

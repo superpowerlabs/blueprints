@@ -47,80 +47,173 @@ class SideBar extends Base {
   render() {
     return (
       <div>
-        <div className={"searchBox"}>
-          <InputGroup className="mb-3" size={"sm"}>
-            <InputGroup.Text id="basic-addon3">Search by ID</InputGroup.Text>
-            <FormControl
-              className={"id-input"}
-              aria-describedby="basic-addon3"
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-            {
-              // <Form.Check
-              //   type={"checkbox"}
-              //   id={"default-checkbox"}
-              //   label={"My NFTs"}
-              //   checked={this.Store.isMyId}
-              //   onChange={this.handleMyIds}
-              //   variant="warning"
-              //   className={"checkbox"}
-              // />
-            }
-          </InputGroup>
+        {!this.isMobile() ? (
+          <div>
+            <div className={"searchBox"}>
+              <InputGroup className="mb-3" size={"sm"}>
+                <InputGroup.Text id="basic-addon3">
+                  Search by ID
+                </InputGroup.Text>
+                <FormControl
+                  className={"id-input"}
+                  aria-describedby="basic-addon3"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                />
+                {/* <Form.Check
+                type={"checkbox"}
+                id={"default-checkbox"}
+                label={"My NFTs"}
+                checked={this.Store.isMyId}
+                onChange={this.handleMyIds}
+                variant="warning"
+                className={"checkbox"}
+              /> */}
+              </InputGroup>
 
-          <ButtonGroup aria-label="Basic example">
-            <ToggleButton
-              id={"radio-1"}
-              type="radio"
-              variant="warning"
-              name="radio"
-              value={"id"}
-              checked={this.state.sortBy === "id"}
-              className={"btn nowrap"}
-              size={"sm"}
-              onChange={(e) => {
-                this.sortBy("id");
-                this.setState({ sortBy: e.currentTarget.value });
-              }}
-            >
-              Sort by ID
-            </ToggleButton>
+              <ButtonGroup aria-label="Basic example">
+                <ToggleButton
+                  id={"radio-1"}
+                  type="radio"
+                  variant="warning"
+                  name="radio"
+                  value={"id"}
+                  checked={this.state.sortBy === "id"}
+                  className={"btn nowrap"}
+                  size={"sm"}
+                  onChange={(e) => {
+                    this.sortBy("id");
+                    this.setState({ sortBy: e.currentTarget.value });
+                  }}
+                >
+                  Sort by ID
+                </ToggleButton>
 
-            <ToggleButton
-              id={"radio-2"}
-              type="radio"
-              variant="warning"
-              name="radio"
-              value={"score"}
-              checked={this.state.sortBy === "score"}
-              className={"btn nowrap"}
-              size={"sm"}
-              onChange={(e) => {
-                this.sortBy("score");
-                this.setState({ sortBy: e.currentTarget.value });
-              }}
+                <ToggleButton
+                  id={"radio-2"}
+                  type="radio"
+                  variant="warning"
+                  name="radio"
+                  value={"score"}
+                  checked={this.state.sortBy === "score"}
+                  className={"btn nowrap"}
+                  size={"sm"}
+                  onChange={(e) => {
+                    this.sortBy("score");
+                    this.setState({ sortBy: e.currentTarget.value });
+                  }}
+                >
+                  Sort by Rarity
+                </ToggleButton>
+              </ButtonGroup>
+            </div>
+            <div
+              className={classNames("sidebar", {
+                "is-open": this.props.isOpen,
+              })}
             >
-              Sort by Rarity
-            </ToggleButton>
-          </ButtonGroup>
-        </div>
-        <div
-          className={classNames("sidebar", { "is-open": this.props.isOpen })}
-        >
-          <div className="sidebar-header">
-            <Button
-              variant="link"
-              onClick={this.props.toggle}
-              style={{ color: "#fff" }}
-              className="mt-4"
-            >
-              <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
-            </Button>
+              <div className="sidebar-header">
+                <Button
+                  variant="link"
+                  onClick={this.props.toggle}
+                  style={{ color: "#fff" }}
+                  className="mt-4"
+                >
+                  <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
+                </Button>
+              </div>
+
+              <Nav className="sidebarBody flex-column pt-2">
+                {this.allTraits()}
+              </Nav>
+            </div>
           </div>
+        ) : (
+          <div>
+            <div
+              className={"searchBox"}
+              style={{ position: "static", padding: "10px 12px 21px 21px" }}
+            >
+              <InputGroup className="mb-3" size={"sm"}>
+                <InputGroup.Text id="basic-addon3">
+                  Search by ID
+                </InputGroup.Text>
+                <FormControl
+                  className={"id-input"}
+                  aria-describedby="basic-addon3"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                />
+                {/* <Form.Check
+                type={"checkbox"}
+                id={"default-checkbox"}
+                label={"My NFTs"}
+                checked={this.Store.isMyId}
+                onChange={this.handleMyIds}
+                variant="warning"
+                className={"checkbox"}
+              /> */}
+              </InputGroup>
 
-          <Nav className="sidebarBody flex-column pt-2">{this.allTraits()}</Nav>
-        </div>
+              <ButtonGroup aria-label="Basic example">
+                <ToggleButton
+                  id={"radio-1"}
+                  type="radio"
+                  variant="warning"
+                  name="radio"
+                  value={"id"}
+                  checked={this.state.sortBy === "id"}
+                  className={"btn nowrap"}
+                  size={"sm"}
+                  onChange={(e) => {
+                    this.sortBy("id");
+                    this.setState({ sortBy: e.currentTarget.value });
+                  }}
+                >
+                  Sort by ID
+                </ToggleButton>
+
+                <ToggleButton
+                  id={"radio-2"}
+                  type="radio"
+                  variant="warning"
+                  name="radio"
+                  value={"score"}
+                  checked={this.state.sortBy === "score"}
+                  className={"btn nowrap"}
+                  size={"sm"}
+                  onChange={(e) => {
+                    this.sortBy("score");
+                    this.setState({ sortBy: e.currentTarget.value });
+                  }}
+                >
+                  Sort by Rarity
+                </ToggleButton>
+              </ButtonGroup>
+            </div>
+            <div
+              className={classNames("sidebar", {
+                "is-open": this.props.isOpen,
+              })}
+              style={{ position: "relative", paddingTop: "0px", top: "0px" }}
+            >
+              <div className="sidebar-header">
+                <Button
+                  variant="link"
+                  onClick={this.props.toggle}
+                  style={{ color: "#fff" }}
+                  className="mt-4"
+                >
+                  <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
+                </Button>
+              </div>
+
+              <Nav className="sidebarBody flex-column pt-2">
+                {this.allTraits()}
+              </Nav>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

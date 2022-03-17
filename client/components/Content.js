@@ -288,60 +288,130 @@ export default class Content extends Base {
     let i = 0;
 
     return (
-      <div className={"tokenList"}>
-        <div className={"toplist"}>
-          {Object.keys(filter).map((f) => {
-            f = f.split("|");
-            let text = [f[0], this.cleanTrait(f[1])].join(": ");
-            return (
-              <div key={"cat" + i++} className={"category"}>
-                <Form.Group className="" controlId={"check" + i}>
-                  <Form.Check
-                    inline
-                    type="checkbox"
-                    label={text}
-                    checked={true}
-                    onChange={(event) => this.props.onCheck(event, f[0], f[1])}
-                  />
-                </Form.Group>
-              </div>
-            );
-          })}
-          {!this.Store.isMyId ? (
-            <span className={"total"}>
-              {total} result{total !== 1 ? "s" : ""}
-            </span>
-          ) : (
-            <span className={"total"}>
-              My result{myTotal !== 1 ? "s" : ""}: {myTotal}
-            </span>
-          )}
-        </div>
-        <div style={{ marginTop: 8 }}>
-          <InfiniteScroll
-            dataLength={this.state.items.length}
-            next={this.fetchMoreData}
-            hasMore={this.state.hasMore}
-            loader={<h4>Loading...</h4>}
-            endMessage={
-              <p
-                style={{
-                  padding: 40,
-                  textAlign: "center",
-                  color: "#bac",
-                  fontSize: "80%",
-                }}
+      <div>
+        {!this.isMobile() ? (
+          <div className={"tokenList"}>
+            <div className={"toplist"}>
+              {Object.keys(filter).map((f) => {
+                f = f.split("|");
+                let text = [f[0], this.cleanTrait(f[1])].join(": ");
+                return (
+                  <div key={"cat" + i++} className={"category"}>
+                    <Form.Group className="" controlId={"check" + i}>
+                      <Form.Check
+                        inline
+                        type="checkbox"
+                        label={text}
+                        checked={true}
+                        onChange={(event) =>
+                          this.props.onCheck(event, f[0], f[1])
+                        }
+                      />
+                    </Form.Group>
+                  </div>
+                );
+              })}
+              {!this.Store.isMyId ? (
+                <span className={"total"}>
+                  {total} result{total !== 1 ? "s" : ""}
+                </span>
+              ) : (
+                <span className={"total"}>
+                  My result{myTotal !== 1 ? "s" : ""}: {myTotal}
+                </span>
+              )}
+            </div>
+            <div style={{ marginTop: 8 }}>
+              <InfiniteScroll
+                dataLength={this.state.items.length}
+                next={this.fetchMoreData}
+                hasMore={this.state.hasMore}
+                loader={<h4>Loading...</h4>}
+                endMessage={
+                  <p
+                    style={{
+                      padding: 40,
+                      textAlign: "center",
+                      color: "#bac",
+                      fontSize: "80%",
+                    }}
+                  >
+                    {this.state.items.length
+                      ? "Yay! You have seen it all"
+                      : "No items with this filter"}
+                  </p>
+                }
               >
-                {this.state.items.length
-                  ? "Yay! You have seen it all"
-                  : "No items with this filter"}
-              </p>
-            }
+                {" "}
+                <Masonry>{this.getTokens()}</Masonry>
+              </InfiniteScroll>
+            </div>
+          </div>
+        ) : (
+          <div
+            className={"tokenList"}
+            style={{ marginLeft: "60px", marginTop: "10px" }}
           >
-            {" "}
-            <Masonry>{this.getTokens()}</Masonry>
-          </InfiniteScroll>
-        </div>
+            <div
+              className={"toplist"}
+              style={{ position: "static", left: "50px" }}
+            >
+              {Object.keys(filter).map((f) => {
+                f = f.split("|");
+                let text = [f[0], this.cleanTrait(f[1])].join(": ");
+                return (
+                  <div key={"cat" + i++} className={"category"}>
+                    <Form.Group className="" controlId={"check" + i}>
+                      <Form.Check
+                        inline
+                        type="checkbox"
+                        label={text}
+                        checked={true}
+                        onChange={(event) =>
+                          this.props.onCheck(event, f[0], f[1])
+                        }
+                      />
+                    </Form.Group>
+                  </div>
+                );
+              })}
+              {!this.Store.isMyId ? (
+                <span className={"total"}>
+                  {total} result{total !== 1 ? "s" : ""}
+                </span>
+              ) : (
+                <span className={"total"}>
+                  My result{myTotal !== 1 ? "s" : ""}: {myTotal}
+                </span>
+              )}
+            </div>
+            <div style={{ marginTop: 8 }}>
+              <InfiniteScroll
+                dataLength={this.state.items.length}
+                next={this.fetchMoreData}
+                hasMore={this.state.hasMore}
+                loader={<h4>Loading...</h4>}
+                endMessage={
+                  <p
+                    style={{
+                      padding: 40,
+                      textAlign: "center",
+                      color: "#bac",
+                      fontSize: "80%",
+                    }}
+                  >
+                    {this.state.items.length
+                      ? "Yay! You have seen it all"
+                      : "No items with this filter"}
+                  </p>
+                }
+              >
+                {" "}
+                <Masonry>{this.getTokens()}</Masonry>
+              </InfiniteScroll>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
