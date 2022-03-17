@@ -16,7 +16,6 @@ import Error404 from "./Error404";
 import PopUp from "./Popup";
 import Overview from "../Pages/Overview";
 import { isMobile } from "react-device-detect";
-
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 class App extends Common {
