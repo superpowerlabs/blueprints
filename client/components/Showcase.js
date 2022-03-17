@@ -5,12 +5,41 @@ import SideBar from "./SideBar";
 import Content from "./Content";
 import Base from "./Base";
 import { toNumber } from "lodash";
+import {chainConf} from "../config";
 
 export default class Showcase extends Base {
   constructor(props) {
     super(props);
 
     this.bindMany(["onCheck", "onId", "onSort"]);
+  }
+
+  async switchTo(chainId) {
+    const chain = chainConf[chainId];
+    chainId = chain.chainId;
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId }],
+      });
+    } catch (switchError) {
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (switchError.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              chain
+            ],
+          });
+        } catch (addError) {
+          console.error(addError);
+        }
+      } else {
+        console.error(switchError);
+      }
+      // handle other "switch" errors
+    }
   }
 
   onCheck(event, trait, value, id) {
@@ -102,7 +131,7 @@ export default class Showcase extends Base {
                 )}
               </div>
             ) : (
-              <div className="wallet-message">Switch to BSC network</div>
+              <div className="wallet-message command" onClick={() => this.switchTo(56)}>Click to switch to Binance Smart Chain</div>
             )}
           </div>
         ) : (

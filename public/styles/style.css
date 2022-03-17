@@ -2050,7 +2050,7 @@ li a.dropdown-toggle::after {
 
 .checkbox {
     color: #61dafb;
-    padding-left: 3.5em;
+    padding: 0 2em 0 3.5em;
 }
 .form-check-input:checked {
     background-color: #2e1645;
@@ -2113,11 +2113,19 @@ li a.dropdown-toggle::after {
 }
 
 .wallet-message {
-    font-family: Modeco;
-    src: url(../assets/Modeco-Regular.ttf);
+    font-family: Modeco, sans-serif !important;
     margin-top: 300px;
     margin-left: 620px;
-    font-size: 50px;
+    font-size: 2rem;
     font-weight: bold;
     color: #61dafb;
+}
+
+.command {
+    cursor: pointer;
+}
+
+.form-check-label {
+    color: #4da6ff !important;
+    font-size: 0.8rem !important;
 }
