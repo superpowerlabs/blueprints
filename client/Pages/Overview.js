@@ -20,7 +20,7 @@ export default class Overview extends Base {
         }}
       >
         <Row>
-          <Col md={"4"}></Col>
+          <Col md={"4"} />
           <Col md={"8"} className={"doc"}>
             <div
               className={"Overview"}

@@ -33,18 +33,20 @@ class SideBar extends Base {
     }
     return rows;
   }
+
   handleChange(event) {
     this.setState({ value: event.target.value });
     this.props.onId(event.target.value);
   }
 
   sortBy(by) {
-    if (by !== this.sortBy) {
+    if (by !== this.Store.sortBy) {
       this.props.onSort();
     }
   }
 
   render() {
+    const sortBy = this.Store.sortBy || "id";
     return (
       <div>
         {!this.isMobile() ? (
@@ -60,17 +62,7 @@ class SideBar extends Base {
                   value={this.state.value}
                   onChange={this.handleChange}
                 />
-                {/* <Form.Check
-                type={"checkbox"}
-                id={"default-checkbox"}
-                label={"My NFTs"}
-                checked={this.Store.isMyId}
-                onChange={this.handleMyIds}
-                variant="warning"
-                className={"checkbox"}
-              /> */}
               </InputGroup>
-
               <ButtonGroup aria-label="Basic example">
                 <ToggleButton
                   id={"radio-1"}
@@ -78,12 +70,12 @@ class SideBar extends Base {
                   variant="warning"
                   name="radio"
                   value={"id"}
-                  checked={this.state.sortBy === "id"}
+                  checked={sortBy === "id"}
                   className={"btn nowrap"}
                   size={"sm"}
                   onChange={(e) => {
                     this.sortBy("id");
-                    this.setState({ sortBy: e.currentTarget.value });
+                    this.setStore({ sortBy: "id" });
                   }}
                 >
                   Sort by ID
@@ -95,12 +87,12 @@ class SideBar extends Base {
                   variant="warning"
                   name="radio"
                   value={"score"}
-                  checked={this.state.sortBy === "score"}
+                  checked={sortBy === "score"}
                   className={"btn nowrap"}
                   size={"sm"}
                   onChange={(e) => {
                     this.sortBy("score");
-                    this.setState({ sortBy: e.currentTarget.value });
+                    this.setStore({ sortBy: "score" });
                   }}
                 >
                   Sort by Rarity
@@ -162,7 +154,7 @@ class SideBar extends Base {
                   variant="warning"
                   name="radio"
                   value={"id"}
-                  checked={this.state.sortBy === "id"}
+                  checked={sortBy === "id"}
                   className={"btn nowrap"}
                   size={"sm"}
                   onChange={(e) => {
@@ -179,7 +171,7 @@ class SideBar extends Base {
                   variant="warning"
                   name="radio"
                   value={"score"}
-                  checked={this.state.sortBy === "score"}
+                  checked={sortBy === "score"}
                   className={"btn nowrap"}
                   size={"sm"}
                   onChange={(e) => {
