@@ -2040,12 +2040,17 @@ li a.dropdown-toggle::after {
 
 .searchBox {
     padding: 70px 12px 21px 21px;
-    width: 360px;
+    width: 240px;
     position: fixed;
     left: 0;
     top: 0;
     z-index: 3;
     background: #000011cc;
+}
+
+.searchBox input {
+    background-color: #000 !important;
+    color: yellow !important;
 }
 
 .checkbox {
