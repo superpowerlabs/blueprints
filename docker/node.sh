@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-docker stop offficiallly-com
-docker rm offficiallly-com
+docker stop blue-micio-net
+docker rm blue-micio-net
 
 docker run -d \
-  --name offficiallly-com \
+  --name blue-micio-net \
   -p 8734 \
   --restart unless-stopped \
   -v $PWD:/usr/src/app \
-  -v /vol/log/offficiallly-com_app:/var/log/offficiallly-com_app \
+  -v /vol/log/blue-micio-net_app:/var/log/blue-micio-net_app \
   -e NODE_ENV=production \
-  -e VIRTUAL_HOST=offficiallly.com,blueprint.offficiallly.com \
-  -e LETSENCRYPT_HOST=offficiallly.com,blueprint.offficiallly.com \
-  -e LETSENCRYPT_EMAIL=offficiallly@sullo.co \
+  -e VIRTUAL_HOST=blue.micio.net \
+  -e LETSENCRYPT_HOST=blue.micio.net \
+  -e LETSENCRYPT_EMAIL=something@sullo.co \
   -w /usr/src/app node:16 npm run start
