@@ -331,6 +331,8 @@ export default class Content extends Base {
                   >
                     {this.state.items.length
                       ? "Yay! You have seen it all"
+                      : this.Store.isMyId
+                      ? "Whoops, you do not own any blueprint"
                       : "No items with this filter"}
                   </p>
                 }
