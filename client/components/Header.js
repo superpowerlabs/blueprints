@@ -171,7 +171,7 @@ export default class Header extends Base {
         ) : null}
         {!this.isMobile() ? (
           connectedWallet ? (
-            <div className={"aqua floatRightAbsolute"}>
+            <div className={"coral floatRightAbsolute"}>
               <i
                 className="fas fa-user-astronaut"
                 style={{ marginRight: 10 }}
@@ -188,7 +188,7 @@ export default class Header extends Base {
             </Button>
           )
         ) : connectedWallet ? (
-          <div className={"aqua floatRightAbsolute"}>
+          <div className={"coral floatRightAbsolute"}>
             <i className="fas fa-user-astronaut" style={{ marginRight: 10 }} />
             {address}
           </div>
