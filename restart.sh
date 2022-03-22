@@ -1,3 +1,3 @@
 #!/bin/env bash
 
-git pull && pnpm i && pnpm build && pm2 restart arg3
+git pull && pnpm i && pnpm build && pm2 restart blueprints
