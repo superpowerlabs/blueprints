@@ -46,7 +46,7 @@ const config = {
     "Personality",
     "Trait",
     "Gang",
-    "Skin Tone",
+    // "Skin Tone",
     "Combat Style",
     "Macro Ability",
     "Chest",

@@ -22,13 +22,6 @@ for (let m of metadata) {
   }
 }
 
-const addSomeDecimals = (s, c = 2) => {
-  s = s.toString().split(".");
-  s[1] = (s[1] || "").substring(0, c);
-  s[1] = s[1] + "0".repeat(c - s[1].length);
-  return s.join(".");
-};
-
 let preferredOrder = [
   "Rarity",
   "Tier",
@@ -36,7 +29,7 @@ let preferredOrder = [
   "Personality",
   "Trait",
   "Gang",
-  "Skin Tone",
+  // "Skin Tone",
   "Combat Style",
   "Macro Ability",
   "Chest",
@@ -57,6 +50,22 @@ let preferredOrder = [
   "Passive Ability",
   "Leader Ability",
 ];
+
+const traitsKey = Object.keys(traits);
+
+for (let i of preferredOrder) {
+  if (!~traitsKey.indexOf(i)) {
+    console.log(i);
+  }
+}
+
+// console.log(Object.keys(traits))
+const addSomeDecimals = (s, c = 2) => {
+  s = s.toString().split(".");
+  s[1] = (s[1] || "").substring(0, c);
+  s[1] = s[1] + "0".repeat(c - s[1].length);
+  return s.join(".");
+};
 
 let dist = {};
 

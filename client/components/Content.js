@@ -189,7 +189,7 @@ export default class Content extends Base {
             controls
             loop
             autoPlay
-            poster={this.getJpg(m)}
+            poster={m.extras.thumbnail}
           />
         </Col>
         <Col className={"pcCol"} lg={3}>
@@ -207,14 +207,6 @@ export default class Content extends Base {
     });
   }
 
-  getJpg(m) {
-    let img = m.image.split("/");
-    return (
-      "https://s3.mob.land/blueprints-thumbs/" +
-      img[img.length - 1].replace(/png$/, "jpg")
-    );
-  }
-
   getTokens() {
     let { items } = this.state;
     const rows = [];
@@ -226,7 +218,8 @@ export default class Content extends Base {
     ) {
       for (let m of allMetadata) {
         if (m.tokenId === this.Store.searchTokenId) {
-          let img = this.getJpg(m);
+          // console.log(m.extras.thumbnail);
+          let img = m.extras.thumbnail;
           rows.push(
             <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
               <LazyLoadImage
@@ -245,7 +238,8 @@ export default class Content extends Base {
       }
     } else {
       for (let m of items) {
-        let img = this.getJpg(m);
+        let img = m.extras.thumbnail;
+        // console.log(m.extras.thumbnail);
         rows.push(
           <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
             <LazyLoadImage
