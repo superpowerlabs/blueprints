@@ -12,7 +12,7 @@ import rarityDistribution from "../config/rarityDistribution.json";
 class SideBar extends Base {
   constructor(props) {
     super(props);
-    this.state = { value: ""};
+    this.state = { value: "" };
     this.bindMany(["handleChange"]);
   }
 
@@ -28,8 +28,9 @@ class SideBar extends Base {
           Store={this.Store}
           setStore={this.setStore}
           onCheck={() => {
-            this.setState({value: ""})
-            this.props.onCheck()}}
+            this.setState({ value: "" });
+            this.props.onCheck();
+          }}
         />
       );
     }
