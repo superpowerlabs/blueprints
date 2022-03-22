@@ -84,7 +84,6 @@ export default class Content extends Base {
             index++;
             continue;
           }
-
           if (this.Store.isMyId) {
             const ownedIds = this.Store.ownedIds || [];
             if (ownedIds.includes(m.tokenId) && !items.includes(m)) {

@@ -27,9 +27,9 @@ class SideBar extends Base {
           values={rarityDistribution[trait]}
           Store={this.Store}
           setStore={this.setStore}
-          onCheck={() => {
+          onCheck={(...args) => {
             this.setState({ value: "" });
-            this.props.onCheck();
+            this.props.onCheck(...args);
           }}
         />
       );
