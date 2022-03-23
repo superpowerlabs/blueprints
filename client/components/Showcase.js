@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-undef
-import indexedMetadata from "../config/indexedMetadata.json";
+import indexedMetadata from "../../public/json/indexedMetadata.json";
 
 import SideBar from "./SideBar";
 import Content from "./Content";

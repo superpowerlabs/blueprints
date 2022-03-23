@@ -7,13 +7,14 @@ const { InputGroup, FormControl, Button, Nav, ButtonGroup, ToggleButton } =
 import classNames from "classnames";
 import Base from "./Base";
 
-import rarityDistribution from "../config/rarityDistribution.json";
+import rarityDistribution from "../../public/json/rarityDistribution.json";
 
 class SideBar extends Base {
   constructor(props) {
     super(props);
     this.state = { value: "" };
     this.bindMany(["handleChange"]);
+    this.setStore({ sortBy: "id" });
   }
 
   allTraits() {
@@ -100,6 +101,22 @@ class SideBar extends Base {
                 >
                   Sort by Rarity
                 </ToggleButton>
+                <ToggleButton
+                  id={"radio-3"}
+                  type="radio"
+                  variant="warning"
+                  name="radio"
+                  value={"value"}
+                  checked={sortBy === "value"}
+                  className={"btn nowrap"}
+                  size={"sm"}
+                  onChange={(e) => {
+                    this.sortBy("value");
+                    this.setStore({ sortBy: "value" });
+                  }}
+                >
+                  Sort by Value
+                </ToggleButton>
               </ButtonGroup>
             </div>
             <div
@@ -162,7 +179,7 @@ class SideBar extends Base {
                   size={"sm"}
                   onChange={(e) => {
                     this.sortBy("id");
-                    this.setState({ sortBy: e.currentTarget.value });
+                    this.setStore({ sortBy: "id" });
                   }}
                 >
                   Sort by ID
@@ -179,10 +196,26 @@ class SideBar extends Base {
                   size={"sm"}
                   onChange={(e) => {
                     this.sortBy("score");
-                    this.setState({ sortBy: e.currentTarget.value });
+                    this.setStore({ sortBy: "score" });
                   }}
                 >
                   Sort by Rarity
+                </ToggleButton>
+                <ToggleButton
+                  id={"radio-3"}
+                  type="radio"
+                  variant="warning"
+                  name="radio"
+                  value={"value"}
+                  checked={sortBy === "value"}
+                  className={"btn nowrap"}
+                  size={"sm"}
+                  onChange={(e) => {
+                    this.sortBy("value");
+                    this.setStore({ sortBy: "value" });
+                  }}
+                >
+                  Sort by Value
                 </ToggleButton>
               </ButtonGroup>
             </div>

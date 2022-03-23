@@ -2,13 +2,14 @@
 const { Form, Row, Col } = ReactBootstrap;
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
-import allMetadata from "../config/allDataandRarityScore.json";
+import allMetadata from "../../public/json/allDataandRarityScore.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
-import percent from "../config/percentageDistribution.json";
+import percent from "../../public/json/percentageDistribution.json";
 import { preferredOrder } from "../config";
-import sortedAllMetadata from "../config/sortedAllDataandRarityScore.json";
+import sortedAllMetadata from "../../public/json/sortedAllDataandRarityScore.json";
 import Decimals from "../utils/Decimals";
+import sortedValue from "../../public/json/sortedValueScore.json";
 
 import Base from "./Base";
 
@@ -68,8 +69,9 @@ export default class Content extends Base {
   }
 
   fetchMoreData() {
-    let sorted = this.Store.isSorted;
+    // let sorted = this.Store.isSorted;
     let { items } = this.state;
+    let sortBy = this.Store.sortBy;
     const filter = this.Store.filter || {};
     const noFilter = Object.keys(filter).length === 0;
     const tokenIds = this.Store.tokenIds || [];
@@ -77,7 +79,7 @@ export default class Content extends Base {
     let index = 1;
     let len = items.length;
     let newItems = 0;
-    if (sorted) {
+    if (sortBy === "score") {
       for (let m of sortedAllMetadata) {
         if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
           if (index <= len) {
@@ -101,14 +103,37 @@ export default class Content extends Base {
           break;
         }
       }
-    } else {
+    } else if (sortBy === "id") {
       for (let m of allMetadata) {
         if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
           if (index <= len) {
             index++;
             continue;
           }
-
+          if (this.Store.isMyId) {
+            const ownedIds = this.Store.ownedIds || [];
+            if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
+              newItems++;
+              items.push(m);
+            }
+          } else {
+            newItems++;
+            items.push(m);
+          }
+        }
+        if (newItems > 20) {
+          hasMore = true;
+          items.pop();
+          break;
+        }
+      }
+    } else if (sortBy === "value") {
+      for (let m of sortedValue) {
+        if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
+          if (index <= len) {
+            index++;
+            continue;
+          }
           if (this.Store.isMyId) {
             const ownedIds = this.Store.ownedIds || [];
             if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
