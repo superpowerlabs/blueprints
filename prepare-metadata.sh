@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-scripts/extractPercentageDistribuition.js
+scripts/extractPercentageDistribution.js
 scripts/extractRarityDistribution.js
 scripts/extractRarityScore.js
 scripts/addRarityScoreToAll.js
