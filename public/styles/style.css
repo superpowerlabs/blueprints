@@ -1960,7 +1960,7 @@ li a.dropdown-toggle::after {
 .tokenCard img {
     width: 230px;
     height: 230px;
-    border-radius: 8px;
+    border-radius: 3px;
 }
 
 .label {
