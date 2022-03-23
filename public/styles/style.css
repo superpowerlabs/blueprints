@@ -1857,6 +1857,7 @@ table td {
     top: 80px;
     position: fixed;
     overflow-y: auto;
+    padding-bottom: 100px;
 }
 
 .sidebar.is-open {

@@ -63,8 +63,8 @@ for (let i = 0; i < traits.length; i++) {
       }
     }
   }
-  totalScore = totalAttributes + totalStats + totalRarity + totalAbilities;
-  console.log(totalScore);
+  let totalScore = totalAttributes + totalStats + totalRarity + totalAbilities;
+  // console.log(totalScore);
   per.push([traits[i][0], totalScore]);
 }
 
