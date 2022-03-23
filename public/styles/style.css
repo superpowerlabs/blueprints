@@ -1857,6 +1857,7 @@ table td {
     top: 80px;
     position: fixed;
     overflow-y: auto;
+    padding-bottom: 100px;
 }
 
 .sidebar.is-open {
@@ -1959,7 +1960,7 @@ li a.dropdown-toggle::after {
 .tokenCard img {
     width: 230px;
     height: 230px;
-    border-radius: 8px;
+    border-radius: 3px;
 }
 
 .label {

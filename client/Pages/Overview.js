@@ -1,5 +1,5 @@
 import * as Scroll from "react-scroll";
-import React from "react";
+
 import text from "../config/text";
 import Markdown from "react-markdown-it";
 import Base from "../components/Base";
