@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-node extractPercentageDistribuition.js 
-node extractRarityDistribution.js 
-node extractRarityScore.js 
-node extractValueScore.js
-node addRarityScoreToAll.js
-node sortByRarityScore.js  
-node extractValueScore.js
-node addValueScore.js
-node sortByValueScore.js
+node scripts/extractPercentageDistribution.js 
+node scripts/extractRarityDistribution.js 
+node scripts/extractRarityScore.js 
+node scripts/addRarityScoreToAll.js
+node scripts/sortByRarityScore.js  
+node scripts/extractValueScore.js
+node scripts/addValueScore.js
+node scripts/sortByValueScore.js

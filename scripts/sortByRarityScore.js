@@ -4,7 +4,7 @@ const fspath = require("fspath");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
-const allDataandRarityScore = require("./public/json/allDataandRarityScore.json");
+const allDataandRarityScore = require("../public/json/allDataandRarityScore.json");
 
 const sorted = allDataandRarityScore.sort(function (a, b) {
   return b.rarity_score - a.rarity_score;

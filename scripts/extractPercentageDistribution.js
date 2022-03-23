@@ -4,7 +4,7 @@ const fspath = require("fspath");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
-const metadata = require("./public/json/allMetadata.json");
+const metadata = require("../public/json/allMetadata.json");
 let total = 0;
 let traits = {};
 

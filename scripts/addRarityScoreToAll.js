@@ -4,8 +4,8 @@ const fspath = require("fspath");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
-const metadata = require("./public/json/allMetadata.json");
-const rarityScore = require("./public/json/rarityScore.json");
+const metadata = require("../public/json/allMetadata.json");
+const rarityScore = require("../public/json/rarityScore.json");
 
 let traits = [];
 for (let m of metadata) {
