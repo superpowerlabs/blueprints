@@ -2,13 +2,13 @@
 const { Form, Row, Col } = ReactBootstrap;
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
-import allMetadata from "../config/allDataandRarityScore.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
-import percent from "../config/percentageDistribution.json";
 import { preferredOrder } from "../config";
-import sortedAllMetadata from "../config/sortedAllDataandRarityScore.json";
 import Decimals from "../utils/Decimals";
+let allMetadata;
+let percent;
+let sortedAllMetadata;
 
 import Base from "./Base";
 
@@ -31,7 +31,27 @@ export default class Content extends Base {
     ]);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    // await fetch("json/allDataandRarityScore.json"
+    // ,{
+    //    headers: {
+    //     "Content-Type": "application/json",
+    //     "Accept": "application/json"
+    //    }
+    // }
+    // )
+    //   .then(function(response){
+    //     console.log(response)
+    //     return response.json();
+    //   })
+    //   .then(function(myJson) {
+    //     console.log(myJson, "helloo");
+    //   });
+    allMetadata = await this.fetchJson("json/allDataandRarityScore.json");
+    percent = await this.fetchJson("json/percentageDistribution.json");
+    sortedAllMetadata = await this.fetchJson(
+      "json/sortedAllDataandRarityScore.json"
+    );
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
     Scroll.animateScroll.scrollToTop();
@@ -271,7 +291,10 @@ export default class Content extends Base {
     const filter = this.Store.filter || {};
     let myTotal = this.Store.ownedIds || {};
     myTotal = myTotal.length;
-    let total = allMetadata.length;
+    let total = 0;
+    if (allMetadata) {
+      total = allMetadata.length;
+    }
     if (this.Store.tokenIds) {
       total = this.Store.tokenIds.length;
     }

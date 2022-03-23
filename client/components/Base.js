@@ -15,6 +15,7 @@ class Base extends Common {
       "waitForWeb3",
       "waitForContracts",
       "checkIfOperator",
+      "fetchJson",
     ]);
     this.Store = this.props.Store;
   }
@@ -45,6 +46,22 @@ class Base extends Common {
       multipart,
       extraHeaders
     );
+  }
+  async fetchJson(jsonPath) {
+    let ret;
+    await fetch(jsonPath, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (myJson) {
+        ret = myJson;
+      });
+    return ret;
   }
 
   setStore(...params) {
