@@ -61,6 +61,7 @@ app.use("/:anything", function (req, res, next) {
     case "images":
     case "bundle":
     case "assets":
+    case "json":
       next();
       break;
     default:

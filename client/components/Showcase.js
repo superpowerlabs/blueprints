@@ -1,11 +1,10 @@
 // eslint-disable-next-line no-undef
-import indexedMetadata from "../../public/json/indexedMetadata.json";
-
 import SideBar from "./SideBar";
 import Content from "./Content";
 import Base from "./Base";
 import { toNumber } from "lodash";
 import { chainConf } from "../config";
+let indexedMetadata;
 
 export default class Showcase extends Base {
   constructor(props) {
@@ -20,6 +19,10 @@ export default class Showcase extends Base {
       });
     }
     this.bindMany(["onCheck", "onId", "onSort"]);
+  }
+
+  async componentDidMount() {
+    indexedMetadata = await this.fetchJson("json/indexedMetadata.json");
   }
 
   async switchTo(chainId) {

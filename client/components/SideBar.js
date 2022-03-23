@@ -7,8 +7,7 @@ const { InputGroup, FormControl, Button, Nav, ButtonGroup, ToggleButton } =
 import classNames from "classnames";
 import Base from "./Base";
 
-import rarityDistribution from "../../public/json/rarityDistribution.json";
-
+let rarityDistribution;
 class SideBar extends Base {
   constructor(props) {
     super(props);
@@ -41,6 +40,10 @@ class SideBar extends Base {
   handleChange(event) {
     this.setState({ value: event.target.value });
     this.props.onId(event.target.value);
+  }
+
+  async componentDidMount() {
+    rarityDistribution = await this.fetchJson("json/rarityDistribution.json");
   }
 
   sortBy(by) {
