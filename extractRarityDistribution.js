@@ -5,7 +5,7 @@ const { preferredOrder } = require("./client/config");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
-const metadata = require("./client/config/allMetadata.json");
+const metadata = require("./public/json/allMetadata.json");
 
 let traits = {};
 for (let m of metadata) {
@@ -26,7 +26,7 @@ for (let key of preferredOrder) {
   dist[key] = traits[key];
 }
 
-let output = new fspath("./client/config/rarityDistribution.json");
+let output = new fspath("./public/json/rarityDistribution.json");
 output.write(JSON.stringify(dist, null, 2));
 
 // index data
@@ -42,5 +42,5 @@ for (let m of metadata) {
   }
 }
 
-output = new fspath("./client/config/indexedMetadata.json");
+output = new fspath("./public/json/indexedMetadata.json");
 output.write(JSON.stringify(index, null, 2));
