@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-docker stop super-micio-net
-docker rm super-micio-net
+docker stop bp-altermafia-com
+docker rm bp-altermafia-com
 
 docker run -d \
-  --name super-micio-net \
+  --name bp-altermafia-com \
   -p 8734 \
   --restart unless-stopped \
   -v $PWD:/usr/src/app \
-  -v /vol/log/super-micio-net_app:/var/log/super-micio-net_app \
+  -v /vol/log/bp-altermafia-com_app:/var/log/bp-altermafia-com_app \
   -e NODE_ENV=production \
-  -e VIRTUAL_HOST=super.micio.net \
-  -e LETSENCRYPT_HOST=super.micio.net \
-  -e LETSENCRYPT_EMAIL=something@sullo.co \
+  -e VIRTUAL_HOST=bp.altermafia.com \
+  -e LETSENCRYPT_HOST=bp.altermafia.com \
+  -e LETSENCRYPT_EMAIL=altermafia@sullo.co \
   -w /usr/src/app node:16 npm run start
