@@ -23,6 +23,7 @@ specifiers:
   cookie-parser: ^1.4.5
   cors: ^2.8.5
   css-loader: ^3.6.0
+  csv-stringify: ^6.0.5
   discord-oauth2: ^2.9.0
   dotenv: ^9.0.2
   eslint: ^6.8.0
@@ -81,6 +82,7 @@ dependencies:
   cli-spinner: 0.2.10
   cookie-parser: 1.4.5
   cors: 2.8.5
+  csv-stringify: 6.0.5
   discord-oauth2: 2.9.0
   dotenv: 9.0.2
   eslint-webpack-plugin: 3.1.1_eslint@6.8.0+webpack@5.70.0
@@ -3462,6 +3464,10 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
     dev: true
+
+  /csv-stringify/6.0.5:
+    resolution: {integrity: sha512-7xpV3uweJCFF/Ssn56l3xsR/k2r3UqszwjEhej9qEn2cCPzyK1WyHCgoUVzBA792x8HbwonNX7CU9XM2K5s5yw==}
+    dev: false
 
   /dashdash/1.14.1:
     resolution: {integrity: sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=}
