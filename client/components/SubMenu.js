@@ -48,6 +48,20 @@ class SubMenu extends Base {
     return str;
   }
 
+  getPercentage(value) {
+    return this.addSomeDecimals((100 * value) / 8000) + "%";
+  }
+
+  addSomeDecimals(s, c = 2) {
+    s = s.toString().split(".");
+    if (!s[0]) {
+      s[0] = 0;
+    }
+    s[1] = (s[1] || "").substring(0, c);
+    s[1] = s[1] + "0".repeat(c - s[1].length);
+    return s.join(".");
+  }
+
   allValues() {
     const { trait, values } = this.props;
     const rows = [];
@@ -55,7 +69,10 @@ class SubMenu extends Base {
     for (let value in values) {
       let text = (
         <span>
-          <b>{this.cleanTrait(value)}</b> ({values[value]})
+          <b>{this.cleanTrait(value)}</b>{" "}
+          <span style={{ color: "#888", fontSize: "90%" }}>
+            ({values[value]}, {this.getPercentage(values[value])})
+          </span>
         </span>
       );
       rows.push(
