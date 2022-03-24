@@ -118,7 +118,7 @@ class SideBar extends Base {
                     this.setStore({ sortBy: "value" });
                   }}
                 >
-                  Sort by Value
+                  Sort by Power
                 </ToggleButton>
               </ButtonGroup>
             </div>
@@ -218,7 +218,7 @@ class SideBar extends Base {
                     this.setStore({ sortBy: "value" });
                   }}
                 >
-                  Sort by Value
+                  Sort by Power
                 </ToggleButton>
               </ButtonGroup>
             </div>
