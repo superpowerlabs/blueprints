@@ -188,7 +188,7 @@ class SideBar extends Base {
                   Sort by ID
                 </ToggleButton>
 
-                <ToggleButton
+                {/* <ToggleButton
                   id={"radio-2"}
                   type="radio"
                   variant="warning"
@@ -203,7 +203,7 @@ class SideBar extends Base {
                   }}
                 >
                   Sort by Rarity
-                </ToggleButton>
+                </ToggleButton> */}
                 <ToggleButton
                   id={"radio-3"}
                   type="radio"
