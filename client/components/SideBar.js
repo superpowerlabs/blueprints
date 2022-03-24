@@ -88,22 +88,22 @@ class SideBar extends Base {
                   Sort by ID
                 </ToggleButton>
 
-                <ToggleButton
-                  id={"radio-2"}
-                  type="radio"
-                  variant="warning"
-                  name="radio"
-                  value={"score"}
-                  checked={sortBy === "score"}
-                  className={"btn nowrap"}
-                  size={"sm"}
-                  onChange={(e) => {
-                    this.sortBy("score");
-                    this.setStore({ sortBy: "score" });
-                  }}
-                >
-                  Sort by Rarity
-                </ToggleButton>
+                {/*<ToggleButton*/}
+                {/*  id={"radio-2"}*/}
+                {/*  type="radio"*/}
+                {/*  variant="warning"*/}
+                {/*  name="radio"*/}
+                {/*  value={"score"}*/}
+                {/*  checked={sortBy === "score"}*/}
+                {/*  className={"btn nowrap"}*/}
+                {/*  size={"sm"}*/}
+                {/*  onChange={(e) => {*/}
+                {/*    this.sortBy("score");*/}
+                {/*    this.setStore({ sortBy: "score" });*/}
+                {/*  }}*/}
+                {/*>*/}
+                {/*  Sort by Rarity*/}
+                {/*</ToggleButton>*/}
                 <ToggleButton
                   id={"radio-3"}
                   type="radio"
