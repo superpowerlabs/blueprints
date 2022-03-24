@@ -8,7 +8,6 @@ import { preferredOrder } from "../config";
 import Decimals from "../utils/Decimals";
 let allMetadata;
 let percent;
-let sortedAllMetadata;
 let sortedValue;
 
 import Base from "./Base";
@@ -33,11 +32,8 @@ export default class Content extends Base {
   }
 
   async componentDidMount() {
-    allMetadata = await this.fetchJson("json/allDataandRarityScore.json");
+    allMetadata = await this.fetchJson("json/allMetadata.json");
     percent = await this.fetchJson("json/percentageDistribution.json");
-    sortedAllMetadata = await this.fetchJson(
-      "json/sortedAllDataandRarityScore.json"
-    );
     sortedValue = await this.fetchJson("json/sortedValueScore.json");
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
@@ -85,31 +81,7 @@ export default class Content extends Base {
     let index = 1;
     let len = items.length;
     let newItems = 0;
-    if (sortBy === "score") {
-      for (let m of sortedAllMetadata) {
-        if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
-          if (index <= len) {
-            index++;
-            continue;
-          }
-          if (this.Store.isMyId) {
-            const ownedIds = this.Store.ownedIds || [];
-            if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
-              newItems++;
-              items.push(m);
-            }
-          } else {
-            newItems++;
-            items.push(m);
-          }
-        }
-        if (newItems > 20) {
-          hasMore = true;
-          items.pop();
-          break;
-        }
-      }
-    } else if (sortBy === "id") {
+    if (sortBy === "id") {
       for (let m of allMetadata) {
         if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
           if (index <= len) {
