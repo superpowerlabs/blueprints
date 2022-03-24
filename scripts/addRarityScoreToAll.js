@@ -4,8 +4,8 @@ const fspath = require("fspath");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
-const metadata = require("../client/config/allMetadata.json");
-const rarityScore = require("../client/config/rarityScore.json");
+const metadata = require("../public/json/allMetadata.json");
+const rarityScore = require("../public/json/rarityScore.json");
 
 let traits = [];
 for (let m of metadata) {
@@ -17,5 +17,5 @@ for (let m of metadata) {
   }
 }
 
-let output = new fspath("./client/config/allDataandRarityScore.json");
+let output = new fspath("./public/json/allDataandRarityScore.json");
 output.write(JSON.stringify(traits, null, 2));

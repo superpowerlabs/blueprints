@@ -4,8 +4,8 @@ const fspath = require("fspath");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
-const metadata = require("../client/config/allMetadata.json");
-const percentageDistribution = require("../client/config/percentageDistribution.json");
+const metadata = require("../public/json/allMetadata.json");
+const percentageDistribution = require("../public/json/percentageDistribution.json");
 const stats = ["Health", "Attack", "Defense", "Heal", "Soul"];
 // const abilities = [
 //   "Active Ability 1",
@@ -63,10 +63,10 @@ for (let i = 0; i < traits.length; i++) {
       }
     }
   }
-  let totalScore = totalAttributes + totalStats + totalRarity + totalAbilities;
-  // console.log(totalScore);
+  totalScore =
+    totalAttributes + totalStats + totalRarity + totalAbilities + totalTier;
   per.push([traits[i][0], totalScore]);
 }
 
-let output = new fspath("./client/config/rarityScore.json");
+let output = new fspath("./public/json/rarityScore.json");
 output.write(JSON.stringify(per, null, 2));

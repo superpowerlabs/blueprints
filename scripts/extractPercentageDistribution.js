@@ -4,7 +4,7 @@ const fspath = require("fspath");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
-const metadata = require("../client/config/allMetadata.json");
+const metadata = require("../public/json/allMetadata.json");
 let total = 0;
 let traits = {};
 
@@ -55,5 +55,5 @@ for (let attributes in dist) {
   });
 }
 
-let output = new fspath("./client/config/percentageDistribution.json");
+let output = new fspath("./public/json/percentageDistribution.json");
 output.write(JSON.stringify(dist, null, 2));

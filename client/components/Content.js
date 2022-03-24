@@ -2,13 +2,14 @@
 const { Form, Row, Col } = ReactBootstrap;
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
-import allMetadata from "../config/allDataandRarityScore.json";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
-import percent from "../config/percentageDistribution.json";
 import { preferredOrder } from "../config";
-import sortedAllMetadata from "../config/sortedAllDataandRarityScore.json";
 import Decimals from "../utils/Decimals";
+let allMetadata;
+let percent;
+let sortedAllMetadata;
+let sortedValue;
 
 import Base from "./Base";
 
@@ -31,7 +32,13 @@ export default class Content extends Base {
     ]);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    allMetadata = await this.fetchJson("json/allDataandRarityScore.json");
+    percent = await this.fetchJson("json/percentageDistribution.json");
+    sortedAllMetadata = await this.fetchJson(
+      "json/sortedAllDataandRarityScore.json"
+    );
+    sortedValue = await this.fetchJson("json/sortedValueScore.json");
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
     Scroll.animateScroll.scrollToTop();
@@ -68,8 +75,9 @@ export default class Content extends Base {
   }
 
   fetchMoreData() {
-    let sorted = this.Store.isSorted;
+    // let sorted = this.Store.isSorted;
     let { items } = this.state;
+    let sortBy = this.Store.sortBy;
     const filter = this.Store.filter || {};
     const noFilter = Object.keys(filter).length === 0;
     const tokenIds = this.Store.tokenIds || [];
@@ -77,7 +85,7 @@ export default class Content extends Base {
     let index = 1;
     let len = items.length;
     let newItems = 0;
-    if (sorted) {
+    if (sortBy === "score") {
       for (let m of sortedAllMetadata) {
         if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
           if (index <= len) {
@@ -101,14 +109,37 @@ export default class Content extends Base {
           break;
         }
       }
-    } else {
+    } else if (sortBy === "id") {
       for (let m of allMetadata) {
         if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
           if (index <= len) {
             index++;
             continue;
           }
-
+          if (this.Store.isMyId) {
+            const ownedIds = this.Store.ownedIds || [];
+            if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
+              newItems++;
+              items.push(m);
+            }
+          } else {
+            newItems++;
+            items.push(m);
+          }
+        }
+        if (newItems > 20) {
+          hasMore = true;
+          items.pop();
+          break;
+        }
+      }
+    } else if (sortBy === "value") {
+      for (let m of sortedValue) {
+        if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
+          if (index <= len) {
+            index++;
+            continue;
+          }
           if (this.Store.isMyId) {
             const ownedIds = this.Store.ownedIds || [];
             if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
@@ -271,7 +302,10 @@ export default class Content extends Base {
     const filter = this.Store.filter || {};
     let myTotal = this.Store.ownedIds || {};
     myTotal = myTotal.length;
-    let total = allMetadata.length;
+    let total = 0;
+    if (allMetadata) {
+      total = allMetadata.length;
+    }
     if (this.Store.tokenIds) {
       total = this.Store.tokenIds.length;
     }
