@@ -11,6 +11,16 @@ let sortedValue;
 
 import Base from "./Base";
 
+const classes = {
+  Tier: "aqua",
+  Rarity: "chartreuse",
+  Health: "gold",
+  Heal: "gold",
+  Defense: "gold",
+  Attack: "gold",
+  Soul: "gold",
+};
+
 export default class Content extends Base {
   constructor(props) {
     super(props);
@@ -174,7 +184,7 @@ export default class Content extends Base {
       arr = i % 2 ? pc2 : pc;
       arr.push(
         <div key={"pc" + i++}>
-          <span className={"pcTrait"}>{trait}</span>:{" "}
+          <span className={classes[trait] || "pcTrait"}>{trait}</span>:{" "}
           <span className={"pcValue"}>
             {this.cleanTrait(percentages[trait][0])}
           </span>{" "}
@@ -196,7 +206,10 @@ export default class Content extends Base {
         </Col>
         <Col className={"pcCol"} lg={3}>
           {pc}
-          <div>Power score: {m.rarity_score}</div>
+          <div>
+            <span style={{ color: "coral" }}>Power score:</span>{" "}
+            {m.rarity_score}
+          </div>
         </Col>
         <Col className={"pcCol"} lg={3}>
           {pc2}

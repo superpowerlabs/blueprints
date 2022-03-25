@@ -4,7 +4,7 @@ const fspath = require("fspath");
 // we do not want to re-execute this by mistake
 // process.exit(0)
 
-const metadata = require("../public/json/allMetadata.json");
+const metadata = require("../input/allMetadata.json");
 let total = 0;
 let traits = {};
 
@@ -24,15 +24,6 @@ for (let m of metadata) {
 
 let { preferredOrder } = require("../client/config");
 
-const traitsKey = Object.keys(traits);
-
-// for (let i of preferredOrder) {
-//   if (!~traitsKey.indexOf(i)) {
-//     console.log(i);
-//   }
-// }
-
-// console.log(Object.keys(traits))
 const addSomeDecimals = (s, c = 2) => {
   s = s.toString().split(".");
   s[1] = (s[1] || "").substring(0, c);

@@ -2033,10 +2033,18 @@ li a.dropdown-toggle::after {
 }
 
 .pcTrait {
-    color: yellow;
+    color: #52f1cd;
 }
 .pcPc {
     color: #888;
+}
+
+.aqua {
+    color: aqua;
+}
+
+.chartreuse {
+    color: chartreuse;
 }
 
 .searchBox {
