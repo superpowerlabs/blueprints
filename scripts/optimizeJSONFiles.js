@@ -23,10 +23,15 @@ let indexedValuesArray = new fspath("./public/json/indexedValuesArray.json");
 indexedValuesArray.write(JSON.stringify(values));
 
 for (let m of metas) {
-  csv += "\n" + m.attributes.map((e) => values.indexOf(e.value)).concat([
-    m.extras.mp4_sha256.substring(0,16),
-    m.extras.png_sha256.substring(0,16)
-  ]).join(",");
+  csv +=
+    "\n" +
+    m.attributes
+      .map((e) => values.indexOf(e.value))
+      .concat([
+        m.extras.mp4_sha256.substring(0, 16),
+        m.extras.png_sha256.substring(0, 16),
+      ])
+      .join(",");
 }
 
 let output = new fspath("./public/json/metadata.csv.js");
