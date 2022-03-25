@@ -262,18 +262,15 @@ class App extends Common {
   setStore(newProps, storeItLocally) {
     let store = this.state.Store;
     let localStore = JSON.parse(ls("localStore") || "{}");
-    let saveLocalStore = false;
     for (let i in newProps) {
       if (newProps[i] === null) {
         if (storeItLocally) {
           delete localStore[i];
-          saveLocalStore = true;
         }
         delete store[i];
       } else {
         if (storeItLocally) {
           localStore[i] = newProps[i];
-          saveLocalStore = true;
         }
         store[i] = newProps[i];
       }
@@ -281,7 +278,7 @@ class App extends Common {
     this.setState({
       Store: store,
     });
-    if (saveLocalStore) {
+    if (storeItLocally) {
       ls("localStore", JSON.stringify(localStore));
     }
   }

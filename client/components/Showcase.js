@@ -28,9 +28,9 @@ export default class Showcase extends Base {
       const rarityDistribution = await this.fetchJson(
         "json/rarityDistribution.json"
       );
-      const allMetadata = await this.fetchJson("json/allMetadata.json");
+      const allMetadata = await this.fetchJson("json/allValueMetadataOptimized.json");
       const percent = await this.fetchJson("json/percentageDistribution.json");
-      const sortedValue = await this.fetchJson("json/sortedValueScore.json");
+      const sortedValue = await this.fetchJson("json/sortedValueScoreOptimized.json");
       this.setStore(
         {
           rarityDistribution,
@@ -41,6 +41,8 @@ export default class Showcase extends Base {
         },
         true
       );
+    } else {
+      indexedMetadata = this.Store.indexedMetadata
     }
   }
 
@@ -220,6 +222,7 @@ export default class Showcase extends Base {
     ) : (
       <div style={{ paddingTop: 300 }}>
         <Loading />
+        <div style={{padding: 50}}>Loading the metadata...</div>
       </div>
     );
   }

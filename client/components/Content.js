@@ -32,9 +32,9 @@ export default class Content extends Base {
   }
 
   async componentDidMount() {
-    allMetadata = await this.fetchJson("json/allMetadata.json");
-    percent = await this.fetchJson("json/percentageDistribution.json");
-    sortedValue = await this.fetchJson("json/sortedValueScore.json");
+    allMetadata = this.Store.allMetadata
+    percent = this.Store.percent
+    sortedValue = this.Store.sortedvalue
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
     Scroll.animateScroll.scrollToTop();

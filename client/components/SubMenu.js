@@ -2,6 +2,7 @@
 const { Accordion, Nav, Form } = ReactBootstrap;
 // eslint-disable-next-line no-undef
 import Base from "./Base";
+import Decimals from "../utils/Decimals";
 
 class SubMenu extends Base {
   constructor(props) {
@@ -49,17 +50,7 @@ class SubMenu extends Base {
   }
 
   getPercentage(value) {
-    return this.addSomeDecimals((100 * value) / 8000) + "%";
-  }
-
-  addSomeDecimals(s = "", c = 2) {
-    s = s.toString().split(".");
-    if (!s[0]) {
-      s[0] = 0;
-    }
-    s[1] = (s[1] || "").substring(0, c);
-    s[1] = s[1] + "0".repeat(c - s[1].length);
-    return s.join(".");
+    return Decimals((100 * value) / 8000) + "%";
   }
 
   allValues() {
