@@ -169,7 +169,6 @@ export default class Content extends Base {
     );
   }
 
-
   imageClick(m) {
     const percentages = this.getPercentages(m);
     const pc = [];
