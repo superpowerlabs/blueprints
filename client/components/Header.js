@@ -1,5 +1,5 @@
 // import { isMobile } from "react-device-detect";
-const { Navbar} =
+const { Navbar } =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
 // eslint-disable-next-line no-undef
