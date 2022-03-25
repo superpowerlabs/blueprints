@@ -5,7 +5,7 @@ const fspath = require("fspath");
 // process.exit(0)
 
 const metadata = require("../input/allMetadata.json");
-const stats = ["Health", "Attack", "Defense", "Heal", "Soul"];
+const stats = ["Health", "Attack", "Defense", "Heal"];
 
 function addDecimals(s = "", c = 2) {
   s = s.toString().split(".");
