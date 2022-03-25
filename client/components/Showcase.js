@@ -22,19 +22,32 @@ export default class Showcase extends Base {
     this.bindMany(["onCheck", "onId", "onSort"]);
   }
 
+  expandMetadata(metas, dictionary) {
+    for (let m of metas) {
+      for (let a of m.A) {
+        a.t = dictionary[a.t]
+        a.v = dictionary[a.v]
+      }
+    }
+    return metas
+  }
+
   async componentDidMount() {
     if (!this.Store.indexedMetadata) {
       indexedMetadata = await this.fetchJson("json/indexedMetadata.json");
       const rarityDistribution = await this.fetchJson(
         "json/rarityDistribution.json"
       );
-      const allMetadata = await this.fetchJson(
-        "json/allMetadataOptimized.json"
+      const dictionary = await this.fetchJson(
+        "json/dictionary.json"
       );
       const percent = await this.fetchJson("json/percentageDistribution.json");
-      const sortedValue = await this.fetchJson(
+      const allMetadata = this.expandMetadata(await this.fetchJson(
+        "json/allMetadataOptimized.json"
+      ), dictionary);
+      const sortedValue = this.expandMetadata(await this.fetchJson(
         "json/sortedValueScoreOptimized.json"
-      );
+      ), dictionary);
       this.setStore({
         rarityDistribution,
         allMetadata,
@@ -223,7 +236,9 @@ export default class Showcase extends Base {
     ) : (
       <div style={{ paddingTop: 200 }}>
         <Loading />
-        <div style={{ padding: 50, textAlign: "center" }}>Loading the metadata...</div>
+        <div style={{ padding: 50, textAlign: "center" }}>
+          Loading the metadata...
+        </div>
       </div>
     );
   }

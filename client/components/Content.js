@@ -82,14 +82,14 @@ export default class Content extends Base {
     let newItems = 0;
     if (sortBy === "id") {
       for (let m of allMetadata) {
-        if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
+        if (noFilter || tokenIds.indexOf(m.i) !== -1) {
           if (index <= len) {
             index++;
             continue;
           }
           if (this.Store.isMyId) {
             const ownedIds = this.Store.ownedIds || [];
-            if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
+            if (ownedIds.includes(m.i) && !items.includes(m)) {
               newItems++;
               items.push(m);
             }
@@ -106,14 +106,14 @@ export default class Content extends Base {
       }
     } else if (sortBy === "value") {
       for (let m of sortedValue) {
-        if (noFilter || tokenIds.indexOf(m.tokenId) !== -1) {
+        if (noFilter || tokenIds.indexOf(m.i) !== -1) {
           if (index <= len) {
             index++;
             continue;
           }
           if (this.Store.isMyId) {
             const ownedIds = this.Store.ownedIds || [];
-            if (ownedIds.includes(m.tokenId) && !items.includes(m)) {
+            if (ownedIds.includes(m.i) && !items.includes(m)) {
               newItems++;
               items.push(m);
             }
@@ -136,7 +136,7 @@ export default class Content extends Base {
   }
 
   getPercentages(m) {
-    const attributes = m.attributes;
+    const attributes = m.A;
     const percentages = {};
     for (let x in attributes) {
       for (let y in percent) {
@@ -158,13 +158,13 @@ export default class Content extends Base {
 
   getThumbnail(m) {
     return (
-      "https://data.mob.land/genesis_blueprints/jpg/" + m.thumbnail + "-png.jpg"
+      "https://data.mob.land/genesis_blueprints/jpg/" + m.j + "-png.jpg"
     );
   }
 
   getVideo(m) {
     return (
-      "https://data.mob.land/genesis_blueprints/mp4/" + m.animation_url + ".mp4"
+      "https://data.mob.land/genesis_blueprints/mp4/" + m.a + ".mp4"
     );
   }
 
@@ -223,17 +223,17 @@ export default class Content extends Base {
       !isNaN(parseInt(this.Store.searchTokenId))
     ) {
       for (let m of allMetadata) {
-        if (m.tokenId === this.Store.searchTokenId) {
+        if (m.i === this.Store.searchTokenId) {
           // console.log(m.extras.thumbnail);
           let img = this.getThumbnail(m);
           rows.push(
-            <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
+            <div key={"tokenId" + m.i} className={"tokenCard"}>
               <LazyLoadImage
                 className={"command"}
                 src={img}
                 onClick={() => this.imageClick(m)}
               />
-              <div className={"centered tokenId"}># {m.tokenId}</div>
+              <div className={"centered tokenId"}># {m.i}</div>
             </div>
           );
           foundSearch = true;
@@ -247,13 +247,13 @@ export default class Content extends Base {
         let img = this.getThumbnail(m);
         // console.log(m.extras.thumbnail);
         rows.push(
-          <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
+          <div key={"tokenId" + m.i} className={"tokenCard"}>
             <LazyLoadImage
               className={"command"}
               src={img}
               onClick={() => this.imageClick(m)}
             />
-            <div className={"centered tokenId"}># {m.tokenId}</div>
+            <div className={"centered tokenId"}># {m.i}</div>
           </div>
         );
       }
