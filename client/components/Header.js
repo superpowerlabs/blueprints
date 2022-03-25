@@ -1,5 +1,5 @@
 // import { isMobile } from "react-device-detect";
-const { Navbar, Button } =
+const { Navbar} =
   // eslint-disable-next-line no-undef
   ReactBootstrap;
 // eslint-disable-next-line no-undef
@@ -86,15 +86,15 @@ export default class Header extends Base {
   }
 
   render() {
-    const { connectedWallet } = this.Store;
+    // const { connectedWallet } = this.Store;
     const { expanded } = this.state;
 
-    let address;
-    if (connectedWallet) {
-      address = this.ellipseAddress(connectedWallet);
-    }
+    // let address;
+    // if (connectedWallet) {
+    //   address = this.ellipseAddress(connectedWallet);
+    // }
 
-    const pathname = window.location.pathname.split("/")[1];
+    // const pathname = window.location.pathname.split("/")[1];
 
     return (
       <Navbar
@@ -145,62 +145,62 @@ export default class Header extends Base {
           {/*    }}*/}
           {/*  />*/}
           {/*) : null}*/}
-          <Link
-            className={"headerButton " + (pathname === "" ? "selected" : "")}
-            to="/"
-            onClick={this.handleAllIds}
-          >
-            Collection
-          </Link>
-          <Link
-            className={"headerButton " + (pathname === "" ? "selected" : "")}
-            to="/"
-            onClick={this.handleMyIds}
-          >
-            My Collection
-          </Link>
-          <Link
-            className={"headerButton " + (pathname === "" ? "selected" : "")}
-            to="/overview"
-          >
-            Overview
-          </Link>
+          {/*<Link*/}
+          {/*  className={"headerButton " + (pathname === "" ? "selected" : "")}*/}
+          {/*  to="/"*/}
+          {/*  onClick={this.handleAllIds}*/}
+          {/*>*/}
+          {/*  Collection*/}
+          {/*</Link>*/}
+          {/*<Link*/}
+          {/*  className={"headerButton " + (pathname === "" ? "selected" : "")}*/}
+          {/*  to="/"*/}
+          {/*  onClick={this.handleMyIds}*/}
+          {/*>*/}
+          {/*  My Collection*/}
+          {/*</Link>*/}
+          {/*<Link*/}
+          {/*  className={"headerButton " + (pathname === "" ? "selected" : "")}*/}
+          {/*  to="/overview"*/}
+          {/*>*/}
+          {/*  Overview*/}
+          {/*</Link>*/}
         </Navbar.Collapse>
         {this.isMobile() ? (
           <BsFillFunnelFill onClick={this.openSidebar} />
         ) : null}
-        {!this.isMobile() ? (
-          connectedWallet ? (
-            <div className={"coral floatRightAbsolute"}>
-              <i
-                className="fas fa-user-astronaut"
-                style={{ marginRight: 10 }}
-              />
-              {address}
-            </div>
-          ) : (
-            <Button
-              className={"floatRightAbsolute"}
-              size={"sm"}
-              onClick={this.props.connect}
-            >
-              Connect your wallet
-            </Button>
-          )
-        ) : connectedWallet ? (
-          <div className={"coral floatRightAbsolute"}>
-            <i className="fas fa-user-astronaut" style={{ marginRight: 10 }} />
-            {address}
-          </div>
-        ) : (
-          <Button
-            className={"floatRightAbsolute"}
-            size={"sm"}
-            onClick={this.props.connect}
-          >
-            Connect your wallet
-          </Button>
-        )}
+        {/*{!this.isMobile() ? (*/}
+        {/*  connectedWallet ? (*/}
+        {/*    <div className={"coral floatRightAbsolute"}>*/}
+        {/*      <i*/}
+        {/*        className="fas fa-user-astronaut"*/}
+        {/*        style={{ marginRight: 10 }}*/}
+        {/*      />*/}
+        {/*      {address}*/}
+        {/*    </div>*/}
+        {/*  ) : (*/}
+        {/*    <Button*/}
+        {/*      className={"floatRightAbsolute"}*/}
+        {/*      size={"sm"}*/}
+        {/*      onClick={this.props.connect}*/}
+        {/*    >*/}
+        {/*      Connect your wallet*/}
+        {/*    </Button>*/}
+        {/*  )*/}
+        {/*) : connectedWallet ? (*/}
+        {/*  <div className={"coral floatRightAbsolute"}>*/}
+        {/*    <i className="fas fa-user-astronaut" style={{ marginRight: 10 }} />*/}
+        {/*    {address}*/}
+        {/*  </div>*/}
+        {/*) : (*/}
+        {/*  <Button*/}
+        {/*    className={"floatRightAbsolute"}*/}
+        {/*    size={"sm"}*/}
+        {/*    onClick={this.props.connect}*/}
+        {/*  >*/}
+        {/*    Connect your wallet*/}
+        {/*  </Button>*/}
+        {/*)}*/}
       </Navbar>
     );
   }
