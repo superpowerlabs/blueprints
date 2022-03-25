@@ -221,9 +221,9 @@ export default class Showcase extends Base {
         )}
       </div>
     ) : (
-      <div style={{ paddingTop: 300 }}>
+      <div style={{ paddingTop: 200 }}>
         <Loading />
-        <div style={{ padding: 50 }}>Loading the metadata...</div>
+        <div style={{ padding: 50, textAlign: "center" }}>Loading the metadata...</div>
       </div>
     );
   }
