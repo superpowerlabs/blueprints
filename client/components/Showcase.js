@@ -4,6 +4,7 @@ import Content from "./Content";
 import Base from "./Base";
 import { toNumber } from "lodash";
 import { chainConf } from "../config";
+import Loading from "./lib/Loading";
 let indexedMetadata;
 
 export default class Showcase extends Base {
@@ -22,7 +23,25 @@ export default class Showcase extends Base {
   }
 
   async componentDidMount() {
-    indexedMetadata = await this.fetchJson("json/indexedMetadata.json");
+    if (!this.Store.indexedMetadata) {
+      indexedMetadata = await this.fetchJson("json/indexedMetadata.json");
+      const rarityDistribution = await this.fetchJson(
+        "json/rarityDistribution.json"
+      );
+      const allMetadata = await this.fetchJson("json/allMetadata.json");
+      const percent = await this.fetchJson("json/percentageDistribution.json");
+      const sortedValue = await this.fetchJson("json/sortedValueScore.json");
+      this.setStore(
+        {
+          rarityDistribution,
+          allMetadata,
+          indexedMetadata,
+          percent,
+          sortedValue,
+        },
+        true
+      );
+    }
   }
 
   async switchTo(chainId) {
@@ -115,7 +134,7 @@ export default class Showcase extends Base {
       connectedNetwork,
     } = this.Store;
     const ownedIds = this.Store.ownedIds || "";
-    return (
+    return this.Store.indexedMetadata ? (
       <div style={{ width: "100%" }}>
         <SideBar
           Store={this.Store}
@@ -197,6 +216,10 @@ export default class Showcase extends Base {
             )}
           </div>
         )}
+      </div>
+    ) : (
+      <div style={{ paddingTop: 300 }}>
+        <Loading />
       </div>
     );
   }

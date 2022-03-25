@@ -52,7 +52,7 @@ class SubMenu extends Base {
     return this.addSomeDecimals((100 * value) / 8000) + "%";
   }
 
-  addSomeDecimals(s, c = 2) {
+  addSomeDecimals(s = "", c = 2) {
     s = s.toString().split(".");
     if (!s[0]) {
       s[0] = 0;

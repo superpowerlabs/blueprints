@@ -83,9 +83,9 @@
     "prettier": "2.5.1"
   },
   "scripts": {
-    "start": "./generate-missing-deployed-json.sh && node .",
-    "start:dev": "./generate-missing-deployed-json.sh && NODE_ENV=development node .",
-    "build": "./generate-missing-deployed-json.sh && webpack",
+    "start": "node .",
+    "start:dev": "webpack --mode development && NODE_ENV=development node .",
+    "build": "webpack",
     "format": "npx prettier --write .",
     "lint": "npm run lint:client && npm run lint:server",
     "lint:client": "eslint client/**/*.js",
