@@ -40,16 +40,20 @@ export default class Showcase extends Base {
       );
       const dictionary = await this.fetchJson("json/dictionary.json");
       const percent = await this.fetchJson("json/percentageDistribution.json");
-      const allMetadata = await this.fetchJson("json/allMetadataOptimized.json")
+      const allMetadata = await this.fetchJson(
+        "json/allMetadataOptimized.json"
+      );
       for (let m of allMetadata) {
         for (let a of m.A) {
           a.t = dictionary[a.t];
           a.v = dictionary[a.v];
         }
       }
-      const sortedValue = await this.fetchJson("json/sortedValueScoreOptimized.json")
-      for (let i=0;i<8000;i++) {
-        sortedValue[i] = allMetadata[sortedValue[i]]
+      const sortedValue = await this.fetchJson(
+        "json/sortedValueScoreOptimized.json"
+      );
+      for (let i = 0; i < 8000; i++) {
+        sortedValue[i] = allMetadata[sortedValue[i]];
       }
       this.setStore({
         rarityDistribution,
