@@ -206,10 +206,7 @@ export default class Content extends Base {
         </Col>
         <Col className={"pcCol"} lg={3}>
           {pc}
-          <div>
-            <span style={{ color: "coral" }}>Power score:</span>{" "}
-            {m.rarity_score}
-          </div>
+          <div className={"powerScore"}>Power score: {m.rarity_score}</div>
         </Col>
         <Col className={"pcCol"} lg={3}>
           {pc2}
