@@ -22,8 +22,8 @@ function optimize(metadata) {
   return metadata;
 }
 
-let metas = require("../public/json/allValueMetadata.json");
-let output = new fspath("./public/json/allValueMetadataOptimized.json");
+let metas = require("../public/json/allMetadata.json");
+let output = new fspath("./public/json/allMetadataOptimized.json");
 output.write(JSON.stringify(optimize(metas)));
 
 metas = require("../public/json/sortedValueScore.json");

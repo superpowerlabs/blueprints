@@ -2,6 +2,7 @@
 
 scripts/extractPercentageDistribution.js
 scripts/extractRarityDistribution.js
-scripts/extractRarityScore.js
-scripts/addRarityScoreToAll.js
-scripts/sortByRarityScore.js
+scripts/extractValueScore.js
+scripts/addValueScore.js
+scripts/sortByValueScore.js
+scripts/optimizeJSONFiles.js

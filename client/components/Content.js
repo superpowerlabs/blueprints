@@ -5,7 +5,6 @@ import Masonry from "react-masonry-component";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { preferredOrder } from "../config";
-import Decimals from "../utils/Decimals";
 let allMetadata;
 let percent;
 let sortedValue;
@@ -34,7 +33,7 @@ export default class Content extends Base {
   async componentDidMount() {
     allMetadata = this.Store.allMetadata;
     percent = this.Store.percent;
-    sortedValue = this.Store.sortedvalue;
+    sortedValue = this.Store.sortedValue;
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
     Scroll.animateScroll.scrollToTop();
@@ -187,13 +186,6 @@ export default class Content extends Base {
         </div>
       );
     }
-    arr.push(
-      <div key={"pc"}>
-        <span className={"pcTrait"}>Rarity_score</span>
-        <span className={"pcValue"}>:</span>{" "}
-        <span className={"pcPc"}>({Decimals(m.rarity_score)})</span>
-      </div>
-    );
     const body = (
       <Row>
         <Col lg={6}>

@@ -29,22 +29,19 @@ export default class Showcase extends Base {
         "json/rarityDistribution.json"
       );
       const allMetadata = await this.fetchJson(
-        "json/allValueMetadataOptimized.json"
+        "json/allMetadataOptimized.json"
       );
       const percent = await this.fetchJson("json/percentageDistribution.json");
       const sortedValue = await this.fetchJson(
         "json/sortedValueScoreOptimized.json"
       );
-      this.setStore(
-        {
-          rarityDistribution,
-          allMetadata,
-          indexedMetadata,
-          percent,
-          sortedValue,
-        },
-        true
-      );
+      this.setStore({
+        rarityDistribution,
+        allMetadata,
+        indexedMetadata,
+        percent,
+        sortedValue,
+      });
     } else {
       indexedMetadata = this.Store.indexedMetadata;
     }
