@@ -5,7 +5,7 @@ const fspath = require("fspath");
 
 const dictionary = [];
 
-let metadata = require("../public/json/allValueMetadata.json");
+let metadata = require("../tmp/allValueMetadata.json");
 
 for (let m of metadata) {
   delete m.description;
@@ -39,7 +39,7 @@ for (let m of metadata) {
 let output = new fspath("./public/json/allMetadataOptimized.json");
 output.write(JSON.stringify(metadata));
 
-let sortedMetadata = require("../public/json/sortedValueScore.json");
+let sortedMetadata = require("../tmp/sortedValueScore.json");
 let finalSorted = [];
 for (let m of sortedMetadata) {
   finalSorted.push(m.tokenId);
