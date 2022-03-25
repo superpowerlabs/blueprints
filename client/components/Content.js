@@ -17,7 +17,7 @@ const classes = {
   Health: "gold",
   Heal: "gold",
   Defense: "gold",
-  Attack: "gold"
+  Attack: "gold",
 };
 
 export default class Content extends Base {
