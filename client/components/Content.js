@@ -196,6 +196,7 @@ export default class Content extends Base {
         </Col>
         <Col className={"pcCol"} lg={3}>
           {pc}
+          <div>Power score: {m.rarity_score}</div>
         </Col>
         <Col className={"pcCol"} lg={3}>
           {pc2}

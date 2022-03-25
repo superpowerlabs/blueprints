@@ -5,9 +5,11 @@ const fspath = require("fspath");
 
 const allDataandRarityScore = require("../public/json/allValueMetadata.json");
 
-const sorted = allDataandRarityScore.sort(function (a, b) {
-  return b.rarity_score - a.rarity_score;
+allDataandRarityScore.sort(function (a, b) {
+  a = a.rarity_score
+  b = b.rarity_score
+  return a < b ? 1 : a > b ? -1 : 0
 });
 
 let output = new fspath("./public/json/sortedValueScore.json");
-output.write(JSON.stringify(sorted, null, 2));
+output.write(JSON.stringify(allDataandRarityScore, null, 2));

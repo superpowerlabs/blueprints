@@ -53,7 +53,7 @@ export default class Showcase extends Base {
         "json/sortedValueScoreOptimized.json"
       );
       for (let i = 0; i < 8000; i++) {
-        sortedValue[i] = allMetadata[sortedValue[i]];
+        sortedValue[i] = allMetadata[sortedValue[i] - 1];
       }
       this.setStore({
         rarityDistribution,

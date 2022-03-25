@@ -5,7 +5,7 @@ const fspath = require("fspath");
 
 const dictionary = [];
 
-let metadata = require("../public/json/allMetadata.json");
+let metadata = require("../public/json/allValueMetadata.json");
 
 for (let m of metadata) {
   delete m.description;
