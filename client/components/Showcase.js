@@ -4,6 +4,7 @@ import Content from "./Content";
 import Base from "./Base";
 import { toNumber } from "lodash";
 import { chainConf } from "../config";
+import Loading from "./lib/Loading";
 let indexedMetadata;
 
 export default class Showcase extends Base {
@@ -21,8 +22,49 @@ export default class Showcase extends Base {
     this.bindMany(["onCheck", "onId", "onSort"]);
   }
 
+  expandMetadata(metas, dictionary) {
+    for (let m of metas) {
+      for (let a of m.A) {
+        a.t = dictionary[a.t];
+        a.v = dictionary[a.v];
+      }
+    }
+    return metas;
+  }
+
   async componentDidMount() {
-    indexedMetadata = await this.fetchJson("json/indexedMetadata.json");
+    if (!this.Store.indexedMetadata) {
+      indexedMetadata = await this.fetchJson("json/indexedMetadata.json");
+      const rarityDistribution = await this.fetchJson(
+        "json/rarityDistribution.json"
+      );
+      const dictionary = await this.fetchJson("json/dictionary.json");
+      const percent = await this.fetchJson("json/percentageDistribution.json");
+      const allMetadata = await this.fetchJson(
+        "json/allMetadataOptimized.json"
+      );
+      for (let m of allMetadata) {
+        for (let a of m.A) {
+          a.t = dictionary[a.t];
+          a.v = dictionary[a.v];
+        }
+      }
+      const sortedValue = await this.fetchJson(
+        "json/sortedValueScoreOptimized.json"
+      );
+      for (let i = 0; i < 8000; i++) {
+        sortedValue[i] = allMetadata[sortedValue[i] - 1];
+      }
+      this.setStore({
+        rarityDistribution,
+        allMetadata,
+        indexedMetadata,
+        percent,
+        sortedValue,
+      });
+    } else {
+      indexedMetadata = this.Store.indexedMetadata;
+    }
   }
 
   async switchTo(chainId) {
@@ -115,7 +157,7 @@ export default class Showcase extends Base {
       connectedNetwork,
     } = this.Store;
     const ownedIds = this.Store.ownedIds || "";
-    return (
+    return this.Store.indexedMetadata ? (
       <div style={{ width: "100%" }}>
         <SideBar
           Store={this.Store}
@@ -197,6 +239,13 @@ export default class Showcase extends Base {
             )}
           </div>
         )}
+      </div>
+    ) : (
+      <div style={{ paddingTop: 200 }}>
+        <Loading />
+        <div style={{ padding: 50, textAlign: "center" }}>
+          Loading the metadata...
+        </div>
       </div>
     );
   }
