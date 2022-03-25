@@ -25,11 +25,11 @@ export default class Showcase extends Base {
   expandMetadata(metas, dictionary) {
     for (let m of metas) {
       for (let a of m.A) {
-        a.t = dictionary[a.t]
-        a.v = dictionary[a.v]
+        a.t = dictionary[a.t];
+        a.v = dictionary[a.v];
       }
     }
-    return metas
+    return metas;
   }
 
   async componentDidMount() {
@@ -38,16 +38,19 @@ export default class Showcase extends Base {
       const rarityDistribution = await this.fetchJson(
         "json/rarityDistribution.json"
       );
-      const dictionary = await this.fetchJson(
-        "json/dictionary.json"
-      );
+      const dictionary = await this.fetchJson("json/dictionary.json");
       const percent = await this.fetchJson("json/percentageDistribution.json");
-      const allMetadata = this.expandMetadata(await this.fetchJson(
-        "json/allMetadataOptimized.json"
-      ), dictionary);
-      const sortedValue = this.expandMetadata(await this.fetchJson(
-        "json/sortedValueScoreOptimized.json"
-      ), dictionary);
+      const allMetadata = await this.fetchJson("json/allMetadataOptimized.json")
+      for (let m of allMetadata) {
+        for (let a of m.A) {
+          a.t = dictionary[a.t];
+          a.v = dictionary[a.v];
+        }
+      }
+      const sortedValue = await this.fetchJson("json/sortedValueScoreOptimized.json")
+      for (let i=0;i<8000;i++) {
+        sortedValue[i] = allMetadata[sortedValue[i]]
+      }
       this.setStore({
         rarityDistribution,
         allMetadata,

@@ -157,15 +157,11 @@ export default class Content extends Base {
   }
 
   getThumbnail(m) {
-    return (
-      "https://data.mob.land/genesis_blueprints/jpg/" + m.j + "-png.jpg"
-    );
+    return "https://data.mob.land/genesis_blueprints/jpg/" + m.j + "-png.jpg";
   }
 
   getVideo(m) {
-    return (
-      "https://data.mob.land/genesis_blueprints/mp4/" + m.a + ".mp4"
-    );
+    return "https://data.mob.land/genesis_blueprints/mp4/" + m.a + ".mp4";
   }
 
   imageClick(m) {
