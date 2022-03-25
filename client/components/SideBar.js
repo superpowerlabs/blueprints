@@ -16,7 +16,7 @@ class SideBar extends Base {
   }
 
   allTraits() {
-    const {rarityDistribution} = this.Store
+    const { rarityDistribution } = this.Store;
     const rows = [];
     let i = 0;
     for (let trait in rarityDistribution) {

@@ -32,9 +32,9 @@ export default class Content extends Base {
   }
 
   async componentDidMount() {
-    allMetadata = this.Store.allMetadata
-    percent = this.Store.percent
-    sortedValue = this.Store.sortedvalue
+    allMetadata = this.Store.allMetadata;
+    percent = this.Store.percent;
+    sortedValue = this.Store.sortedvalue;
     this.fetchMoreData();
     this.setTimeout(this.monitorData, 1000);
     Scroll.animateScroll.scrollToTop();
@@ -141,9 +141,9 @@ export default class Content extends Base {
     const percentages = {};
     for (let x in attributes) {
       for (let y in percent) {
-        if (attributes[x]["trait_type"] === y) {
+        if (attributes[x].t === y) {
           for (let num in percent[y]) {
-            if (num === attributes[x]["value"]) {
+            if (num === attributes[x].v) {
               percentages[y] = [num, percent[y][num]];
             }
           }
@@ -156,6 +156,19 @@ export default class Content extends Base {
     }
     return result;
   }
+
+  getThumbnail(m) {
+    return (
+      "https://data.mob.land/genesis_blueprints/jpg/" + m.thumbnail + "-png.jpg"
+    );
+  }
+
+  getVideo(m) {
+    return (
+      "https://data.mob.land/genesis_blueprints/mp4/" + m.animation_url + ".mp4"
+    );
+  }
+
 
   imageClick(m) {
     const percentages = this.getPercentages(m);
@@ -187,11 +200,11 @@ export default class Content extends Base {
         <Col lg={6}>
           <video
             style={{ width: "100%" }}
-            src={m.animation_url}
+            src={this.getVideo(m)}
             controls
             loop
             autoPlay
-            poster={m.extras.thumbnail}
+            poster={this.getThumbnail(m)}
           />
         </Col>
         <Col className={"pcCol"} lg={3}>
@@ -221,7 +234,7 @@ export default class Content extends Base {
       for (let m of allMetadata) {
         if (m.tokenId === this.Store.searchTokenId) {
           // console.log(m.extras.thumbnail);
-          let img = m.extras.thumbnail;
+          let img = this.getThumbnail(m);
           rows.push(
             <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
               <LazyLoadImage
@@ -240,7 +253,7 @@ export default class Content extends Base {
       }
     } else {
       for (let m of items) {
-        let img = m.extras.thumbnail;
+        let img = this.getThumbnail(m);
         // console.log(m.extras.thumbnail);
         rows.push(
           <div key={"tokenId" + m.tokenId} className={"tokenCard"}>
