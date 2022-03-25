@@ -193,7 +193,7 @@ export default class Content extends Base {
       );
     }
     const body = (
-      <Row>
+      <div><Row>
         <Col lg={6}>
           <video
             style={{ width: "100%" }}
@@ -204,14 +204,19 @@ export default class Content extends Base {
             poster={this.getThumbnail(m)}
           />
         </Col>
-        <Col className={"pcCol"} lg={3}>
+        <Col lg={6}><Row>
+
+        <Col className={"pcCol"}>
           {pc}
-          <div className={"powerScore"}>Power score: {m.rarity_score}</div>
         </Col>
-        <Col className={"pcCol"} lg={3}>
+        <Col className={"pcCol"}>
           {pc2}
         </Col>
+        </Row>
+          <Row><Col><div className={"powerScore"}>Power score: {m.rarity_score}</div></Col></Row>
+        </Col>
       </Row>
+      </div>
     );
 
     this.Store.globals.showPopUp({
