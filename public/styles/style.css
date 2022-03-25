@@ -2135,3 +2135,10 @@ li a.dropdown-toggle::after {
     font-weight: bold;
     color: #61dafb;
 }
+
+.powerScore {
+    margin-top: 12px;
+    border-top: 1px dotted #8d16f2;
+    padding: 8px 0;
+    color: #845bff;
+}

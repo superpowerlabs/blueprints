@@ -193,28 +193,33 @@ export default class Content extends Base {
       );
     }
     const body = (
-      <Row>
-        <Col lg={6}>
-          <video
-            style={{ width: "100%" }}
-            src={this.getVideo(m)}
-            controls
-            loop
-            autoPlay
-            poster={this.getThumbnail(m)}
-          />
-        </Col>
-        <Col className={"pcCol"} lg={3}>
-          {pc}
-          <div>
-            <span style={{ color: "coral" }}>Power score:</span>{" "}
-            {m.rarity_score}
-          </div>
-        </Col>
-        <Col className={"pcCol"} lg={3}>
-          {pc2}
-        </Col>
-      </Row>
+      <div>
+        <Row>
+          <Col lg={6}>
+            <video
+              style={{ width: "100%" }}
+              src={this.getVideo(m)}
+              controls
+              loop
+              autoPlay
+              poster={this.getThumbnail(m)}
+            />
+          </Col>
+          <Col lg={6}>
+            <Row>
+              <Col className={"pcCol"}>{pc}</Col>
+              <Col className={"pcCol"}>{pc2}</Col>
+            </Row>
+            <Row>
+              <Col>
+                <div className={"powerScore"}>
+                  Power score: {m.rarity_score}
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </div>
     );
 
     this.Store.globals.showPopUp({
