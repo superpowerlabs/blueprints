@@ -5,6 +5,7 @@ if [[ ! -d "tmp" ]]; then
 fi
 
 scripts/extractPercentageDistribution.js
+scripts/extractRarityDistribution.js
 scripts/indexMetadata.js
 scripts/calculatePowerScore.js
 scripts/sortByPowerScore.js
