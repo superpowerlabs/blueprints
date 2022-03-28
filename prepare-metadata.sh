@@ -21,3 +21,6 @@ scripts/sortByPowerScore.js
 
 echo "Optimize indexes"
 scripts/optimizeJSONFiles.js
+
+echo "Add statistical rarity score"
+scripts/extraRarityIndex.js
