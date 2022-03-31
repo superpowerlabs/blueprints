@@ -1,6 +1,5 @@
 import * as Scroll from "react-scroll";
 
-
 import Markdown from "react-markdown-it";
 import Base from "../components/Base";
 
@@ -165,7 +164,6 @@ Most collections have Rarity scores to determine the value of an NFT. Rarity is 
 
 `,
 ];
-
 
 export default class Overview extends Base {
   componentDidMount() {
