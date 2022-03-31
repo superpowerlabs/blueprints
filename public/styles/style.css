@@ -109,6 +109,10 @@ a {
     text-align: center;
 }
 
+.padded {
+    padding: 12px;
+}
+
 .alignRight {
     text-align: right;
 }
@@ -2141,4 +2145,18 @@ li a.dropdown-toggle::after {
     border-top: 1px dotted #8d16f2;
     padding: 8px 0;
     color: #845bff;
+}
+
+.Overview h2 {
+    text-align: left;
+    padding-top:32px;
+}
+
+.Overview h4 {
+    padding-top:12px;
+}
+
+blockquote {
+    font-size: 120%;
+    padding: 8px 24px;
 }
