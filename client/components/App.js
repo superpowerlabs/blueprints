@@ -17,6 +17,7 @@ import PopUp from "./Popup";
 import Overview from "../Pages/Overview";
 import { isMobile } from "react-device-detect";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+
 class App extends Common {
   constructor(props) {
     super(props);
@@ -307,6 +308,9 @@ class App extends Common {
           <Switch>
             <Route exact path="/">
               <Showcase Store={Store} setStore={this.setStore} />
+            </Route>
+            <Route path="/:id">
+              <Showcase Store={Store} setStore={this.setStore}  />
             </Route>
             <Route path="/overview">
               <Overview Store={Store} setStore={this.setStore} />

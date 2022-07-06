@@ -5,9 +5,11 @@ import Base from "./Base";
 import { toNumber } from "lodash";
 import { chainConf } from "../config";
 import Loading from "./lib/Loading";
+import {withRouter} from "react-router-dom";
+
 let indexedMetadata;
 
-export default class Showcase extends Base {
+class Showcase extends Base {
   constructor(props) {
     super(props);
     if (this.isMobile()) {
@@ -19,8 +21,9 @@ export default class Showcase extends Base {
         sideOpen: true,
       });
     }
-    this.bindMany(["onCheck", "onId", "onSort"]);
+    this.bindMany(["onCheck", "onId","showUser", "onSort"]);
   }
+
 
   expandMetadata(metas, dictionary) {
     for (let m of metas) {
@@ -52,6 +55,7 @@ export default class Showcase extends Base {
       const sortedValue = await this.fetchJson(
         "json/sortedValueScoreOptimized.json"
       );
+
       for (let i = 0; i < 8000; i++) {
         sortedValue[i] = allMetadata[sortedValue[i] - 1];
       }
@@ -65,6 +69,9 @@ export default class Showcase extends Base {
     } else {
       indexedMetadata = this.Store.indexedMetadata;
     }
+
+    this.showUser()
+
   }
 
   async switchTo(chainId) {
@@ -132,9 +139,15 @@ export default class Showcase extends Base {
       isSearch: false,
     });
   }
+  showUser() { 
+    const id = this.props.match.params.id;
+    if (typeof id !== "undefined")
+    {
+    this.onId(id)} 
+  }
 
   onId(id) {
-    let idnum = toNumber(id);
+   let idnum = toNumber(id);
     const filter = {};
     this.setStore({
       filter,
@@ -250,3 +263,6 @@ export default class Showcase extends Base {
     );
   }
 }
+
+export default withRouter(Showcase);
+
