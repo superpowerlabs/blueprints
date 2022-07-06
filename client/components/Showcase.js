@@ -21,7 +21,7 @@ class Showcase extends Base {
         sideOpen: true,
       });
     }
-    this.bindMany(["onCheck", "onId", "showUser", "onSort"]);
+    this.bindMany(["onCheck", "onId", "showSingleNftFromId", "onSort"]);
   }
 
   expandMetadata(metas, dictionary) {
@@ -69,7 +69,7 @@ class Showcase extends Base {
       indexedMetadata = this.Store.indexedMetadata;
     }
 
-    this.showUser();
+    this.showSingleNftFromId();
   }
 
   async switchTo(chainId) {
@@ -137,7 +137,7 @@ class Showcase extends Base {
       isSearch: false,
     });
   }
-  showUser() {
+  showSingleNftFromId() {
     const id = this.props.match.params.id;
     if (typeof id !== "undefined") {
       this.onId(id);
