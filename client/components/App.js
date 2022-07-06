@@ -310,7 +310,7 @@ class App extends Common {
               <Showcase Store={Store} setStore={this.setStore} />
             </Route>
             <Route path="/:id">
-              <Showcase Store={Store} setStore={this.setStore}  />
+              <Showcase Store={Store} setStore={this.setStore} />
             </Route>
             <Route path="/overview">
               <Overview Store={Store} setStore={this.setStore} />
