@@ -35,7 +35,6 @@ const config = {
     }),
   ],
   externals: {
-    ethers: "ethers",
     lodash: "_",
   },
   mode,

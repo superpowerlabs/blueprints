@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-const ethers = require("ethers");
+import { ethers } from "ethers";
 import clientApi from "../utils/ClientApi";
 import config from "../config";
 
