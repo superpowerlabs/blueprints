@@ -4,7 +4,7 @@ import Markdown from "react-markdown-it";
 import Base from "../components/Base";
 
 // eslint-disable-next-line no-undef
-const { Container, Row, Col } = ReactBootstrap;
+import { Container, Row, Col } from "react-bootstrap";
 
 const text = [
   `

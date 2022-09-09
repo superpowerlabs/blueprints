@@ -1,4 +1,4 @@
-const ethers = require("ethers");
+import { ethers } from "ethers";
 const { Contract } = require("@ethersproject/contracts");
 const config = require("../../client/config");
 const path = require("path");

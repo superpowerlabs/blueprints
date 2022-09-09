@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-undef
+import React from "react";
 import SideBar from "./SideBar";
 import Content from "./Content";
 import Base from "./Base";

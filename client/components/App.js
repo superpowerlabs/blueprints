@@ -1,9 +1,7 @@
-// eslint-disable-next-line no-undef
-const { BrowserRouter, Route, Switch } = ReactRouterDOM;
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-// eslint-disable-next-line no-undef
-
-const ethers = require("ethers");
+import { ethers } from "ethers";
 import clientApi from "../utils/ClientApi";
 import config from "../config";
 

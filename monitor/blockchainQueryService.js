@@ -1,4 +1,4 @@
-const ethers = require("ethers");
+import { ethers } from "ethers";
 const { header } = require("express/lib/request");
 superagent = require("superagent");
 require("dotenv").config();
