@@ -59,6 +59,7 @@
     "react-markdown-it": "^1.0.2",
     "react-masonry-component": "^6.3.0",
     "react-native": "^0.69.1",
+    "react-router-dom": "^5.2.0",
     "react-scroll": "^1.8.5",
     "react-scroll-horizontal": "^1.6.6",
     "react-spring": "^9.4.4",

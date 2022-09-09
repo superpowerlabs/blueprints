@@ -1,7 +1,7 @@
 // import { isMobile } from "react-device-detect";
 import { Navbar, Button } from "react-bootstrap";
 // eslint-disable-next-line no-undef
-const { Link } = ReactRouterDOM;
+import { Link } from "react-router-dom";
 import Base from "./Base";
 import { BsFillFunnelFill } from "react-icons/bs";
 
