@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-undef
+import React from "react";
 export default class Ab extends React.Component {
   render() {
     const { link, label, onClick, title } = this.props;

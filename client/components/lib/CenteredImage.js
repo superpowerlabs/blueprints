@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 import { Row, Col } from "react-bootstrap";
 
 import Ab from "./Ab";

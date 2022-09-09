@@ -1,5 +1,6 @@
 /* eslint-disable */
 // eslint-disable-next-line no-undef
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
 export default class PopUp extends React.Component {

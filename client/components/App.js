@@ -1,7 +1,5 @@
-// eslint-disable-next-line no-undef
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
-// eslint-disable-next-line no-undef
 
 const ethers = require("ethers");
 import clientApi from "../utils/ClientApi";

@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-undef
+import React from "react";
 import { Form, Row, Col } from "react-bootstrap";
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
