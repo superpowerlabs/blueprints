@@ -35,7 +35,6 @@ const config = {
     }),
   ],
   externals: {
-    lodash: "_",
   },
   mode,
 };
