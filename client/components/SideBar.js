@@ -1,9 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import SubMenu from "./SubMenu";
-const { InputGroup, FormControl, Button, Nav, ButtonGroup, ToggleButton } =
-  // eslint-disable-next-line no-undef
-  ReactBootstrap;
+import {
+  InputGroup,
+  FormControl,
+  Button,
+  Nav,
+  ButtonGroup,
+  ToggleButton,
+} from "react-bootstrap";
 import classNames from "classnames";
 import Base from "./Base";
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-undef
-const { Form, Row, Col } = ReactBootstrap;
+import { Form, Row, Col } from "react-bootstrap";
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
 import { LazyLoadImage } from "react-lazy-load-image-component";

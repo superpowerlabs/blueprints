@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-undef
-const { Accordion, Nav, Form } = ReactBootstrap;
+import { Accordion, Nav, Form } from "react-bootstrap";
 // eslint-disable-next-line no-undef
 import Base from "./Base";
 import Decimals from "../utils/Decimals";
