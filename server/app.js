@@ -44,15 +44,15 @@ app.use("/healthcheck", function (req, res) {
 
 applyNonce(app, {
   index_file: "../../public/index.html",
-  static_assets: [ 
-      "favicon.png",
-      "favicon.ico",
-      "styles",
-      "all",
-      "images",
-      "bundle",
-      "json"
-   ]
+  static_assets: [
+    "favicon.png",
+    "favicon.ico",
+    "styles",
+    "all",
+    "images",
+    "bundle",
+    "json",
+  ],
 });
 
 app.use(express.static(path.resolve(__dirname, "../public")));
