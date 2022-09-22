@@ -1,12 +1,12 @@
 {
-  "name": "mobland-website",
+  "name": "blueprint",
   "version": "0.0.1",
   "private": true,
-  "description": "A simple website for mob.land",
+  "description": "A simple website for mob.land blueprints",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/superpowerlabs/mobland-website.git"
+    "url": "git+https://github.com/superpowerlabs/blueprint.git"
   },
   "author": "Francesco Sullo <francesco@sullo.co>",
   "license": "MIT",
