@@ -35,6 +35,8 @@
     "express-rate-limit": "^5.5.1",
     "fs-extra": "^8.1.0",
     "fspath": "^0.15.0",
+    "helmet": "^6.0.0",
+    "helmet-csp": "^3.4.0",
     "html-webpack-plugin": "^5.5.0",
     "knex": "^0.21.19",
     "konva": "^8.3.10",
