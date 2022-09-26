@@ -15,7 +15,7 @@ process.on("uncaughtException", function (error) {
 
 const app = express();
 
-applySecurity(app, {
+const security_config = {
   connect: ["ka-f.fontawesome.com"],
   style: [
     "'unsafe-hashes'",
@@ -25,7 +25,19 @@ applySecurity(app, {
   ],
   font: ["data:", "fonts.gstatic.com/", "use.fontawesome.com/"],
   img: ["www.w3.org/"],
-});
+  index_file: "../../public/index.html",
+  static_assets: [
+    "favicon.png",
+    "favicon.ico",
+    "styles",
+    "all",
+    "images",
+    "bundle",
+    "json",
+  ],
+};
+
+applySecurity(app, security_config);
 
 app.use(cors());
 app.use(cookieParser());
@@ -42,18 +54,7 @@ app.use("/healthcheck", function (req, res) {
   res.send("ok");
 });
 
-applyNonce(app, {
-  index_file: "../../public/index.html",
-  static_assets: [
-    "favicon.png",
-    "favicon.ico",
-    "styles",
-    "all",
-    "images",
-    "bundle",
-    "json",
-  ],
-});
+applyNonce(app, security_config);
 
 app.use(express.static(path.resolve(__dirname, "../public")));
 
