@@ -167,7 +167,9 @@ export default class Content extends Base {
 
   getThumbnail(m) {
     if (updated[m.i.toString()]) {
-      return "https://data.mob.land/genesis_blueprints/thumbnails/" + m.i + ".jpg";
+      return (
+        "https://data.mob.land/genesis_blueprints/thumbnails/" + m.i + ".jpg"
+      );
     } else {
       return "https://data.mob.land/genesis_blueprints/jpg/" + m.j + "-png.jpg";
     }
@@ -199,21 +201,26 @@ export default class Content extends Base {
       <div>
         <Row>
           <Col lg={6}>
-            {
-              updated[m.i.toString()]
-              ? <img src={"https://data.mob.land/genesis_blueprints/images/" + m.i + ".png"} alt={"nft #"+m.i+" image"}
-                style={{width: "100%"}}
-                />
-                : <video
-                  style={{ width: "100%" }}
-                  src={this.getVideo(m)}
-                  controls
-                  loop
-                  autoPlay
-                  poster={this.getThumbnail(m)}
-                />
-            }
-
+            {updated[m.i.toString()] ? (
+              <img
+                src={
+                  "https://data.mob.land/genesis_blueprints/images/" +
+                  m.i +
+                  ".png"
+                }
+                alt={"nft #" + m.i + " image"}
+                style={{ width: "100%" }}
+              />
+            ) : (
+              <video
+                style={{ width: "100%" }}
+                src={this.getVideo(m)}
+                controls
+                loop
+                autoPlay
+                poster={this.getThumbnail(m)}
+              />
+            )}
           </Col>
           <Col lg={6}>
             <Row>
