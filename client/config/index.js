@@ -63,6 +63,7 @@ const config = {
     "Class",
     "Weapon Type",
   ],
+  updated: require("./updated.json")
 };
 
 module.exports = config;
