@@ -9,7 +9,7 @@ async function main() {
    * Get port from environment and store in Express.
    */
 
-  const port = normalizePort("8734");
+  const port = normalizePort("8773");
   app.set("port", port);
 
   /**
