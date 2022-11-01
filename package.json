@@ -43,7 +43,7 @@
     "local-storage": "^1.4.2",
     "lodash": "^4.17.21",
     "markdown-it": "^12.3.2",
-    "node-fetch": "^3.2.0",
+    "node-fetch": "^3.2.10",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "pg": "^8.7.1",
     "prop-types": "^15.8.0",
