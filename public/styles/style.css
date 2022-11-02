@@ -29,7 +29,8 @@ body {
     /*background-attachment: fixed;*/
     /*background-position: bottom;*/
 
-    background-image: url(../images/bg.jpg);
+    background-image: url(https://staking.mob.land/static/media/SeedFarm_Web.84e94726.jpg) !important;
+
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
