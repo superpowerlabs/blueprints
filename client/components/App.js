@@ -220,15 +220,15 @@ class App extends Common {
           ).toNumber()
         );
       }
-    const depositLenght = await poolContract.getDepositsLength(connectedWallet)
-    for (let i = 0; i < depositLenght; i++) {
-      let deposit = (
-        await poolContract.getDepositByIndex(connectedWallet, i)
+      const depositLenght = await poolContract.getDepositsLength(
+        connectedWallet
       );
-      if (deposit.tokenType >= 5 && deposit.unlockedAt === 0) {
-        ownedCoupons.push(deposit.tokenID)
+      for (let i = 0; i < depositLenght; i++) {
+        let deposit = await poolContract.getDepositByIndex(connectedWallet, i);
+        if (deposit.tokenType >= 5 && deposit.unlockedAt === 0) {
+          ownedCoupons.push(deposit.tokenID);
+        }
       }
-    }
       this.setStore({
         ownedIds: ownedCoupons,
       });
