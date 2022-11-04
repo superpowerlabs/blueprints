@@ -81,7 +81,7 @@ export default class Content extends Base {
   fetchMoreData() {
     // let sorted = this.Store.isSorted;
     let { items } = this.state;
-    let sortBy = this.Store.sortBy;
+    const {sortBy, onlyRevealed} = this.Store;
     const filter = this.Store.filter || {};
     const noFilter = Object.keys(filter).length === 0;
     const tokenIds = this.Store.tokenIds || [];
@@ -91,7 +91,11 @@ export default class Content extends Base {
     let newItems = 0;
     if (sortBy === "id") {
       for (let m of allMetadata) {
-        if (noFilter || tokenIds.indexOf(m.i) !== -1) {
+        if (noFilter || tokenIds.indexOf(m.i) !== -1
+        ) {
+          if (onlyRevealed && !updated[m.i.toString()]) {
+            continue;
+          }
           if (index <= len) {
             index++;
             continue;
@@ -116,6 +120,9 @@ export default class Content extends Base {
     } else if (sortBy === "value") {
       for (let m of sortedValue) {
         if (noFilter || tokenIds.indexOf(m.i) !== -1) {
+          if (onlyRevealed && !updated[m.i.toString()]) {
+            continue;
+          }
           if (index <= len) {
             index++;
             continue;

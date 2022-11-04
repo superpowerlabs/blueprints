@@ -1,12 +1,29 @@
 @font-face {
     font-family: Wrong;
-    src: url(../assets/wrongtime.ttf);
+    src: url(/assets/wrongtime.ttf);
     font-weight: normal;
 }
 
 @font-face {
     font-family: Modeco;
-    src: url(../assets/Modeco-Regular.ttf);
+    src: url(/assets/modeco.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: ModecoLight;
+    src: url(/assets/Modeco-ExtraLight.otf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: ModecoBold;
+    src: url(/assets/Modeco-Bold.otf);
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Ubuntu Mono";
+    src: url(/assets/UbuntuMono-Regular.ttf);
     font-weight: normal;
 }
 
@@ -1859,7 +1876,7 @@ table td {
     transition: all 0.5s;
     float: left;
     height: 100%;
-    top: 80px;
+    top: 100px;
     position: fixed;
     overflow-y: auto;
     padding-bottom: 100px;
@@ -2069,8 +2086,14 @@ li a.dropdown-toggle::after {
 
 .checkbox {
     color: #61dafb;
-    padding-left: 3.5em;
+    margin: 11px 0 0;
+    font-size: 0.8rem;
 }
+
+.checkbox input.form-check-input {
+    background-color: #220099 !important;
+}
+
 .form-check-input:checked {
     background-color: #2e1645;
     border-color: #fdcf00;
