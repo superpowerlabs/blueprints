@@ -7,7 +7,7 @@ const ethers = require("ethers");
 import clientApi from "../utils/ClientApi";
 import config from "../config";
 
-import { SYN_COUPONS_NAME } from "../config/constants";
+import { SYN_COUPONS_NAME, SEED_POOL_NAME } from "../config/constants";
 import ls from "local-storage";
 import Common from "./Common";
 import Header from "./Header";
@@ -206,9 +206,10 @@ class App extends Common {
 
   async getCoupons(contracts, connectedWallet) {
     const couponsContract = contracts[SYN_COUPONS_NAME];
+    const poolContract = contracts[SEED_POOL_NAME];
 
     let ownedCoupons = [];
-    if (connectedWallet && couponsContract) {
+    if (connectedWallet && couponsContract && poolContract) {
       const balance = (
         await couponsContract.balanceOf(connectedWallet)
       ).toNumber();
@@ -219,6 +220,15 @@ class App extends Common {
           ).toNumber()
         );
       }
+    const depositLenght = await poolContract.getDepositsLength(connectedWallet)
+    for (let i = 0; i < depositLenght; i++) {
+      let deposit = (
+        await poolContract.getDepositByIndex(connectedWallet, i)
+      );
+      if (deposit.tokenType >= 5 && deposit.unlockedAt === 0) {
+        ownedCoupons.push(deposit.tokenID)
+      }
+    }
       this.setStore({
         ownedIds: ownedCoupons,
       });

@@ -79,9 +79,21 @@ export default class Content extends Base {
     this.setTimeout(this.monitorData, 1000);
   }
 
-  fetchMoreData() {
+  async fetchMoreData() {
     // let sorted = this.Store.isSorted;
     let { items } = this.state;
+    let depositedBlueprint = []
+    let wallet = this.Store.connectedWallet
+    let pool = this.Store.contracts.SeedPool
+    const depositLenght = await pool.getDepositsLength(wallet)
+    for (let i = 0; i < depositLenght; i++) {
+      let deposit = (
+        await pool.getDepositByIndex(wallet, i)
+      );
+      if (deposit.tokenType >= 5 && deposit.unlockedAt === 0) {
+        depositedBlueprint.push(deposit.tokenID)
+      }
+    }
     let sortBy = this.Store.sortBy;
     const filter = this.Store.filter || {};
     const noFilter = Object.keys(filter).length === 0;
@@ -103,10 +115,16 @@ export default class Content extends Base {
               newItems++;
               items.push(m);
             }
+            else if(depositedBlueprint.includes(m.i) && !items.includes(m))
+            {
+              newItems++;
+              items.push(m);
+            }
           } else {
             newItems++;
             items.push(m);
           }
+          
         }
         if (newItems > 20) {
           hasMore = true;
@@ -127,7 +145,13 @@ export default class Content extends Base {
               newItems++;
               items.push(m);
             }
-          } else {
+          }
+          else if(depositedBlueprint.includes(m.i) && !items.includes(m))
+          {
+            newItems++;
+            items.push(m);
+          }
+           else {
             newItems++;
             items.push(m);
           }
@@ -292,6 +316,7 @@ export default class Content extends Base {
   render() {
     const filter = this.Store.filter || {};
     let myTotal = this.Store.ownedIds || {};
+
     myTotal = myTotal.length;
     let total = 0;
     if (allMetadata) {

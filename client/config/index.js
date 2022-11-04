@@ -4,7 +4,7 @@ const contracts = Object.assign(
   require("./deployedProduction.json")
 );
 
-const contractWhitelist = ["SynCityCoupons"];
+const contractWhitelist = ["SynCityCoupons", "SeedPool"];
 
 for (let chainId in contracts) {
   let item = contracts[chainId];
@@ -20,6 +20,7 @@ for (let chainId in contracts) {
 const supportedId = {};
 supportedId[56] = "BSC";
 supportedId[97] = "BSC Testnet";
+supportedId[43113] = "Fuji";
 supportedId[1337] = "localhost";
 
 const config = {
