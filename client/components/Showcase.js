@@ -1,13 +1,15 @@
-// eslint-disable-next-line no-undef
+import React from "react";
 import SideBar from "./SideBar";
 import Content from "./Content";
 import Base from "./Base";
 import { toNumber } from "lodash";
 import { chainConf } from "../config";
 import Loading from "./lib/Loading";
+import { withRouter } from "react-router-dom";
+
 let indexedMetadata;
 
-export default class Showcase extends Base {
+class Showcase extends Base {
   constructor(props) {
     super(props);
     if (this.isMobile()) {
@@ -19,7 +21,7 @@ export default class Showcase extends Base {
         sideOpen: true,
       });
     }
-    this.bindMany(["onCheck", "onId", "onSort"]);
+    this.bindMany(["onCheck", "onId", "showSingleNftFromId", "onSort"]);
   }
 
   expandMetadata(metas, dictionary) {
@@ -52,6 +54,7 @@ export default class Showcase extends Base {
       const sortedValue = await this.fetchJson(
         "json/sortedValueScoreOptimized.json"
       );
+
       for (let i = 0; i < 8000; i++) {
         sortedValue[i] = allMetadata[sortedValue[i] - 1];
       }
@@ -65,6 +68,8 @@ export default class Showcase extends Base {
     } else {
       indexedMetadata = this.Store.indexedMetadata;
     }
+
+    this.showSingleNftFromId();
   }
 
   async switchTo(chainId) {
@@ -131,6 +136,12 @@ export default class Showcase extends Base {
       tokenIds: tokens,
       isSearch: false,
     });
+  }
+  showSingleNftFromId() {
+    const id = this.props.match.params.id;
+    if (typeof id !== "undefined") {
+      this.onId(id);
+    }
   }
 
   onId(id) {
@@ -250,3 +261,5 @@ export default class Showcase extends Base {
     );
   }
 }
+
+export default withRouter(Showcase);

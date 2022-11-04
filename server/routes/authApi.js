@@ -15,7 +15,7 @@ router.get("/discord/login", (req, res) => {
   baseUri =
     req.hostname === "arg.mob.land"
       ? "https://arg.mob.land"
-      : "http://localhost:8734";
+      : "http://localhost:8773";
   redirectUri = `${baseUri}/auth/discord/callback`;
   const oauth = new DiscordOauth2({
     clientId,

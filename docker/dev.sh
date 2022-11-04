@@ -2,7 +2,7 @@
 
 docker run -it --rm \
   --name offficiallly-com-dev \
-  -p 8734 \
+  -p 8773 \
   -v $PWD:/usr/src/app \
   -v $PWD/log:/var/log/offficiallly-com \
   -e NODE_ENV=development \

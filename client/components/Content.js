@@ -1,11 +1,11 @@
-// eslint-disable-next-line no-undef
-const { Form, Row, Col } = ReactBootstrap;
+import React from "react";
+import { Form, Row, Col } from "react-bootstrap";
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { preferredOrder } from "../config";
 import { tokenTypes } from "../config/constants";
+import { preferredOrder, updated } from "../config";
 let allMetadata;
 let percent;
 let sortedValue;
@@ -19,7 +19,6 @@ const classes = {
   Heal: "gold",
   Defense: "gold",
   Attack: "gold",
-  Soul: "gold",
 };
 
 export default class Content extends Base {
@@ -187,7 +186,13 @@ export default class Content extends Base {
   }
 
   getThumbnail(m) {
-    return "https://data.mob.land/genesis_blueprints/jpg/" + m.j + "-png.jpg";
+    if (updated[m.i.toString()]) {
+      return (
+        "https://data.mob.land/genesis_blueprints/thumbnails/" + m.i + ".jpg"
+      );
+    } else {
+      return "https://data.mob.land/genesis_blueprints/jpg/" + m.j + "-png.jpg";
+    }
   }
 
   getVideo(m) {
@@ -216,14 +221,26 @@ export default class Content extends Base {
       <div>
         <Row>
           <Col lg={6}>
-            <video
-              style={{ width: "100%" }}
-              src={this.getVideo(m)}
-              controls
-              loop
-              autoPlay
-              poster={this.getThumbnail(m)}
-            />
+            {updated[m.i.toString()] ? (
+              <img
+                src={
+                  "https://data.mob.land/genesis_blueprints/images/" +
+                  m.i +
+                  ".png"
+                }
+                alt={"nft #" + m.i + " image"}
+                style={{ width: "100%" }}
+              />
+            ) : (
+              <video
+                style={{ width: "100%" }}
+                src={this.getVideo(m)}
+                controls
+                loop
+                autoPlay
+                poster={this.getThumbnail(m)}
+              />
+            )}
           </Col>
           <Col lg={6}>
             <Row>

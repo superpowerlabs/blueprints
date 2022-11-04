@@ -5,7 +5,7 @@ docker rm bp-altermafia-com
 
 docker run -d \
   --name bp-altermafia-com \
-  -p 8734 \
+  -p 8773 \
   --restart unless-stopped \
   -v $PWD:/usr/src/app \
   -v /vol/log/bp-altermafia-com_app:/var/log/bp-altermafia-com_app \

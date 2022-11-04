@@ -29,7 +29,8 @@ body {
     /*background-attachment: fixed;*/
     /*background-position: bottom;*/
 
-    background-image: url(../images/bg.jpg);
+    background-image: url(https://staking.mob.land/static/media/SeedFarm_Web.84e94726.jpg) !important;
+
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -107,6 +108,10 @@ a {
 
 .centered {
     text-align: center;
+}
+
+.padded {
+    padding: 12px;
 }
 
 .alignRight {
@@ -2141,4 +2146,18 @@ li a.dropdown-toggle::after {
     border-top: 1px dotted #8d16f2;
     padding: 8px 0;
     color: #845bff;
+}
+
+.Overview h2 {
+    text-align: left;
+    padding-top: 32px;
+}
+
+.Overview h4 {
+    padding-top: 12px;
+}
+
+blockquote {
+    font-size: 120%;
+    padding: 8px 24px;
 }

@@ -1,41 +1,43 @@
 const express = require("express");
-const fs = require("fs-extra");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const Logger = require("./lib/Logger");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const rateLimit = require("express-rate-limit");
 const apiV1 = require("./routes/apiV1");
+const applySecurity = require("./applySecurity");
+const applyNonce = require("./applyNonce");
 
 process.on("uncaughtException", function (error) {
   Logger.error(error.message);
   Logger.error(error.stack);
-
-  // if(!error.isOperational)
-  //   process.exit(1)
 });
-
-let indexText;
-
-function getIndex() {
-  if (!indexText) {
-    indexText = fs.readFileSync(
-      path.resolve(__dirname, "../public/index.html"),
-      "utf-8"
-    );
-  }
-  return indexText;
-}
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 10 * 1000,
-  max: 60,
-});
+const security_config = {
+  connect: ["ka-f.fontawesome.com"],
+  style: [
+    "'unsafe-hashes'",
+    "fonts.googleapis.com/",
+    "cdnjs.cloudflare.com/ajax/libs/bootstrap/",
+    "use.fontawesome.com/releases/v6.0.0-beta1/",
+  ],
+  font: ["data:", "fonts.gstatic.com/", "use.fontawesome.com/"],
+  img: ["www.w3.org/"],
+  index_file: "../../public/index.html",
+  static_assets: [
+    "favicon.png",
+    "favicon.ico",
+    "styles",
+    "all",
+    "images",
+    "bundle",
+    "json",
+  ],
+};
 
-app.use(limiter);
+applySecurity(app, security_config);
 
 app.use(cors());
 app.use(cookieParser());
@@ -52,22 +54,7 @@ app.use("/healthcheck", function (req, res) {
   res.send("ok");
 });
 
-app.use("/:anything", function (req, res, next) {
-  let v = req.params.anything;
-  switch (v) {
-    case "favicon.png":
-    case "favicon.ico":
-    case "styles":
-    case "images":
-    case "bundle":
-    case "assets":
-    case "json":
-      next();
-      break;
-    default:
-      res.send(getIndex());
-  }
-});
+applyNonce(app, security_config);
 
 app.use(express.static(path.resolve(__dirname, "../public")));
 

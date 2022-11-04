@@ -34,28 +34,13 @@ const config = {
       template: join(__dirname, "/public/index.html"),
     }),
   ],
-  externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
-    "react-router-dom": "ReactRouterDOM",
-    "react-bootstrap": "ReactBootstrap",
-    ethers: "ethers",
-    lodash: "_",
-  },
+  externals: {},
   mode,
 };
 
 module.exports = (env, argv) => {
-  if (argv.mode === "development") {
+  if (mode === "development" || argv.mode === "development") {
     config.devtool = "inline-source-map";
-  }
-
-  if (argv.mode === "production") {
-    config.plugins.push(
-      new ESLintPlugin({
-        files: "src/**/*.js",
-      })
-    );
   }
 
   return config;
