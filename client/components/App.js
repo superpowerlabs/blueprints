@@ -7,7 +7,11 @@ const ethers = require("ethers");
 import clientApi from "../utils/ClientApi";
 import config from "../config";
 
-import { SYN_COUPONS_NAME, SEED_POOL_NAME } from "../config/constants";
+import {
+  SYN_COUPONS_NAME,
+  SEED_POOL_NAME,
+  tokenTypes,
+} from "../config/constants";
 import ls from "local-storage";
 import Common from "./Common";
 import Header from "./Header";
@@ -220,12 +224,15 @@ class App extends Common {
           ).toNumber()
         );
       }
-      const depositLenght = await poolContract.getDepositsLength(
+      const depositLength = await poolContract.getDepositsLength(
         connectedWallet
       );
-      for (let i = 0; i < depositLenght; i++) {
+      for (let i = 0; i < depositLength; i++) {
         let deposit = await poolContract.getDepositByIndex(connectedWallet, i);
-        if (deposit.tokenType >= 5 && deposit.unlockedAt === 0) {
+        if (
+          deposit.tokenType >= tokenTypes.BLUEPRINT_STAKE_FOR_BOOST &&
+          deposit.unlockedAt === 0
+        ) {
           ownedCoupons.push(deposit.tokenID);
         }
       }

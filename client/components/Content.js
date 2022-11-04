@@ -5,6 +5,7 @@ import Masonry from "react-masonry-component";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { preferredOrder } from "../config";
+import { tokenTypes } from "../config/constants";
 let allMetadata;
 let percent;
 let sortedValue;
@@ -85,10 +86,13 @@ export default class Content extends Base {
     let depositedBlueprint = [];
     let wallet = this.Store.connectedWallet;
     let pool = this.Store.contracts.SeedPool;
-    const depositLenght = await pool.getDepositsLength(wallet);
-    for (let i = 0; i < depositLenght; i++) {
+    const depositLength = await pool.getDepositsLength(wallet);
+    for (let i = 0; i < depositLength; i++) {
       let deposit = await pool.getDepositByIndex(wallet, i);
-      if (deposit.tokenType >= 5 && deposit.unlockedAt === 0) {
+      if (
+        deposit.tokenType >= tokenTypes.BLUEPRINT_STAKE_FOR_BOOST &&
+        deposit.unlockedAt === 0
+      ) {
         depositedBlueprint.push(deposit.tokenID);
       }
     }
