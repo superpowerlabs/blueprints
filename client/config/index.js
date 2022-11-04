@@ -22,77 +22,21 @@ function toHex(val) {
 }
 
 let isDev;
-let isTestnet;
-let isStage;
-let isProd;
-let isJero;
 
 if (typeof window !== "undefined") {
   const { hostname } = window.location;
   isDev = /localhost/.test(hostname);
-  isStage = /(staking-stage|jeroyafra).mob.land(|\.local)$/.test(hostname);
-  isTestnet = isDev || isStage;
-  isProd = /staking.mob.land/.test(hostname);
-  isJero = /jeroyafra/.test(hostname);
-} else if (!!process) {
-  isDev = isTestnet = true;
+}
+
+const supportedId = {};
+if (isDev) {
+  supportedId[56] = "BSC";
+  supportedId[97] = "BSC Testnet";
+  supportedId[1337] = "localhost";
 }
 
 const config = {
-  supportedId: {
-    56: {
-      chainId: toHex(56),
-      chainName: "BNB Chain",
-      nativeCurrency: {
-        name: "BNB",
-        symbol: "BNB",
-        decimals: 18,
-      },
-      rpcUrls: ["https://bsc-dataseed.binance.org"],
-      blockExplorerUrls: ["https://bscscan.com"],
-    },
-    97: isDev
-      ? {
-          chainId: toHex(97),
-          chainName: "BNB Chain Testnet",
-          nativeCurrency: {
-            name: "BNB",
-            symbol: "BNB",
-            decimals: 18,
-          },
-          rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545"],
-          blockExplorerUrls: ["https://testnet.bscscan.com"],
-        }
-      : undefined,
-    1337: isDev
-      ? {
-          chainId: toHex(1337),
-          chainName: "Localhost 8545",
-          nativeCurrency: {
-            name: "ETH",
-            symbol: "ETH",
-            decimals: 18,
-          },
-          rpcUrls: ["http://localhost:8545"],
-          blockExplorerUrls: [],
-        }
-      : undefined,
-    43113:
-      isStage || isDev
-        ? {
-            chainId: toHex(43113),
-            chainName: "Fuji",
-            nativeCurrency: {
-              name: "AVAX",
-              symbol: "AVAX",
-              decimals: 18,
-            },
-            rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-            blockExplorerUrls: ["https://cchain.explorer.avax-test.network"],
-            isTestnet: true,
-          }
-        : undefined,
-  },
+  supportedId,
   chainConf: {
     56: {
       chainId: "0x" + Number(56).toString(16),
@@ -120,7 +64,6 @@ const config = {
     "Personality",
     "Trait",
     "Gang",
-    // "Skin Tone",
     "Combat Style",
     "Chest",
     "Hair",
