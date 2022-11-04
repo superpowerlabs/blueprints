@@ -1,10 +1,11 @@
 import React from "react";
-import { Form, Row, Col } from "react-bootstrap";
+import {Form, Row, Col} from "react-bootstrap";
 import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { preferredOrder, updated } from "../config";
+import {preferredOrder, updated} from "../config";
+
 let allMetadata;
 let percent;
 let sortedValue;
@@ -80,7 +81,7 @@ export default class Content extends Base {
 
   fetchMoreData() {
     // let sorted = this.Store.isSorted;
-    let { items } = this.state;
+    let {items} = this.state;
     const {sortBy, onlyRevealed} = this.Store;
     const filter = this.Store.filter || {};
     const noFilter = Object.keys(filter).length === 0;
@@ -91,8 +92,7 @@ export default class Content extends Base {
     let newItems = 0;
     if (sortBy === "id") {
       for (let m of allMetadata) {
-        if (noFilter || tokenIds.indexOf(m.i) !== -1
-        ) {
+        if (noFilter || tokenIds.indexOf(m.i) !== -1) {
           if (onlyRevealed && !updated[m.i.toString()]) {
             continue;
           }
@@ -216,11 +216,11 @@ export default class Content extends Base {
                   ".png"
                 }
                 alt={"nft #" + m.i + " image"}
-                style={{ width: "100%" }}
+                style={{width: "100%"}}
               />
             ) : (
               <video
-                style={{ width: "100%" }}
+                style={{width: "100%"}}
                 src={this.getVideo(m)}
                 controls
                 loop
@@ -253,7 +253,7 @@ export default class Content extends Base {
   }
 
   getTokens() {
-    let { items } = this.state;
+    let {items} = this.state;
     const rows = [];
     let foundSearch = null;
     if (
@@ -363,7 +363,7 @@ export default class Content extends Base {
                 </span>
               )}
             </div>
-            <div style={{ marginTop: 8 }}>
+            <div style={{marginTop: 8}}>
               <InfiniteScroll
                 dataLength={this.state.items.length}
                 next={this.fetchMoreData}
@@ -381,8 +381,8 @@ export default class Content extends Base {
                     {this.state.items.length
                       ? "Yay! You have seen it all"
                       : this.Store.isMyId
-                      ? "Whoops, you do not own any blueprint"
-                      : "No items with this filter"}
+                        ? "Whoops, you do not own any blueprint"
+                        : "No items with this filter"}
                   </p>
                 }
               >
@@ -394,11 +394,11 @@ export default class Content extends Base {
         ) : (
           <div
             className={"tokenList"}
-            style={{ marginLeft: "60px", marginTop: "10px" }}
+            style={{marginLeft: "60px", marginTop: "10px"}}
           >
             <div
               className={"toplist"}
-              style={{ position: "static", left: "50px" }}
+              style={{position: "static", left: "50px"}}
             >
               {Object.keys(filter).map((f) => {
                 f = f.split("|");
@@ -429,7 +429,7 @@ export default class Content extends Base {
                 </span>
               )}
             </div>
-            <div style={{ marginTop: 8 }}>
+            <div style={{marginTop: 8}}>
               <InfiniteScroll
                 dataLength={this.state.items.length}
                 next={this.fetchMoreData}
