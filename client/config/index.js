@@ -4,7 +4,7 @@ const contracts = Object.assign(
   require("./deployedProduction.json")
 );
 
-const contractWhitelist = ["SynCityCoupons"];
+const contractWhitelist = ["SynCityCoupons", "SeedPool"];
 
 for (let chainId in contracts) {
   let item = contracts[chainId];
@@ -17,10 +17,23 @@ for (let chainId in contracts) {
   contracts[chainId] = tmp;
 }
 
+function toHex(val) {
+  return "0x" + Number(val).toString(16);
+}
+
+let isDev;
+
+if (typeof window !== "undefined") {
+  const { hostname } = window.location;
+  isDev = /localhost/.test(hostname);
+}
+
 const supportedId = {};
-supportedId[56] = "BSC";
-supportedId[97] = "BSC Testnet";
-supportedId[1337] = "localhost";
+if (isDev) {
+  supportedId[56] = "BSC";
+  supportedId[97] = "BSC Testnet";
+  supportedId[1337] = "localhost";
+}
 
 const config = {
   supportedId,
@@ -51,7 +64,6 @@ const config = {
     "Personality",
     "Trait",
     "Gang",
-    // "Skin Tone",
     "Combat Style",
     "Chest",
     "Hair",

@@ -4,7 +4,8 @@ import * as Scroll from "react-scroll";
 import Masonry from "react-masonry-component";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {preferredOrder, updated} from "../config";
+import { tokenTypes } from "../config/constants";
+import { preferredOrder, updated } from "../config";
 
 let allMetadata;
 let percent;
@@ -79,9 +80,25 @@ export default class Content extends Base {
     this.setTimeout(this.monitorData, 1000);
   }
 
-  fetchMoreData() {
+  async fetchMoreData() {
     // let sorted = this.Store.isSorted;
-    let {items} = this.state;
+    let { items } = this.state;
+    let depositedBlueprint = [];
+    let wallet = this.Store.connectedWallet;
+    let depositLength = 0;
+    if (this.Store.contracts && this.Store.contracts.SeedPool) {
+      let pool = this.Store.contracts.SeedPool;
+      depositLength = await pool.getDepositsLength(wallet);
+      for (let i = 0; i < depositLength; i++) {
+        let deposit = await pool.getDepositByIndex(wallet, i);
+        if (
+          deposit.tokenType >= tokenTypes.BLUEPRINT_STAKE_FOR_BOOST &&
+          deposit.unlockedAt === 0
+        ) {
+          depositedBlueprint.push(deposit.tokenID);
+        }
+      }
+    }
     const {sortBy, onlyRevealed} = this.Store;
     const filter = this.Store.filter || {};
     const noFilter = Object.keys(filter).length === 0;
@@ -103,6 +120,9 @@ export default class Content extends Base {
           if (this.Store.isMyId) {
             const ownedIds = this.Store.ownedIds || [];
             if (ownedIds.includes(m.i) && !items.includes(m)) {
+              newItems++;
+              items.push(m);
+            } else if (depositedBlueprint.includes(m.i) && !items.includes(m)) {
               newItems++;
               items.push(m);
             }
@@ -133,6 +153,9 @@ export default class Content extends Base {
               newItems++;
               items.push(m);
             }
+          } else if (depositedBlueprint.includes(m.i) && !items.includes(m)) {
+            newItems++;
+            items.push(m);
           } else {
             newItems++;
             items.push(m);
@@ -316,6 +339,7 @@ export default class Content extends Base {
   render() {
     const filter = this.Store.filter || {};
     let myTotal = this.Store.ownedIds || {};
+
     myTotal = myTotal.length;
     let total = 0;
     if (allMetadata) {
