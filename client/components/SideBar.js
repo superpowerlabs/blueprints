@@ -1,6 +1,6 @@
 import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import SubMenu from "./SubMenu";
 import {
   InputGroup,
@@ -17,13 +17,13 @@ import Base from "./Base";
 class SideBar extends Base {
   constructor(props) {
     super(props);
-    this.state = {value: "", checked: false};
+    this.state = { value: "", checked: false };
     this.bindMany(["handleChange", "handleChangeCheckbox"]);
-    this.setStore({sortBy: "id"});
+    this.setStore({ sortBy: "id" });
   }
 
   allTraits() {
-    const {rarityDistribution} = this.Store;
+    const { rarityDistribution } = this.Store;
     const rows = [];
     let i = 0;
     for (let trait in rarityDistribution) {
@@ -35,7 +35,7 @@ class SideBar extends Base {
           Store={this.Store}
           setStore={this.setStore}
           onCheck={(...args) => {
-            this.setState({value: ""});
+            this.setState({ value: "" });
             this.props.onCheck(...args);
           }}
         />
@@ -45,16 +45,16 @@ class SideBar extends Base {
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
     this.props.onId(event.target.value);
   }
 
   handleChangeCheckbox(event) {
     if (event.target.checked) {
-      this.setStore({onlyRevealed: true});
+      this.setStore({ onlyRevealed: true });
       this.props.onSort();
     } else {
-      this.setStore({onlyRevealed: false});
+      this.setStore({ onlyRevealed: false });
       this.props.onSort();
     }
   }
@@ -95,7 +95,7 @@ class SideBar extends Base {
                   size={"sm"}
                   onChange={(e) => {
                     this.sortBy("id");
-                    this.setStore({sortBy: "id"});
+                    this.setStore({ sortBy: "id" });
                   }}
                 >
                   Sort by ID
@@ -112,7 +112,7 @@ class SideBar extends Base {
                   size={"sm"}
                   onChange={(e) => {
                     this.sortBy("value");
-                    this.setStore({sortBy: "value"});
+                    this.setStore({ sortBy: "value" });
                   }}
                 >
                   Sort by Power
@@ -147,10 +147,10 @@ class SideBar extends Base {
                 <Button
                   variant="link"
                   onClick={this.props.toggle}
-                  style={{color: "#fff"}}
+                  style={{ color: "#fff" }}
                   className="mt-4"
                 >
-                  <FontAwesomeIcon icon={faTimes} pull="right" size="xs"/>
+                  <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
                 </Button>
               </div>
 
@@ -163,7 +163,7 @@ class SideBar extends Base {
           <div>
             <div
               className={"searchBox"}
-              style={{position: "static", padding: "10px 12px 21px 21px"}}
+              style={{ position: "static", padding: "10px 12px 21px 21px" }}
             >
               <InputGroup className="mb-3" size={"sm"}>
                 <InputGroup.Text id="basic-addon3">
@@ -198,7 +198,7 @@ class SideBar extends Base {
                   size={"sm"}
                   onChange={(e) => {
                     this.sortBy("id");
-                    this.setStore({sortBy: "id"});
+                    this.setStore({ sortBy: "id" });
                   }}
                 >
                   Sort by ID
@@ -215,7 +215,7 @@ class SideBar extends Base {
                   size={"sm"}
                   onChange={(e) => {
                     this.sortBy("value");
-                    this.setStore({sortBy: "value"});
+                    this.setStore({ sortBy: "value" });
                   }}
                 >
                   Sort by Power
@@ -235,16 +235,16 @@ class SideBar extends Base {
               className={classNames("sidebar", {
                 "is-open": this.props.isOpen,
               })}
-              style={{position: "relative", paddingTop: "0px", top: "0px"}}
+              style={{ position: "relative", paddingTop: "0px", top: "0px" }}
             >
               <div className="sidebar-header">
                 <Button
                   variant="link"
                   onClick={this.props.toggle}
-                  style={{color: "#fff"}}
+                  style={{ color: "#fff" }}
                   className="mt-4"
                 >
-                  <FontAwesomeIcon icon={faTimes} pull="right" size="xs"/>
+                  <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
                 </Button>
               </div>
 
