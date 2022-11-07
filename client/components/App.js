@@ -324,11 +324,8 @@ class App extends Common {
             <Route exact path="/">
               <Showcase Store={Store} setStore={this.setStore} />
             </Route>
-            <Route path="/overview">
+            <Route exact path="/overview">
               <Overview Store={Store} setStore={this.setStore} />
-            </Route>
-            <Route path="/:id">
-              <Showcase Store={Store} setStore={this.setStore} />
             </Route>
             <Route exact path="*">
               <Error404 Store={Store} setStore={this.setStore} />
