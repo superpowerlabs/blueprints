@@ -25,6 +25,7 @@ module.exports = (app, extraConfig) => {
   // TODO check path to index, set default?
   let index_file = extraConfig.index_file;
   let static_assets = extraConfig.static_assets || [];
+
   app.use("*", function (req, res, next) {
     if (req.params["0"] === "/") {
       res.send(insertNonce(res, html, index_file));
