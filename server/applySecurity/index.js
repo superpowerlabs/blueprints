@@ -11,16 +11,15 @@ module.exports = (app, extraConfig) => {
   app.use("/:anything", function (req, res, next) {
     let v = req.params.anything;
     // if static_assets is not empty, we skip CSP for everything but index
-    if (static_assets.length && static_assets.includes(v)) {
-      next();
-    } else {
+    if (!static_assets.length || !static_assets.includes(v)) {
       res.locals.isHome = true;
     }
+    next();
   });
 
   app.use((req, res, next) => {
     if (res.locals.isHome) {
-      console.info("helmet on for index");
+      // console.info("helmet on for index");
       helmet()(req, res, next);
     } else {
       next();
@@ -33,7 +32,7 @@ module.exports = (app, extraConfig) => {
 
   app.use((req, res, next) => {
     if (res.locals.isHome) {
-      console.info("CSP on for index");
+      // console.info("CSP on for index");
       CSP(extraConfig)(req, res, next);
     } else {
       next();

@@ -91,7 +91,7 @@ export default class Header extends Base {
       address = this.ellipseAddress(connectedWallet);
     }
 
-    const pathname = window.location.pathname.split("/")[1];
+    // const pathname = window.location.pathname.split("/")[1];
 
     return (
       <Navbar
@@ -117,49 +117,21 @@ export default class Header extends Base {
           />
         </Navbar.Brand>
         <Navbar.Collapse id="navbarScroll">
-          {/*<Nav className="mr-auto my-2 my-lg-0" navbarScroll>*/}
-          {/*  <Navbar.Text className={"links"}>*/}
-          {/*    <span style={{ fontSize: "1.4rem" }}>BLUEPRINTS SHOWCASE</span>*/}
-          {/*  </Navbar.Text>*/}
-          {/*</Nav>*/}
-          {/*{this.Store.width ? (*/}
-          {/*  <img*/}
-          {/*    className={"positionAbsolute"}*/}
-          {/*    src={"https://s3.mob.land/assets/Mobland_Title_Stylized300.png"}*/}
-          {/*    style={{*/}
-          {/*      width: 160,*/}
-          {/*      left: this.isMobile() ? 80 : this.Store.width / 2 - 80,*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*) : null}*/}
-          {/*{this.Store.width ? (*/}
-          {/*  <img*/}
-          {/*    className={"positionAbsolute"}*/}
-          {/*    src={"https://s3.mob.land/assets/Mobland_Title_Stylized300.png"}*/}
-          {/*    style={{*/}
-          {/*      width: 160,*/}
-          {/*      left: this.isMobile() ? 80 : this.Store.width / 2 - 80,*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*) : null}*/}
           <Link
-            className={"headerButton " + (pathname === "" ? "selected" : "")}
+            className={"headerButton selected"}
             to="/"
             onClick={this.handleAllIds}
           >
             Collection
           </Link>
           <Link
-            className={"headerButton " + (pathname === "" ? "selected" : "")}
+            className={"headerButton selected"}
             to="/"
             onClick={this.handleMyIds}
           >
             My Collection
           </Link>
-          <Link
-            className={"headerButton " + (pathname === "" ? "selected" : "")}
-            to="/overview"
-          >
+          <Link className={"headerButton selected"} to="/overview">
             Overview
           </Link>
         </Navbar.Collapse>

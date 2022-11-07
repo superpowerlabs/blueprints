@@ -7,6 +7,7 @@ const cors = require("cors");
 const apiV1 = require("./routes/apiV1");
 const applySecurity = require("./applySecurity");
 const applyNonce = require("./applyNonce");
+const helmet = require("helmet");
 
 process.on("uncaughtException", function (error) {
   Logger.error(error.message);
