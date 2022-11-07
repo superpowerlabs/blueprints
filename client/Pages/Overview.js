@@ -1,3 +1,4 @@
+import React from "react";
 import * as Scroll from "react-scroll";
 
 import Markdown from "react-markdown-it";

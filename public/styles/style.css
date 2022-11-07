@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: Modeco;
-    src: url(/assets/modeco.ttf);
+    src: url(/assets/Modeco-Regular.otf);
     font-weight: normal;
 }
 
@@ -2182,4 +2182,9 @@ li a.dropdown-toggle::after {
 blockquote {
     font-size: 120%;
     padding: 8px 24px;
+}
+
+.form-check-label {
+    font-family: ModecoLight, sans-serif;
+    font-size: 85%;
 }
