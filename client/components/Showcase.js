@@ -167,6 +167,7 @@ class Showcase extends Base {
       isMyId: check,
       connectedNetwork,
     } = this.Store;
+
     const ownedIds = this.Store.ownedIds || "";
     return this.Store.indexedMetadata ? (
       <div style={{ width: "100%" }}>

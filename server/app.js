@@ -32,6 +32,7 @@ const security_config = {
     "styles",
     "all",
     "images",
+    "assets",
     "bundle",
     "json",
   ],

@@ -29,8 +29,9 @@ if (typeof window !== "undefined") {
 }
 
 const supportedId = {};
+supportedId[56] = "BSC";
+
 if (isDev) {
-  supportedId[56] = "BSC";
   supportedId[97] = "BSC Testnet";
   supportedId[1337] = "localhost";
 }
