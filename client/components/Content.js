@@ -338,9 +338,7 @@ export default class Content extends Base {
 
   render() {
     const filter = this.Store.filter || {};
-    let myTotal = this.Store.ownedIds || {};
-
-    myTotal = myTotal.length;
+    let myTotal = (this.Store.ownedIds || []).length;
     let total = 0;
     if (allMetadata) {
       total = allMetadata.length;

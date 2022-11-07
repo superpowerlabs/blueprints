@@ -185,7 +185,7 @@ class Showcase extends Base {
               <div>
                 {connectedNetwork || !check ? (
                   <div>
-                    {ownedIds === 0 && check ? (
+                    {(ownedIds||[]).length === 0 && check ? (
                       <div className="wallet-message">
                         You do not own any NFTS
                       </div>
@@ -216,7 +216,7 @@ class Showcase extends Base {
               <div>
                 {connectedNetwork || !check ? (
                   <div>
-                    {ownedIds === 0 && check ? (
+                    {(ownedIds||[]).length === 0 && check ? (
                       <div
                         className="wallet-message"
                         style={{ marginLeft: "10%", marginTop: "60%" }}
