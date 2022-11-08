@@ -206,7 +206,13 @@ export default class Content extends Base {
   }
 
   getVideo(m) {
-    return "https://data.mob.land/genesis_blueprints/mp4/" + m.a + ".mp4";
+    if (updated[m.i.toString()]) {
+      return (
+        "https://data.mob.land/genesis_blueprints/animations/" + m.i + ".mp4"
+      );
+    } else {
+      return "https://data.mob.land/genesis_blueprints/mp4/" + m.a + ".mp4";
+    }
   }
 
   imageClick(m) {
@@ -231,17 +237,17 @@ export default class Content extends Base {
       <div>
         <Row>
           <Col lg={6}>
-            {updated[m.i.toString()] ? (
-              <img
-                src={
-                  "https://data.mob.land/genesis_blueprints/images/" +
-                  m.i +
-                  ".png"
-                }
-                alt={"nft #" + m.i + " image"}
-                style={{ width: "100%" }}
-              />
-            ) : (
+            {/*{updated[m.i.toString()] ? (*/}
+            {/*  <img*/}
+            {/*    src={*/}
+            {/*      "https://data.mob.land/genesis_blueprints/images/" +*/}
+            {/*      m.i +*/}
+            {/*      ".jpg"*/}
+            {/*    }*/}
+            {/*    alt={"nft #" + m.i + " image"}*/}
+            {/*    style={{ width: "100%" }}*/}
+            {/*  />*/}
+            {/*) : (*/}
               <video
                 style={{ width: "100%" }}
                 src={this.getVideo(m)}
@@ -250,7 +256,7 @@ export default class Content extends Base {
                 autoPlay
                 poster={this.getThumbnail(m)}
               />
-            )}
+            {/*)}*/}
           </Col>
           <Col lg={6}>
             <Row>
