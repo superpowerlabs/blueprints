@@ -248,14 +248,14 @@ export default class Content extends Base {
             {/*    style={{ width: "100%" }}*/}
             {/*  />*/}
             {/*) : (*/}
-              <video
-                style={{ width: "100%" }}
-                src={this.getVideo(m)}
-                controls
-                loop
-                autoPlay
-                poster={this.getThumbnail(m)}
-              />
+            <video
+              style={{ width: "100%" }}
+              src={this.getVideo(m)}
+              controls
+              loop
+              autoPlay
+              poster={this.getThumbnail(m)}
+            />
             {/*)}*/}
           </Col>
           <Col lg={6}>
