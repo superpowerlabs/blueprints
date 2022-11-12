@@ -153,6 +153,7 @@ class Showcase extends Base {
       isSearch: true,
     });
   }
+
   onSort() {
     this.setStore({
       filter: this.Store.filter,
