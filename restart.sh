@@ -1,3 +1,7 @@
 #!/bin/env bash
 
-git pull && pnpm i && pnpm build && pm2 restart blueprints
+if [[ "$1" == "pull" ]]; then git pull; fi
+
+pnpm i
+pnpm build
+pm2 restart blueprints
