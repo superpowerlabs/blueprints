@@ -9,7 +9,7 @@ import {
   Nav,
   ButtonGroup,
   ToggleButton,
-  Form,
+  // Form,
 } from "react-bootstrap";
 import classNames from "classnames";
 import Base from "./Base";
@@ -18,7 +18,10 @@ class SideBar extends Base {
   constructor(props) {
     super(props);
     this.state = { value: "", checked: false };
-    this.bindMany(["handleChange", "handleChangeCheckbox"]);
+    this.bindMany([
+      "handleChange",
+      // , "handleChangeCheckbox"
+    ]);
     this.setStore({ sortBy: "id" });
   }
 
@@ -49,15 +52,15 @@ class SideBar extends Base {
     this.props.onId(event.target.value);
   }
 
-  handleChangeCheckbox(event) {
-    if (event.target.checked) {
-      this.setStore({ onlyRevealed: true });
-      this.props.onSort();
-    } else {
-      this.setStore({ onlyRevealed: false });
-      this.props.onSort();
-    }
-  }
+  // handleChangeCheckbox(event) {
+  //   if (event.target.checked) {
+  //     this.setStore({ onlyRevealed: true });
+  //     this.props.onSort();
+  //   } else {
+  //     this.setStore({ onlyRevealed: false });
+  //     this.props.onSort();
+  //   }
+  // }
 
   sortBy(by) {
     if (by !== this.Store.sortBy) {
@@ -119,24 +122,15 @@ class SideBar extends Base {
                 </ToggleButton>
               </ButtonGroup>
 
-              {/*<div className={'aroundCheckBox'}>*/}
-
-              {/*  <Checkbox*/}
-              {/*    checked={this.state.checked}*/}
-              {/*    onChange={this.handleChangeCheckbox}*/}
-              {/*    inputProps={{ 'aria-label': 'controlled' }}*/}
-              {/*  /> Show only revealed*/}
-              {/*</div>*/}
-
-              <Form.Check
-                type={"checkbox"}
-                id={"default-checkbox"}
-                label={"Show only revealed"}
-                checked={this.Store.onlyRevealed || false}
-                onChange={this.handleChangeCheckbox}
-                variant="warning"
-                className={"checkbox"}
-              />
+              {/*<Form.Check*/}
+              {/*  type={"checkbox"}*/}
+              {/*  id={"default-checkbox"}*/}
+              {/*  label={"Show only revealed"}*/}
+              {/*  checked={this.Store.onlyRevealed || false}*/}
+              {/*  onChange={this.handleChangeCheckbox}*/}
+              {/*  variant="warning"*/}
+              {/*  className={"checkbox"}*/}
+              {/*/>*/}
             </div>
             <div
               className={classNames("sidebar", {
@@ -221,15 +215,15 @@ class SideBar extends Base {
                   Sort by Power
                 </ToggleButton>
               </ButtonGroup>
-              <Form.Check
-                type={"checkbox"}
-                id={"default-checkbox"}
-                label={"Show only revealed"}
-                checked={this.Store.onlyRevealed || false}
-                onChange={this.handleChangeCheckbox}
-                variant="warning"
-                className={"checkbox"}
-              />
+              {/*<Form.Check*/}
+              {/*  type={"checkbox"}*/}
+              {/*  id={"default-checkbox"}*/}
+              {/*  label={"Show only revealed"}*/}
+              {/*  checked={this.Store.onlyRevealed || false}*/}
+              {/*  onChange={this.handleChangeCheckbox}*/}
+              {/*  variant="warning"*/}
+              {/*  className={"checkbox"}*/}
+              {/*/>*/}
             </div>
             <div
               className={classNames("sidebar", {

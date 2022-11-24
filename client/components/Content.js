@@ -5,7 +5,9 @@ import Masonry from "react-masonry-component";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { tokenTypes } from "../config/constants";
-import { preferredOrder, updated } from "../config";
+import { preferredOrder
+  // , updated
+} from "../config";
 
 let allMetadata;
 let percent;
@@ -99,7 +101,10 @@ export default class Content extends Base {
         }
       }
     }
-    const { sortBy, onlyRevealed } = this.Store;
+    const {
+      sortBy,
+      // , onlyRevealed
+    } = this.Store;
     const filter = this.Store.filter || {};
     const noFilter = Object.keys(filter).length === 0;
     const tokenIds = this.Store.tokenIds || [];
@@ -110,9 +115,9 @@ export default class Content extends Base {
     if (sortBy === "id") {
       for (let m of allMetadata) {
         if (noFilter || tokenIds.indexOf(m.i) !== -1) {
-          if (onlyRevealed && !updated[m.i.toString()]) {
-            continue;
-          }
+          // if (onlyRevealed && !updated[m.i.toString()]) {
+          //   continue;
+          // }
           if (index <= len) {
             index++;
             continue;
@@ -140,9 +145,9 @@ export default class Content extends Base {
     } else if (sortBy === "value") {
       for (let m of sortedValue) {
         if (noFilter || tokenIds.indexOf(m.i) !== -1) {
-          if (onlyRevealed && !updated[m.i.toString()]) {
-            continue;
-          }
+          // if (onlyRevealed && !updated[m.i.toString()]) {
+          //   continue;
+          // }
           if (index <= len) {
             index++;
             continue;
@@ -196,23 +201,15 @@ export default class Content extends Base {
   }
 
   getThumbnail(m) {
-    if (updated[m.i.toString()]) {
-      return (
-        "https://data.mob.land/genesis_blueprints/thumbnails/" + m.i + ".jpg"
-      );
-    } else {
-      return "https://data.mob.land/genesis_blueprints/jpg/" + m.j + "-png.jpg";
-    }
+    return (
+      "https://data.mob.land/genesis_blueprints/thumbnails/" + m.i + ".jpg"
+    );
   }
 
   getVideo(m) {
-    if (updated[m.i.toString()]) {
-      return (
-        "https://data.mob.land/genesis_blueprints/animations/" + m.i + ".mp4"
-      );
-    } else {
-      return "https://data.mob.land/genesis_blueprints/mp4/" + m.a + ".mp4";
-    }
+    return (
+      "https://data.mob.land/genesis_blueprints/animations/" + m.i + ".mp4"
+    );
   }
 
   imageClick(m) {
@@ -237,26 +234,23 @@ export default class Content extends Base {
       <div>
         <Row>
           <Col lg={6}>
-            {/*{updated[m.i.toString()] ? (*/}
-            {/*  <img*/}
-            {/*    src={*/}
-            {/*      "https://data.mob.land/genesis_blueprints/images/" +*/}
-            {/*      m.i +*/}
-            {/*      ".jpg"*/}
-            {/*    }*/}
-            {/*    alt={"nft #" + m.i + " image"}*/}
-            {/*    style={{ width: "100%" }}*/}
-            {/*  />*/}
-            {/*) : (*/}
-            <video
+            <img
+              src={
+                "https://data.mob.land/genesis_blueprints/images/" +
+                m.i +
+                ".jpg"
+              }
+              alt={"nft #" + m.i + " image"}
               style={{ width: "100%" }}
-              src={this.getVideo(m)}
-              controls
-              loop
-              autoPlay
-              poster={this.getThumbnail(m)}
             />
-            {/*)}*/}
+            {/*<video*/}
+            {/*  style={{ width: "100%" }}*/}
+            {/*  src={this.getVideo(m)}*/}
+            {/*  controls*/}
+            {/*  loop*/}
+            {/*  autoPlay*/}
+            {/*  poster={this.getThumbnail(m)}*/}
+            {/*/>*/}
           </Col>
           <Col lg={6}>
             <Row>
