@@ -2025,7 +2025,7 @@ li a.dropdown-toggle::after {
 .modal-content {
     background-color: #000000c0 !important;
     border-radius: 12px;
-    border: 1px solid #226;
+    border: 2px solid #0262a6;
 }
 
 .modal-header {
@@ -2167,6 +2167,19 @@ li a.dropdown-toggle::after {
     margin-top: 12px;
     border-top: 1px dotted #8d16f2;
     padding: 8px 0;
+}
+
+.tokenName {
+    font-size: 1.1rem;
+    color: white;
+    width: 100%;
+    position: relative;
+    bottom: 32px;
+    left: 19px;
+    text-shadow: 1px 1px 3px #001060;
+}
+
+.powerScore .violet {
     color: #845bff;
 }
 

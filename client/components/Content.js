@@ -5,7 +5,8 @@ import Masonry from "react-masonry-component";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { tokenTypes } from "../config/constants";
-import { preferredOrder
+import {
+  preferredOrder,
   // , updated
 } from "../config";
 
@@ -251,6 +252,7 @@ export default class Content extends Base {
             {/*  autoPlay*/}
             {/*  poster={this.getThumbnail(m)}*/}
             {/*/>*/}
+            <div className={"tokenName"}>Mobland Genesis Blueprint #{m.i}</div>
           </Col>
           <Col lg={6}>
             <Row>
