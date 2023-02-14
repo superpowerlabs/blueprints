@@ -41,6 +41,8 @@ export default class PopUp extends Base {
       closeVariant,
       saveVariant,
       extraVariant,
+      safeTransfer,
+      connectedWallet,
     } = this.props.modals;
 
     return (
@@ -106,6 +108,8 @@ export default class PopUp extends Base {
           show={this.state.show}
           id={this.state.id}
           onClose={this.handleClose}
+          safeTransfer={safeTransfer}
+          connectedWallet={connectedWallet}
         />
       </div>
     );

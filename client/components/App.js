@@ -55,6 +55,7 @@ class App extends Common {
       "connect",
       "getPercent",
       "getCoupons",
+      "safeTransfer",
     ]);
 
     this.globals = ["showPopUp", "handleClose"];
@@ -203,6 +204,23 @@ class App extends Common {
     }
   }
 
+  async safeTransfer(to, tokenId) {
+    try {
+      const tx = await this.Store.contracts
+      /* eslint-disable */
+      // eslint-disable-next-line no-undef
+        .connect(this.Store.signer)["safeTransferFrom(address,address,uint256)"](
+          this.Store.connectedWallet,
+          to,
+          tokenId
+        );
+      await tx.wait();
+      return tx;
+    } catch (error) {
+      return false;
+    }
+  }
+
   async getCoupons(contracts, connectedWallet) {
     const couponsContract = contracts[SYN_COUPONS_NAME];
 
@@ -247,6 +265,8 @@ class App extends Common {
           closeLabel: "Close",
           noSave: true,
           size: "xl",
+          safeTransfer: this.safeTransfer(),
+          connectedWallet: this.state.Store.connectedWallet,
         }),
       });
     } catch (e) {
