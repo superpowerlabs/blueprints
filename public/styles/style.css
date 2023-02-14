@@ -2201,3 +2201,106 @@ blockquote {
     font-family: ModecoLight, sans-serif;
     font-size: 85%;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.transfer-modal {
+    transform: none;
+    border-radius: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    background: linear-gradient(#0e0f0f, #2b2b2c) !important;
+    border: 2px solid #48484b;
+    box-shadow: 24px;
+}
+
+.basic-title {
+    font-size: 120%;
+    color: whitesmoke;
+    padding-bottom: 24px;
+    padding-top: 20px;
+}
+
+.basic-body {
+    color: white;
+    width: 100% !important;
+}
+
+.basic-body > div {
+    width: 100% !important;
+}
+
+.basic-modal label {
+    color: lightcoral;
+}
+
+.modalImage {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+}
+
+.transferButton {
+    /*  margin: 16px 0 0;*/
+    /*  float: right;*/
+    /*  width: 100%;*/
+    text-align: center;
+    /*  font-size: 1.4rem !important;*/
+    /*  font-weight: bold;*/
+    /*  border-radius: 18px;*/
+}
+
+.inputTransfer {
+    width: 100%;
+    border-radius: 8px !important;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    padding: 12px;
+    text-align: center;
+}
+
+.transferToken {
+    text-decoration: none;
+    color: yellow;
+    background-color: transparent;
+    border: 1px;
+    font-size: 1.4rem;
+    padding: 16px !important;
+}
+
+.transferToken:hover {
+    cursor: pointer;
+}
+
+.transfer:disabled {
+    opacity: 0.5;
+}
+
+.error {
+    font-size: 150% !important;
+}
+
+@media (max-width: 600px) {
+    .transfer-modal {
+        width: 300px;
+    }
+    .modalImage {
+        margin-left: 35px !important;
+    }
+
+    .transfer {
+        width: 83px;
+        height: 25px;
+    }
+
+    .inputTransfer {
+        height: 13%;
+        width: 142px;
+    }
+}

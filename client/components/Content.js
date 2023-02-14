@@ -274,6 +274,8 @@ export default class Content extends Base {
     this.Store.globals.showPopUp({
       title: m.name,
       body: body,
+      id: m.i,
+      image: "https://data.mob.land/genesis_blueprints/images/" + m.i + ".jpg",
     });
   }
 
