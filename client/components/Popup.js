@@ -45,6 +45,9 @@ export default class PopUp extends React.Component {
           ""
         ) : (
           <Modal.Footer>
+            <Button variant={closeVariant || "secondary"} onClick={handleClose}>
+              Transfer
+            </Button>
             {footerText}
             {noClose ? (
               ""
