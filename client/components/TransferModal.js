@@ -1,113 +1,108 @@
 import * as React from "react";
 import { Box, Modal, Button, CircularProgress } from "@mui/material";
 import ErrorIcon from "@mui/icons-material/Error";
-// import { Web3Context } from "../../contexts/Web3Context";
-// import { SaleContext } from "../../contexts/SaleContext";
 import { isValidAddress } from "ethereumjs-util";
-import PropTypes from "prop-types";
+import Base from "./Base";
 
-TransferModal.propTypes = {
-  show: PropTypes.bool.isRequired,
-  id: PropTypes.array.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
+export default class TransferModal extends Base {
+  constructor(props) {
+    super(props);
 
-export default function TransferModal(props) {
-  //   let { web3NetworkDetails } = React.useContext(Web3Context);
-  //   const { connectedWallet } = web3NetworkDetails;
-  //   const { safeTransfer } = React.useContext(SaleContext);
-  const [waiting, setWaiting] = React.useState(false);
-  const [wallet, setWallet] = React.useState("");
-  const [working, setWorking] = React.useState(false);
+    this.state = {
+      waiting: false,
+      wallet: "",
+      working: false,
+    };
 
-  function handleCodeChange(event) {
-    setWallet(event.target.value);
+    this.bindMany([
+      "handleCodeChange",
+      "transferNow",
+      "isWalletNotValid",
+      "handleClose",
+    ]);
   }
 
-  async function transferNow() {
-    setWorking(true);
-    setWaiting(true);
-    // const tx = await safeTransfer(web3NetworkDetails, props.id[0], wallet);
-    // if (!tx) {
-    //   setWorking(false);
-    //   setWallet("");
-    // } else {
-    //   props.onClose(true);
-    //   setWaiting(false);
-    //   setWallet("");
-    // }
+  handleCodeChange(event) {
+    this.setState({ wallet: event.target.value });
   }
 
-  function isWalletNotValid() {
-    return !isValidAddress(wallet);
+  async transferNow() {
+    this.setState({ working: true });
+    this.setState({ waiting: true });
   }
 
-  const handleClose = () => {
-    props.onClose();
-  };
-  return (
-    <Modal
-      open={props.show}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box className={"transfer-modal"}>
-        {!waiting ? (
-          <div>
-            <div className={"basic-title center bold"}>
-              Transfer #{props.id[0]}
-            </div>
-            <div className={"basic-body center"}>
-              <div>
-                <img
-                  src={props.id[1]}
-                  className="modalImage"
-                  alt="icon"
-                  style={{ marginLeft: 100, marginTop: "-10%" }}
-                />
+  isWalletNotValid() {
+    return !isValidAddress(this.state.wallet);
+  }
+
+  handleClose() {
+    this.props.onClose();
+  }
+  render() {
+    return (
+      <Modal
+        open={this.props.show}
+        onClose={this.handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className={"transfer-modal"}>
+          {!this.state.waiting ? (
+            <div>
+              <div className={"basic-title center bold"}>
+                Transfer #{this.props.id[0]}
+              </div>
+              <div className={"basic-body center"}>
                 <div>
-                  <input
-                    type="text"
-                    placeholder="Paste address here"
-                    onChange={handleCodeChange}
-                    className="inputTransfer"
+                  <img
+                    src={this.props.id[1]}
+                    className="modalImage"
+                    alt="icon"
+                    style={{ marginLeft: 125, paddingBottom: 22 }}
                   />
-                </div>
-                <div className="transferButton">
-                  {" "}
-                  <Button
-                    disabled={isWalletNotValid(wallet)}
-                    className={"button transfer"}
-                    variant="outlined"
-                    onClick={() => transferNow()}
-                  >
-                    Transfer
-                  </Button>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Paste address here"
+                      onChange={this.handleCodeChange}
+                      className="inputTransfer"
+                    />
+                  </div>
+                  <div className="transferButton">
+                    {" "}
+                    <Button
+                      disabled={this.isWalletNotValid(this.state.wallet)}
+                      className={"button transfer"}
+                      variant="outlined"
+                      onClick={() => this.transferNow()}
+                    >
+                      Transfer
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ) : working ? (
-          <div>
-            <div className={"basic-title center bold"}>
-              Waiting for confirmation
+          ) : this.state.working ? (
+            <div>
+              <div className={"basic-title center bold"}>
+                Waiting for confirmation
+              </div>
+              <div className={"basic-body center"}>
+                <CircularProgress />
+              </div>
             </div>
-            <div className={"basic-body center"}>
-              <CircularProgress />
+          ) : (
+            <div>
+              <div className={"basic-title center bold error"}>
+                Transaction error
+              </div>
+              <div className={"basic-body center"}>
+                <ErrorIcon sx={{ color: "red", fontSize: 50 }} />
+              </div>
             </div>
-          </div>
-        ) : (
-          <div>
-            <div className={"basic-title center bold error"}>
-              Transaction error
-            </div>
-            <div className={"basic-body center"}>
-              <ErrorIcon sx={{ color: "red", fontSize: 50 }} />
-            </div>
-          </div>
-        )}
-      </Box>
-    </Modal>
-  );
+          )}
+        </Box>
+      </Modal>
+    );
+  }
 }

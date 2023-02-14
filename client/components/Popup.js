@@ -2,10 +2,10 @@
 // eslint-disable-next-line no-undef
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import Common from "./Common";
+import Base from "./Base";
 import TransferModal from "./TransferModal";
 
-export default class PopUp extends Common {
+export default class PopUp extends Base {
   constructor(props) {
     super(props);
 
@@ -19,7 +19,6 @@ export default class PopUp extends Common {
   }
 
   showTransfer() {
-    console.log("here");
     this.setState({ show: true });
   }
   render() {
