@@ -207,9 +207,10 @@ class App extends Common {
   async safeTransfer(to, tokenId) {
     try {
       const tx = await this.Store.contracts
-      /* eslint-disable */
-      // eslint-disable-next-line no-undef
-        .connect(this.Store.signer)["safeTransferFrom(address,address,uint256)"](
+        /* eslint-disable */
+        // eslint-disable-next-line no-undef
+        .connect(this.Store.signer)
+        ["safeTransferFrom(address,address,uint256)"](
           this.Store.connectedWallet,
           to,
           tokenId

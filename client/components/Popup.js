@@ -48,7 +48,7 @@ export default class PopUp extends Base {
     return (
       <div>
         <Modal
-          show={true}
+          show={this.state.show ? false : true}
           onHide={handleClose}
           size={size}
           autoFocus

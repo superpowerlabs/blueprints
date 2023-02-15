@@ -105,7 +105,7 @@ export default class TransferModal extends Base {
               </div>
             </div>
           ) : (
-            <div>
+            <React.Fragment>
               <div className={"basic-title centered bold"}>
                 Transfer #{this.props.id[0]}
               </div>
@@ -138,7 +138,7 @@ export default class TransferModal extends Base {
                   </div>
                 </div>
               </div>
-            </div>
+            </React.Fragment>
           )}
         </Box>
       </Modal>
