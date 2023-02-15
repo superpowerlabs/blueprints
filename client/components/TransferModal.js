@@ -58,7 +58,6 @@ export default class TransferModal extends Base {
           break;
         }
       }
-      console.log(this.props.store.ownedIds);
       this.setState({ message: "Transfer successful" });
       this.setState({ working: 2 });
     } catch (e) {
