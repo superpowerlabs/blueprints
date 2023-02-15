@@ -14,7 +14,10 @@ export default class PopUp extends Base {
     this.bindMany(["handleClose", "showTransfer"]);
   }
 
-  handleClose() {
+  handleClose(success) {
+    if (success) {
+      this.props.modals.handleClose();
+    }
     this.setState({ show: false });
   }
 

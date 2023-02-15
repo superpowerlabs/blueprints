@@ -52,6 +52,13 @@ export default class TransferModal extends Base {
           this.props.id[0]
         );
       await tx.wait();
+      for (let i = 0; i < this.props.store.ownedIds.length; i++) {
+        if (this.props.store.ownedIds[i] === this.props.id[0]) {
+          this.props.store.ownedIds.splice(i, 1);
+          break;
+        }
+      }
+      console.log(this.props.store.ownedIds);
       this.setState({ message: "Transfer successful" });
       this.setState({ working: 2 });
     } catch (e) {
@@ -68,7 +75,11 @@ export default class TransferModal extends Base {
   }
 
   handleClose() {
-    this.props.onClose();
+    if (this.state.working === 2) {
+      this.props.onClose(true);
+    } else {
+      this.props.onClose(false);
+    }
   }
 
   render() {
