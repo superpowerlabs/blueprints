@@ -14,6 +14,9 @@ export default class TransferModal extends Base {
       working: 0,
       message: "",
       error: "",
+      connectedWallet: this.props.store.connectedWallet,
+      contracts: this.props.store.contracts.SynCityCoupons,
+      signer: this.props.store.signer,
     };
 
     this.bindMany([
@@ -40,7 +43,15 @@ export default class TransferModal extends Base {
           </span>
         ),
       });
-      await this.props.safeTransfer(this.state.wallet, this.props.id[0]);
+      /* eslint-disable */
+      const tx = await this.state.contracts
+        .connect(this.state.signer)
+        ["safeTransferFrom(address,address,uint256)"](
+          this.state.connectedWallet,
+          this.state.wallet,
+          this.props.id[0]
+        );
+      await tx.wait();
       this.setState({ message: "Transfer successful" });
       this.setState({ working: 2 });
     } catch (e) {
@@ -126,7 +137,6 @@ export default class TransferModal extends Base {
                     />
                   </div>
                   <div className="transferButton">
-                    {" "}
                     <Button
                       disabled={this.isWalletNotValid(this.state.wallet)}
                       className={"button transfer"}

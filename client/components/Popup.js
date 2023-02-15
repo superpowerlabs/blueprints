@@ -41,8 +41,7 @@ export default class PopUp extends Base {
       closeVariant,
       saveVariant,
       extraVariant,
-      safeTransfer,
-      connectedWallet,
+      store,
     } = this.props.modals;
 
     return (
@@ -67,12 +66,14 @@ export default class PopUp extends Base {
             ""
           ) : (
             <Modal.Footer>
-              <Button
-                variant={closeVariant || "secondary"}
-                onClick={this.showTransfer}
-              >
-                Transfer
-              </Button>
+              {store.ownedIds.includes(this.state.id[0]) ? (
+                <Button
+                  variant={closeVariant || "secondary"}
+                  onClick={this.showTransfer}
+                >
+                  Transfer
+                </Button>
+              ) : null}
               {footerText}
               {noClose ? (
                 ""
@@ -108,8 +109,7 @@ export default class PopUp extends Base {
           show={this.state.show}
           id={this.state.id}
           onClose={this.handleClose}
-          safeTransfer={safeTransfer}
-          connectedWallet={connectedWallet}
+          store={store}
         />
       </div>
     );
