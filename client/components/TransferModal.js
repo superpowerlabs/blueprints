@@ -58,6 +58,7 @@ export default class TransferModal extends Base {
           break;
         }
       }
+      console.log(this.props.store.ownedIds);
       this.setState({ message: "Transfer successful" });
       this.setState({ working: 2 });
     } catch (e) {
@@ -66,10 +67,10 @@ export default class TransferModal extends Base {
     }
   }
 
-  isWalletNotValid() {
+  isWalletNotValid(wallet) {
     return (
       !isValidAddress(this.state.wallet) ||
-      this.state.wallet === this.props.connectedWallet
+      wallet === this.props.store.connectedWallet
     );
   }
 
