@@ -5,6 +5,7 @@ import Masonry from "react-masonry-component";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { tokenTypes } from "../config/constants";
+import TransferModal from "./TransferModal";
 import {
   preferredOrder,
   // , updated
@@ -33,6 +34,8 @@ export default class Content extends Base {
       items: [],
       hasMore: true,
       previous: (this.Store.tokenIds || []).length,
+      show: false,
+      id: ["", ""],
     };
 
     this.bindMany([
@@ -41,7 +44,20 @@ export default class Content extends Base {
       "monitorData",
       "getPercentages",
       "imageClick",
+      "handleClose",
+      "showTransfer",
     ]);
+  }
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  showTransfer() {
+    this.setState({ show: true });
+    this.Store.globals.showPopUp({
+      show: false,
+    });
   }
 
   async componentDidMount() {
@@ -270,12 +286,20 @@ export default class Content extends Base {
         </Row>
       </div>
     );
-
+    this.setState({
+      id: [
+        m.i,
+        "https://data.mob.land/genesis_blueprints/images/" + m.i + ".jpg",
+      ],
+    });
     this.Store.globals.showPopUp({
+      show: true,
       title: m.name,
       body: body,
-      id: m.i,
-      image: "https://data.mob.land/genesis_blueprints/images/" + m.i + ".jpg",
+      id: this.state.id[0],
+      image: this.state.id[1],
+      extra: "Transfer",
+      handleExtra: this.showTransfer,
     });
   }
 
@@ -482,6 +506,12 @@ export default class Content extends Base {
             </div>
           </div>
         )}
+        <TransferModal
+          show={this.state.show}
+          id={this.state.id}
+          onClose={this.handleClose}
+          store={this.Store}
+        />
       </div>
     );
   }

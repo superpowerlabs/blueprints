@@ -3,27 +3,12 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import Base from "./Base";
-import TransferModal from "./TransferModal";
 
 export default class PopUp extends Base {
   constructor(props) {
     super(props);
-
-    this.state = { show: false, id: [props.modals.id, props.modals.image] };
-
-    this.bindMany(["handleClose", "showTransfer"]);
   }
 
-  handleClose(success) {
-    if (success) {
-      this.props.modals.handleClose();
-    }
-    this.setState({ show: false });
-  }
-
-  showTransfer() {
-    this.setState({ show: true });
-  }
   render() {
     const {
       title,
@@ -44,13 +29,13 @@ export default class PopUp extends Base {
       closeVariant,
       saveVariant,
       extraVariant,
-      store,
+      show,
     } = this.props.modals;
 
     return (
       <div>
         <Modal
-          show={this.state.show ? false : true}
+          show={show}
           onHide={handleClose}
           size={size}
           autoFocus
@@ -69,14 +54,6 @@ export default class PopUp extends Base {
             ""
           ) : (
             <Modal.Footer>
-              {store.ownedIds.includes(this.state.id[0]) ? (
-                <Button
-                  variant={closeVariant || "secondary"}
-                  onClick={this.showTransfer}
-                >
-                  Transfer
-                </Button>
-              ) : null}
               {footerText}
               {noClose ? (
                 ""
@@ -108,12 +85,6 @@ export default class PopUp extends Base {
             </Modal.Footer>
           )}
         </Modal>
-        <TransferModal
-          show={this.state.show}
-          id={this.state.id}
-          onClose={this.handleClose}
-          store={store}
-        />
       </div>
     );
   }

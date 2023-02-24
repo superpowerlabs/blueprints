@@ -241,7 +241,6 @@ class App extends Common {
     try {
       this.setStore({
         modals: Object.assign(params, {
-          show: true,
           what: "popup",
           handleClose: this.handleClose,
           closeLabel: "Close",
