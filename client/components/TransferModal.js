@@ -78,9 +78,9 @@ export default class TransferModal extends Base {
 
   handleClose() {
     if (this.state.working === 2) {
-      this.props.onClose(true);
+      this.props.onClose(true, this.props.id[0]);
     } else {
-      this.props.onClose(false);
+      this.props.onClose(false, this.props.id[0]);
     }
   }
 

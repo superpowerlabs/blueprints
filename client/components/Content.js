@@ -49,10 +49,18 @@ export default class Content extends Base {
     ]);
   }
 
-  handleClose(success) {
+  handleClose(success, id) {
     if (success) {
       this.setState({ show: false });
-      window.location.reload();
+      let newItem = [];
+      for (let x in this.state.items) {
+        if (this.state.items[x].i === id) {
+          continue;
+        } else {
+          newItem.push(this.state.items[x]);
+        }
+      }
+      this.setState({ items: newItem });
     } else {
       this.setState({ show: false });
     }
