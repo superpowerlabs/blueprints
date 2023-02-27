@@ -76,11 +76,13 @@ export default class TransferModal extends Base {
     return !isValidAddress(wallet) || wallet === this.Store.connectedWallet;
   }
 
-  handleClose() {
-    if (this.state.working === 2) {
-      this.props.onClose(true, this.props.id[0]);
-    } else if (this.state.working === 0) {
-      this.props.onClose(false, this.props.id[0]);
+  handleClose(event, reason) {
+    if (reason !== "backdropClick") {
+      if (this.state.working === 2) {
+        this.props.onClose(true, this.props.id[0]);
+      } else if (this.state.working === 0) {
+        this.props.onClose(false, this.props.id[0]);
+      }
     }
   }
 
@@ -149,15 +151,26 @@ export default class TransferModal extends Base {
                       className="inputTransfer"
                     />
                   </div>
-                  <div className="transferButton">
-                    <Button
-                      disabled={this.isWalletNotValid(this.state.wallet)}
-                      className={"button transfer"}
-                      variant="outlined"
-                      onClick={() => this.transferNow()}
-                    >
-                      <div className="buttonText">Transfer</div>
-                    </Button>
+                  <div className="buttons">
+                    <div className="transferButton">
+                      <Button
+                        disabled={this.isWalletNotValid(this.state.wallet)}
+                        className={"button transfer"}
+                        variant="outlined"
+                        onClick={() => this.transferNow()}
+                      >
+                        <div className="buttonText">Transfer</div>
+                      </Button>
+                    </div>
+                    <div className="closeButton">
+                      <Button
+                        className={"button transfer"}
+                        variant="outlined"
+                        onClick={() => this.handleClose()}
+                      >
+                        <div className="buttonText">Cancel</div>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>

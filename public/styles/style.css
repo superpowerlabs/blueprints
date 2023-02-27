@@ -2246,6 +2246,11 @@ blockquote {
     width: 200px;
 }
 
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .transferButton {
     /*  margin: 16px 0 0;*/
     /*  float: right;*/
@@ -2257,8 +2262,13 @@ blockquote {
     padding-bottom: 12px;
 }
 
+.closeButton {
+    text-align: center;
+    padding-bottom: 12px;
+}
+
 .buttonText {
-    margin-top: -2%;
+    margin-top: -4%;
 }
 
 .parentInput {
