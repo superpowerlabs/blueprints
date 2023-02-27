@@ -141,7 +141,7 @@ export default class TransferModal extends Base {
                     alt="icon"
                     style={{ marginLeft: 125, paddingBottom: 20 }}
                   />
-                  <div>
+                  <div className="parentInput">
                     <input
                       type="text"
                       placeholder="Paste address here"
@@ -156,7 +156,7 @@ export default class TransferModal extends Base {
                       variant="outlined"
                       onClick={() => this.transferNow()}
                     >
-                      Transfer
+                      <div className="buttonText">Transfer</div>
                     </Button>
                   </div>
                 </div>

@@ -2254,6 +2254,15 @@ blockquote {
     /*  font-size: 1.4rem !important;*/
     /*  font-weight: bold;*/
     /*  border-radius: 18px;*/
+    padding-bottom: 12px;
+}
+
+.buttonText {
+    margin-top: -2%;
+}
+
+.parentInput {
+    padding: 10px;
 }
 
 .inputTransfer {
