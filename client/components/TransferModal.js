@@ -14,9 +14,7 @@ export default class TransferModal extends Base {
       working: 0,
       message: "",
       error: "",
-      connectedWallet: this.props.store.connectedWallet,
-      contracts: this.props.store.contracts.SynCityCoupons,
-      signer: this.props.store.signer,
+      contracts: this.Store.contracts.SynCityCoupons,
     };
 
     this.bindMany([
@@ -32,45 +30,50 @@ export default class TransferModal extends Base {
   }
 
   async transferNow() {
-    this.setState({ working: 1 });
-    try {
-      this.setState({
-        message: (
-          <span>
-            Calling your wallet
-            <br />
-            to authorize the transaction
-          </span>
-        ),
-      });
-      /* eslint-disable */
-      const tx = await this.state.contracts
-        .connect(this.state.signer)
-        ["safeTransferFrom(address,address,uint256)"](
-          this.state.connectedWallet,
-          this.state.wallet,
-          this.props.id[0]
-        );
-      await tx.wait();
-      for (let i = 0; i < this.props.store.ownedIds.length; i++) {
-        if (this.props.store.ownedIds[i] === this.props.id[0]) {
-          this.props.store.ownedIds.splice(i, 1);
-          break;
+    const owner = await this.state.contracts["ownerOf(uint256)"](
+      this.props.id[0]
+    );
+    if (owner === this.Store.connectedWallet) {
+      this.setState({ working: 1 });
+      try {
+        this.setState({
+          message: (
+            <span>
+              Calling your wallet
+              <br />
+              to authorize the transaction
+            </span>
+          ),
+        });
+        /* eslint-disable */
+        const tx = await this.state.contracts
+          .connect(this.Store.signer)
+          ["safeTransferFrom(address,address,uint256)"](
+            this.Store.connectedWallet,
+            this.state.wallet,
+            this.props.id[0]
+          );
+        await tx.wait();
+        for (let i = 0; i < this.Store.ownedIds.length; i++) {
+          if (this.Store.ownedIds[i] === this.props.id[0]) {
+            this.Store.ownedIds.splice(i, 1);
+            break;
+          }
         }
+        this.setState({ message: "Transfer successful" });
+        this.setState({ working: 2 });
+      } catch (e) {
+        this.setState({ working: 0 });
+        this.setState({ error: e.message });
       }
-      this.setState({ message: "Transfer successful" });
-      this.setState({ working: 2 });
-    } catch (e) {
+    } else {
       this.setState({ working: 0 });
-      this.setState({ error: e.message });
+      this.setState({ error: "You are not the owner of the wallet" });
     }
   }
 
   isWalletNotValid(wallet) {
-    return (
-      !isValidAddress(this.state.wallet) ||
-      wallet === this.props.store.connectedWallet
-    );
+    return !isValidAddress(wallet) || wallet === this.Store.connectedWallet;
   }
 
   handleClose() {

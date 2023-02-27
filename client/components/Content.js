@@ -510,7 +510,8 @@ export default class Content extends Base {
           show={this.state.show}
           id={this.state.id}
           onClose={this.handleClose}
-          store={this.Store}
+          Store={this.Store}
+          setStore={this.setStore}
         />
       </div>
     );
