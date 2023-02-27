@@ -49,8 +49,13 @@ export default class Content extends Base {
     ]);
   }
 
-  handleClose() {
-    this.setState({ show: false });
+  handleClose(success) {
+    if (success) {
+      this.setState({ show: false });
+      window.location.reload();
+    } else {
+      this.setState({ show: false });
+    }
   }
 
   showTransfer() {
