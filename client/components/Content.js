@@ -36,6 +36,7 @@ export default class Content extends Base {
       previous: (this.Store.tokenIds || []).length,
       show: false,
       id: ["", ""],
+      transferable: false,
     };
 
     this.bindMany([
@@ -243,6 +244,11 @@ export default class Content extends Base {
   }
 
   imageClick(m) {
+    for (let x in this.Store.ownedIds) {
+      if (this.Store.ownedIds[x] === m.i) {
+        this.setState({ transferable: true });
+      }
+    }
     const percentages = this.getPercentages(m);
     const pc = [];
     const pc2 = [];
@@ -309,10 +315,10 @@ export default class Content extends Base {
       show: true,
       title: m.name,
       body: body,
-      id: this.state.id[0],
-      image: this.state.id[1],
-      extra: "Transfer",
-      handleExtra: this.showTransfer,
+      id: m.i,
+      image: "https://data.mob.land/genesis_blueprints/images/" + m.i + ".jpg",
+      extra: this.Store.ownedIds.includes(m.i) ? "Transfer" : null,
+      handleExtra: this.Store.ownedIds.includes(m.i) ? this.showTransfer : null,
     });
   }
 
