@@ -21,19 +21,20 @@ function toHex(val) {
   return "0x" + Number(val).toString(16);
 }
 
-let isDev;
-
+let isTestnet;
 if (typeof window !== "undefined") {
-  const { hostname } = window.location;
-  isDev = /localhost/.test(hostname);
+  isTestnet = /(local|jeroyafra)/.test(window.location.origin);
+} else if (!!process) {
+  isTestnet = true;
 }
 
 const supportedId = {};
 supportedId[56] = "BSC";
 
-if (isDev) {
+if (isTestnet) {
   supportedId[97] = "BSC Testnet";
   supportedId[1337] = "localhost";
+  supportedId[44787] = "Alfajores";
 }
 
 const config = {
@@ -50,6 +51,19 @@ const config = {
       rpcUrls: ["https://bsc-dataseed.binance.org"],
       blockExplorerUrls: ["https://bscscan.com"],
     },
+    44787: isTestnet
+      ? {
+          chainId: "0x" + Number(44787).toString(16),
+          chainName: "Alfajores",
+          nativeCurrency: {
+            name: "CELO",
+            symbol: "CELO",
+            decimals: 18,
+          },
+          rpcUrls: ["https://alfajores-forno.celo-testnet.org"],
+          blockExplorerUrls: ["https://alfajores-blockscout.celo-testnet.org"],
+        }
+      : undefined,
   },
   contracts,
   abi: require("./ABIs.json").contracts,

@@ -886,15 +886,6 @@ div.label {
     font-family: "Ubuntu Mono", sans-serif;
 }
 
-.error {
-    background-color: crimson;
-    color: floralwhite;
-    padding: 8px 13px;
-    border-radius: 6px;
-    margin-top: 23px;
-    font-size: 1rem;
-}
-
 .token {
     margin: 32px 0;
 }
@@ -2200,4 +2191,153 @@ blockquote {
 .form-check-label {
     font-family: ModecoLight, sans-serif;
     font-size: 85%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.transfer-modal {
+    transform: none;
+    border-radius: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    background: linear-gradient(#0e0f0f, #2b2b2c) !important;
+    border: 2px solid #48484b;
+    box-shadow: 24px;
+}
+
+.smallError {
+    font-size: large;
+    padding: 10px;
+}
+
+.basic-title {
+    font-size: 120%;
+    color: whitesmoke;
+    padding-bottom: 24px;
+    padding-top: 20px;
+}
+
+.error {
+    color: floralwhite;
+    padding: 8px 13px;
+    border-radius: 6px;
+    margin-top: 23px;
+    font-size: 1rem;
+}
+
+.basic-body {
+    color: white;
+    width: 100% !important;
+}
+
+.basic-body > div {
+    width: 100% !important;
+}
+
+.basic-modal label {
+    color: lightcoral;
+}
+
+.modalImage {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.transferButton {
+    /*  margin: 16px 0 0;*/
+    /*  float: right;*/
+    /*  width: 100%;*/
+    text-align: center;
+    /*  font-size: 1.4rem !important;*/
+    /*  font-weight: bold;*/
+    /*  border-radius: 18px;*/
+    padding-bottom: 12px;
+}
+
+.closeButton {
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+.buttonText {
+    margin-top: -4%;
+}
+
+.parentInput {
+    padding: 10px;
+}
+
+.inputTransfer {
+    width: 100%;
+    border-radius: 8px !important;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    padding: 12px;
+    text-align: center;
+}
+
+.transferToken {
+    text-decoration: none;
+    color: yellow;
+    background-color: transparent;
+    border: 1px;
+    font-size: 1.4rem;
+    padding: 16px !important;
+}
+
+.transferToken:hover {
+    cursor: pointer;
+}
+
+.transfer:disabled {
+    opacity: 0.5;
+}
+
+.error {
+    font-size: 150% !important;
+}
+
+.button {
+    background: yellow !important;
+    color: black !important;
+    /*transform: skewX(-6deg);*/
+    border: 1px solid goldenrod;
+    border-radius: 4px !important;
+    font-size: 1.2rem !important;
+    max-width: 250px;
+    font-family: ModecoBold, sans-serif;
+    margin: 12px 0 0;
+    padding: 5px 12px 0px !important;
+    display: inline;
+}
+
+@media (max-width: 600px) {
+    .transfer-modal {
+        width: 300px;
+    }
+    .modalImage {
+        margin-left: 35px !important;
+    }
+
+    .transfer {
+        width: 83px;
+        height: 25px;
+    }
+
+    .inputTransfer {
+        height: 13%;
+        width: 142px;
+    }
 }

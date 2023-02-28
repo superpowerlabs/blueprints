@@ -5,6 +5,7 @@ import Masonry from "react-masonry-component";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { tokenTypes } from "../config/constants";
+import TransferModal from "./TransferModal";
 import {
   preferredOrder,
   // , updated
@@ -33,6 +34,9 @@ export default class Content extends Base {
       items: [],
       hasMore: true,
       previous: (this.Store.tokenIds || []).length,
+      show: false,
+      id: ["", ""],
+      transferable: false,
     };
 
     this.bindMany([
@@ -41,7 +45,33 @@ export default class Content extends Base {
       "monitorData",
       "getPercentages",
       "imageClick",
+      "handleClose",
+      "showTransfer",
     ]);
+  }
+
+  handleClose(success, id) {
+    if (success) {
+      this.setState({ show: false });
+      let newItem = [];
+      for (let x in this.state.items) {
+        if (this.state.items[x].i === id) {
+          continue;
+        } else {
+          newItem.push(this.state.items[x]);
+        }
+      }
+      this.setState({ items: newItem });
+    } else {
+      this.setState({ show: false });
+    }
+  }
+
+  showTransfer() {
+    this.setState({ show: true });
+    this.Store.globals.showPopUp({
+      show: false,
+    });
   }
 
   async componentDidMount() {
@@ -214,6 +244,11 @@ export default class Content extends Base {
   }
 
   imageClick(m) {
+    for (let x in this.Store.ownedIds) {
+      if (this.Store.ownedIds[x] === m.i) {
+        this.setState({ transferable: true });
+      }
+    }
     const percentages = this.getPercentages(m);
     const pc = [];
     const pc2 = [];
@@ -270,10 +305,20 @@ export default class Content extends Base {
         </Row>
       </div>
     );
-
+    this.setState({
+      id: [
+        m.i,
+        "https://data.mob.land/genesis_blueprints/images/" + m.i + ".jpg",
+      ],
+    });
     this.Store.globals.showPopUp({
+      show: true,
       title: m.name,
       body: body,
+      id: m.i,
+      image: "https://data.mob.land/genesis_blueprints/images/" + m.i + ".jpg",
+      extra: this.Store.ownedIds.includes(m.i) ? "Transfer" : null,
+      handleExtra: this.Store.ownedIds.includes(m.i) ? this.showTransfer : null,
     });
   }
 
@@ -480,6 +525,13 @@ export default class Content extends Base {
             </div>
           </div>
         )}
+        <TransferModal
+          show={this.state.show}
+          id={this.state.id}
+          onClose={this.handleClose}
+          Store={this.Store}
+          setStore={this.setStore}
+        />
       </div>
     );
   }
