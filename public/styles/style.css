@@ -886,15 +886,6 @@ div.label {
     font-family: "Ubuntu Mono", sans-serif;
 }
 
-.error {
-    background-color: crimson;
-    color: floralwhite;
-    padding: 8px 13px;
-    border-radius: 6px;
-    margin-top: 23px;
-    font-size: 1rem;
-}
-
 .token {
     margin: 32px 0;
 }
@@ -2220,11 +2211,24 @@ blockquote {
     box-shadow: 24px;
 }
 
+.smallError {
+    font-size: large;
+    padding: 10px;
+}
+
 .basic-title {
     font-size: 120%;
     color: whitesmoke;
     padding-bottom: 24px;
     padding-top: 20px;
+}
+
+.error {
+    color: floralwhite;
+    padding: 8px 13px;
+    border-radius: 6px;
+    margin-top: 23px;
+    font-size: 1rem;
 }
 
 .basic-body {

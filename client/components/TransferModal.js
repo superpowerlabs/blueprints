@@ -65,7 +65,7 @@ export default class TransferModal extends Base {
         this.setState({ working: 2 });
       } catch (e) {
         this.setState({ working: 0 });
-        this.setState({ error: e.message });
+        this.setState({ error: e.reason });
       }
     } else {
       this.setState({ working: 0 });
@@ -114,7 +114,7 @@ export default class TransferModal extends Base {
               <div className={"basic-title centered bold error"}>
                 <ErrorIcon sx={{ color: "red", fontSize: 50 }} />
               </div>
-              <div className={"basic-body center"}>
+              <div className={"basic-body centered bold"}>
                 <div className={"smallError"}>{this.state.error}</div>
               </div>
             </div>
@@ -128,7 +128,9 @@ export default class TransferModal extends Base {
                 {this.state.working === 1 ? (
                   <CircularProgress />
                 ) : (
-                  <div className={"light"} style={{margin: 12}}>Please, close this dialogue</div>
+                  <div className={"light"} style={{ margin: 12 }}>
+                    Please, close this dialogue
+                  </div>
                 )}
               </div>
             </div>
