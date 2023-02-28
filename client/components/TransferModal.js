@@ -53,6 +53,7 @@ export default class TransferModal extends Base {
             this.state.wallet,
             this.props.id[0]
           );
+        this.setState({ message: "Waiting for confirmations" });
         await tx.wait();
         for (let i = 0; i < this.Store.ownedIds.length; i++) {
           if (this.Store.ownedIds[i] === this.props.id[0]) {
@@ -90,12 +91,13 @@ export default class TransferModal extends Base {
     const closeButton = (
       <div
         className={"floatRight"}
-        style={{ color: "darkgray", margin: "5px -17px 0" }}
+        style={{ color: "darkgray", margin: "6px" }}
       >
         <HighlightOffIcon
           style={{ cursor: "pointer" }}
           onClick={this.handleClose}
         />
+        <br style={{ clear: "both" }} />
       </div>
     );
     return (
@@ -126,7 +128,7 @@ export default class TransferModal extends Base {
                 {this.state.working === 1 ? (
                   <CircularProgress />
                 ) : (
-                  <span className={"light"}>Please, close this dialogue</span>
+                  <div className={"light"} style={{margin: 12}}>Please, close this dialogue</div>
                 )}
               </div>
             </div>
