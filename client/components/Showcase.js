@@ -147,11 +147,19 @@ class Showcase extends Base {
   onId(id) {
     let idnum = toNumber(id);
     const filter = {};
-    this.setStore({
-      filter,
-      searchTokenId: idnum,
-      isSearch: true,
-    });
+    if (idnum > 0) {
+      this.setStore({
+        filter,
+        searchTokenId: idnum,
+        isMyId: false,
+        isSearch: true,
+      });
+    } else {
+      this.setStore({
+        filter,
+        isSearch: false,
+      });
+    }
   }
 
   onSort() {
