@@ -47,6 +47,8 @@ export default class Header extends Base {
       filter,
       isMyId: true,
       justIsMyId: true,
+      searchTokenId: null,
+      isSearch: false,
     });
   }
 
