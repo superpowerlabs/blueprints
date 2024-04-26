@@ -1,6 +1,4 @@
-# ARG3 App
-
-A simple app for ARG3
+# MOBLAND Bluprint Showcase
 
 ## Installation
 
