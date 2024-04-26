@@ -29,7 +29,7 @@ pnpm run build
 pnpm run start
 ```
 
-and connect to [http://localhost:8734](http://localhost:8734).
+and connect to [http://localhost:8734](http://localhost:8773).
 
 ## Copyright
 
